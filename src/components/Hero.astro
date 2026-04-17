@@ -1,0 +1,123 @@
+---
+import type { Content } from '../i18n/content';
+interface Props { t: Content }
+const { t } = Astro.props;
+
+const infoIcons: Record<string, string> = {
+  clock: 'M12 7v5l3 2 M12 22a10 10 0 100-20 10 10 0 000 20z',
+  pin: 'M12 22s-7-7.58-7-13a7 7 0 1114 0c0 5.42-7 13-7 13z M12 11a2 2 0 100-4 2 2 0 000 4z',
+  users: 'M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2 M9 11a4 4 0 100-8 4 4 0 000 8z M22 21v-2a4 4 0 00-3-3.87 M16 3.13A4 4 0 0119 7a4 4 0 01-3 3.87',
+  target: 'M12 22a10 10 0 100-20 10 10 0 000 20z M12 18a6 6 0 100-12 6 6 0 000 12z M12 14a2 2 0 100-4 2 2 0 000 4z',
+};
+---
+<section class="relative overflow-hidden">
+  <!-- Background only: stadium-light glow + subtle grid + ambient motion arcs -->
+  <div class="pointer-events-none absolute inset-0">
+    <!-- Subtle grid with radial fade -->
+    <div
+      class="absolute inset-0 opacity-[0.06]"
+      style="background-image: linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px); background-size: 72px 72px; mask-image: radial-gradient(ellipse at center, black 40%, transparent 82%); -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 82%);"
+    ></div>
+
+    <!-- Top-center stadium glow -->
+    <div
+      class="absolute top-[-12%] left-1/2 h-[900px] w-[900px] -translate-x-1/2 rounded-full"
+      style="background: radial-gradient(closest-side, rgba(223,51,38,0.28), transparent 72%); filter: blur(16px);"
+    ></div>
+    <!-- Secondary side glows (stadium floodlights) -->
+    <div
+      class="absolute top-[14%] left-[8%] h-[320px] w-[320px] rounded-full"
+      style="background: radial-gradient(closest-side, rgba(255,255,255,0.06), transparent 70%); filter: blur(14px);"
+    ></div>
+    <div
+      class="absolute top-[10%] right-[10%] h-[360px] w-[360px] rounded-full"
+      style="background: radial-gradient(closest-side, rgba(255,255,255,0.05), transparent 70%); filter: blur(14px);"
+    ></div>
+
+    <!-- Ambient motion arcs (very subtle, behind the title) -->
+    <svg class="absolute inset-x-0 top-0 h-full w-full" viewBox="0 0 1440 820" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="hero-arc-a" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#df3326" stop-opacity="0"></stop>
+          <stop offset="50%" stop-color="#df3326" stop-opacity="0.55"></stop>
+          <stop offset="100%" stop-color="#df3326" stop-opacity="0"></stop>
+        </linearGradient>
+        <linearGradient id="hero-arc-b" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity="0"></stop>
+          <stop offset="50%" stop-color="#ffffff" stop-opacity="0.18"></stop>
+          <stop offset="100%" stop-color="#ffffff" stop-opacity="0"></stop>
+        </linearGradient>
+      </defs>
+      <path d="M-40 640 Q 720 380 1480 640" fill="none" stroke="url(#hero-arc-a)" stroke-width="2" opacity="0.6" />
+      <path d="M-40 700 Q 720 460 1480 700" fill="none" stroke="url(#hero-arc-b)" stroke-width="1" opacity="0.6" />
+      <path d="M-40 760 Q 720 540 1480 760" fill="none" stroke="url(#hero-arc-b)" stroke-width="1" opacity="0.5" />
+    </svg>
+
+    <!-- Bottom vignette -->
+    <div class="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[color:var(--color-black-primary)] to-transparent"></div>
+  </div>
+
+  <!-- Hero content: centered text only -->
+  <div class="relative mx-auto max-w-[960px] px-5 pt-20 pb-20 text-center sm:px-8 md:pt-28 md:pb-28">
+    <h1 class="text-[56px] font-extrabold leading-[1.05] tracking-tight text-white md:text-[104px]">
+      {t.hero.title}
+    </h1>
+    <div class="mx-auto mt-5 h-[3px] w-24 rounded-full bg-gradient-to-r from-transparent via-[color:var(--color-red-primary)] to-transparent md:w-32"></div>
+
+    <p class="mx-auto mt-7 max-w-3xl text-[15px] leading-8 text-white/75 md:text-lg md:leading-9">
+      {t.hero.lead}
+    </p>
+
+    <div class="mt-7 inline-flex items-center gap-3 rounded-full border border-[color:var(--color-red-primary)]/45 bg-[color:var(--color-red-primary)]/12 px-4 py-2 text-xs backdrop-blur md:text-[13px]">
+      <span class="relative flex h-2 w-2">
+        <span class="absolute inset-0 animate-ping rounded-full bg-[color:var(--color-red-primary)] opacity-75"></span>
+        <span class="relative inline-flex h-2 w-2 rounded-full bg-[color:var(--color-red-primary)]"></span>
+      </span>
+      <span class="font-medium text-white/75">{t.hero.deadlineLabel}</span>
+      <span class="h-3 w-px bg-white/20"></span>
+      <span class="font-bold text-white">{t.hero.deadlineValue}</span>
+    </div>
+
+    <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href={t.hero.ctaPrimary.href}
+        class="group inline-flex items-center gap-2 rounded-full bg-[color:var(--color-red-primary)] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_50px_-12px_rgba(223,51,38,0.7)] transition hover:-translate-y-0.5 hover:bg-[color:var(--color-red-primary-hover)] md:text-[15px]"
+      >
+        {t.hero.ctaPrimary.label}
+        <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14 M13 5l7 7-7 7"></path>
+        </svg>
+      </a>
+      <a
+        href={t.hero.ctaSecondary.href}
+        class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white/90 backdrop-blur transition hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/10 md:text-[15px]"
+      >
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4 M7 10l5 5 5-5 M12 15V3"></path>
+        </svg>
+        {t.hero.ctaSecondary.label}
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Info-bar with icons -->
+<section class="relative border-y border-white/5 bg-white/[0.03]">
+  <div class="mx-auto grid max-w-[1240px] grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+    {t.infobar.map((item, i) => (
+      <div
+        class={`relative flex items-start gap-4 px-6 py-6 text-start md:py-8 ${i < 3 ? 'md:after:absolute md:after:inset-y-6 md:after:end-0 md:after:w-px md:after:bg-white/10' : ''} ${i % 2 === 0 ? 'sm:after:absolute sm:after:inset-y-6 sm:after:end-0 sm:after:w-px sm:after:bg-white/10 md:after:bg-transparent' : ''}`}
+      >
+        <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[color:var(--color-red-primary)]/15 text-[color:var(--color-red-primary)] ring-1 ring-inset ring-[color:var(--color-red-primary)]/25">
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d={infoIcons[item.icon] ?? infoIcons.target}></path>
+          </svg>
+        </div>
+        <div class="min-w-0">
+          <div class="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">{item.label}</div>
+          <div class="mt-1.5 text-[13.5px] font-semibold leading-6 text-white md:text-[14.5px]">{item.value}</div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

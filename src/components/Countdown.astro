@@ -1,0 +1,71 @@
+---
+import type { Content } from '../i18n/content';
+import { PROGRAM_START_ISO } from '../i18n/content';
+interface Props { t: Content }
+const { t } = Astro.props;
+---
+<section class="relative py-10 md:py-14">
+  <div class="mx-auto max-w-[1000px] px-5 sm:px-8">
+    <div
+      class="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[color:var(--color-red-primary)]/15 via-white/[0.03] to-transparent p-6 text-center md:p-8"
+      data-countdown
+      data-target={PROGRAM_START_ISO}
+      data-live-text={t.countdown.live}
+    >
+      <div class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[color:var(--color-red-primary)]">
+        {t.countdown.title}
+      </div>
+      <div class="mt-4 flex flex-wrap items-center justify-center gap-3 md:gap-5" data-countdown-units>
+        <div class="flex min-w-[74px] flex-col items-center rounded-2xl border border-white/10 bg-black/40 px-4 py-3">
+          <span class="text-3xl font-extrabold tabular-nums text-white md:text-4xl" data-unit="days">--</span>
+          <span class="mt-1 text-[11px] text-white/60">{t.countdown.units.days}</span>
+        </div>
+        <div class="flex min-w-[74px] flex-col items-center rounded-2xl border border-white/10 bg-black/40 px-4 py-3">
+          <span class="text-3xl font-extrabold tabular-nums text-white md:text-4xl" data-unit="hours">--</span>
+          <span class="mt-1 text-[11px] text-white/60">{t.countdown.units.hours}</span>
+        </div>
+        <div class="flex min-w-[74px] flex-col items-center rounded-2xl border border-white/10 bg-black/40 px-4 py-3">
+          <span class="text-3xl font-extrabold tabular-nums text-white md:text-4xl" data-unit="minutes">--</span>
+          <span class="mt-1 text-[11px] text-white/60">{t.countdown.units.minutes}</span>
+        </div>
+        <div class="flex min-w-[74px] flex-col items-center rounded-2xl border border-white/10 bg-black/40 px-4 py-3">
+          <span class="text-3xl font-extrabold tabular-nums text-white md:text-4xl" data-unit="seconds">--</span>
+          <span class="mt-1 text-[11px] text-white/60">{t.countdown.units.seconds}</span>
+        </div>
+      </div>
+      <div class="mt-4 hidden text-sm font-semibold text-white" data-countdown-live></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const el = document.querySelector<HTMLElement>('[data-countdown]');
+  if (el) {
+    const target = new Date(el.dataset.target ?? '').getTime();
+    const liveText = el.dataset.liveText ?? '';
+    const units = el.querySelector<HTMLElement>('[data-countdown-units]');
+    const live = el.querySelector<HTMLElement>('[data-countdown-live]');
+    const set = (name: string, value: number) => {
+      const node = el.querySelector<HTMLElement>(`[data-unit="${name}"]`);
+      if (node) node.textContent = String(value).padStart(2, '0');
+    };
+    const tick = () => {
+      const diff = target - Date.now();
+      if (diff <= 0) {
+        if (units) units.classList.add('hidden');
+        if (live) {
+          live.textContent = liveText;
+          live.classList.remove('hidden');
+        }
+        return;
+      }
+      const sec = Math.floor(diff / 1000);
+      set('days', Math.floor(sec / 86400));
+      set('hours', Math.floor((sec % 86400) / 3600));
+      set('minutes', Math.floor((sec % 3600) / 60));
+      set('seconds', sec % 60);
+    };
+    tick();
+    setInterval(tick, 1000);
+  }
+</script>

@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  --color-black-primary: #18181a;
+  --color-red-primary: #df3326;
+  --color-red-primary-hover: #c42a1f;
+  --color-surface: #1f1f22;
+  --color-surface-2: #242428;
+  --color-muted: #9ca3af;
+
+  --font-ibm: "IBM Plex Arabic", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-poppins: "Poppins", "IBM Plex Sans Arabic", system-ui, sans-serif;
+}
+
+html {
+  background-color: var(--color-black-primary);
+  color: #fff;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-ibm);
+  background-color: var(--color-black-primary);
+  color: #fff;
+  min-height: 100vh;
+}
+
+html[dir="ltr"] body {
+  font-family: var(--font-poppins);
+}
+
+.racing-stripe {
+  position: absolute;
+  inset: auto 0 10% 0;
+  height: 6px;
+  background: linear-gradient(90deg, transparent, var(--color-red-primary) 35%, var(--color-red-primary) 65%, transparent);
+  filter: drop-shadow(0 0 24px rgba(223, 51, 38, 0.6));
+  opacity: 0.85;
+}
+
+.hero-glow {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  border-radius: 9999px;
+  background: radial-gradient(closest-side, rgba(223, 51, 38, 0.28), transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+details > summary {
+  list-style: none;
+  cursor: pointer;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details[open] .faq-chevron {
+  transform: rotate(45deg);
+}
+
+@keyframes velocity-orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes velocity-pulse {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.04); }
+}
+@keyframes velocity-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes velocity-sweep {
+  0% { stroke-dashoffset: 380; opacity: 0; }
+  20% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0.2; }
+}
+
+.vel-orbit { animation: velocity-orbit 24s linear infinite; transform-origin: center; }
+.vel-orbit-rev { animation: velocity-orbit 34s linear infinite reverse; transform-origin: center; }
+.vel-pulse { animation: velocity-pulse 3.6s ease-in-out infinite; transform-origin: center; }
+.vel-float { animation: velocity-float 4.8s ease-in-out infinite; }
+.vel-float-slow { animation: velocity-float 6.4s ease-in-out infinite; }
+.vel-sweep { stroke-dasharray: 380; animation: velocity-sweep 4.2s ease-out infinite; }

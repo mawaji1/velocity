@@ -1,0 +1,35 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import Countdown from '../../components/Countdown.astro';
+import Stats from '../../components/Stats.astro';
+import Tracks from '../../components/Tracks.astro';
+import Journey from '../../components/Journey.astro';
+import Benefits from '../../components/Benefits.astro';
+import Audience from '../../components/Audience.astro';
+import Technologies from '../../components/Technologies.astro';
+import Partners from '../../components/Partners.astro';
+import FAQ from '../../components/FAQ.astro';
+import FinalCTA from '../../components/FinalCTA.astro';
+import Footer from '../../components/Footer.astro';
+import { content } from '../../i18n/content';
+
+const locale = 'ar' as const;
+const t = content[locale];
+---
+<Base locale={locale}>
+  <Header slot="header" t={t} locale={locale} />
+  <Hero t={t} />
+  <Countdown t={t} />
+  <Stats t={t} />
+  <Tracks t={t} />
+  <Journey t={t} />
+  <Benefits t={t} />
+  <Audience t={t} />
+  <Technologies t={t} />
+  <Partners t={t} />
+  <FAQ t={t} />
+  <FinalCTA t={t} />
+  <Footer slot="footer" t={t} locale={locale} />
+</Base>

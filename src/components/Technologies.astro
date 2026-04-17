@@ -1,0 +1,32 @@
+---
+import type { Content } from '../i18n/content';
+interface Props { t: Content }
+const { t } = Astro.props;
+const iconPaths: Record<string, string> = {
+  ai: 'M12 4a4 4 0 00-4 4v1a3 3 0 00-3 3 3 3 0 003 3v1a4 4 0 004 4 4 4 0 004-4v-1a3 3 0 003-3 3 3 0 00-3-3V8a4 4 0 00-4-4z M9 10h.01 M15 10h.01 M9 14l3 2 3-2',
+  data: 'M3 3h7v7H3z M14 3h7v4h-7z M14 10h7v11h-7z M3 14h7v7H3z',
+  wearable: 'M6 7h12v10H6z M9 4h6l1 3H8z M9 20h6l-1-3H10z M9 11h6v2H9z',
+};
+---
+<section id="technologies" class="relative border-y border-white/5 bg-white/[0.02] py-20 md:py-28">
+  <div class="mx-auto max-w-[1180px] px-5 sm:px-8">
+    <div class="mb-12 text-center md:mb-14">
+      <h2 class="text-3xl font-extrabold text-white md:text-4xl">{t.technologies.title}</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-[15px] text-white/60">{t.technologies.subtitle}</p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
+      {t.technologies.items.map((it) => (
+        <div class="rounded-3xl border border-white/10 bg-white/[0.03] p-7 text-center transition hover:border-white/20 hover:bg-white/[0.05] md:p-8">
+          <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[color:var(--color-red-primary)] text-white shadow-[0_10px_30px_-10px_rgba(223,51,38,0.7)]">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d={iconPaths[it.icon] ?? iconPaths.ai}></path>
+            </svg>
+          </div>
+          <h3 class="mt-5 text-lg font-bold text-white md:text-xl">{it.title}</h3>
+          <p class="mt-3 text-sm leading-7 text-white/65 md:text-[15px]">{it.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

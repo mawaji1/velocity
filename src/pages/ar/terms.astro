@@ -1,0 +1,16 @@
+---
+import Legal from '../../layouts/Legal.astro';
+import { content } from '../../i18n/content';
+
+const locale = 'ar' as const;
+const t = content[locale];
+const terms = t.legal.terms;
+---
+<Legal
+  t={t}
+  locale={locale}
+  title={terms.title}
+  program={terms.program}
+  intro={terms.intro}
+  sections={terms.sections}
+/>

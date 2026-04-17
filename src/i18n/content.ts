@@ -1,0 +1,798 @@
+export type Locale = 'ar' | 'en';
+
+const AR_ROOT = 'https://sportstechaccelerator.seu.edu.sa/ar';
+const EN_ROOT = 'https://sportstechaccelerator.seu.edu.sa/en';
+
+// Program dates — Hijri-calendar agnostic ISO targets used for countdown
+export const PROGRAM_START_ISO = '2026-04-26T09:00:00+03:00';
+export const REGISTRATION_DEADLINE_ISO = '2026-04-15T23:59:59+03:00';
+
+export const content = {
+  ar: {
+    dir: 'rtl' as const,
+    lang: 'ar',
+    meta: {
+      title: 'سيو فيلوسيتي | برنامج الابتكار للتكنولوجيا الرياضية',
+      description:
+        'سيو فيلوسيتي — برنامج ابتكار مكثف مدته 7 أيام لتطوير حلول تقنية مبتكرة في قطاع الرياضة. مبادرة من الجامعة السعودية الإلكترونية.',
+    },
+    nav: {
+      brand: 'سيو فيلوسيتي',
+      back: { label: 'مسرعة سيو', href: AR_ROOT },
+      sections: [
+        { label: 'عن البرنامج', href: '#why' },
+        { label: 'المسارات', href: '#tracks' },
+        { label: 'الرحلة', href: '#journey' },
+        { label: 'المزايا', href: '#benefits' },
+        { label: 'الأسئلة', href: '#faq' },
+      ],
+      register: { label: 'سجّل الآن', href: '#register' },
+      langSwitch: 'En',
+      langSwitchHref: '/velocity/en/',
+    },
+    hero: {
+      eyebrow: 'مبادرة من الجامعة السعودية الإلكترونية',
+      title: 'سيو فيلوسيتي',
+      lead: 'برنامج SEU Velocity هو برنامج ابتكار مكثف مدته 7 أيام يهدف إلى تطوير حلول تقنية مبتكرة في قطاع الرياضة وتحويل الأفكار إلى نماذج أولية قابلة للتطبيق.',
+      ctaPrimary: { label: 'سجّل الآن', href: '#register' },
+      ctaSecondary: { label: 'حمّل كتيب التحديات', href: '#brief' },
+      deadlineLabel: 'آخر موعد للتسجيل',
+      deadlineValue: '15 أبريل',
+    },
+    countdown: {
+      title: 'بداية البرنامج خلال',
+      units: { days: 'يوم', hours: 'ساعة', minutes: 'دقيقة', seconds: 'ثانية' },
+      live: 'البرنامج منطلق الآن',
+    },
+    infobar: [
+      { icon: 'clock', label: 'المدة', value: '5 أيام (اونلاين) + 2 أيام (الموقع)' },
+      { icon: 'pin', label: 'الموقع', value: 'الرياض — مسرعة سيو الرياضية' },
+      { icon: 'users', label: 'الفئة', value: 'مطورون، مصممون، رياضيون، رواد أعمال' },
+      { icon: 'target', label: 'المخرجات', value: 'نموذج أولي + عرض نهائي + فرصة انضمام للمسرعة' },
+    ],
+    why: {
+      title: 'ما هو برنامج فيلوسيتي؟',
+      lead: 'برنامج مكثف يهدف إلى دعم المبتكرين ورواد الأعمال لتطوير حلول تقنية في قطاع الرياضة وتحويل الأفكار إلى نماذج أولية قابلة للتطبيق، بدعم من خبراء القطاع وفرصة عرض المشاريع أمام شركاء من المنظومة الرياضية.',
+      stats: [
+        { value: '7', label: 'أيام مكثفة' },
+        { value: '4', label: 'مسارات تحديات' },
+        { value: '+20', label: 'مرشد وخبير' },
+        { value: '+100', label: 'فرصة استثمارية' },
+      ],
+    },
+    tracks: {
+      title: 'مسارات التحديات',
+      lead: 'اختر مسارك وابنِ حلًا يغيّر المنظومة الرياضية.',
+      legend: {
+        examples: 'أمثلة على التحديات',
+        types: 'نوع الحلول',
+        who: 'المستفيدون',
+        deliverables: 'المخرجات',
+      },
+      items: [
+        {
+          n: '01',
+          title: 'البنية التحتية والمنشآت الرياضية',
+          desc: 'تحسين تجربة الحضور وإدارة المنشآت الرياضية باستخدام التقنيات الذكية.',
+          examples: [
+            'أنظمة حجز وتذاكر ذكية',
+            'إدارة الحشود داخل الملاعب',
+            'IoT لمراقبة الأداء التشغيلي',
+            'أنظمة أمن وسلامة متكاملة',
+            'تجربة حضور مخصّصة للمشجع',
+            'تحليلات تنبؤية لاستهلاك المرافق',
+          ],
+          types: 'منصات رقمية، IoT، AI للتنبؤ',
+          who: 'المنشآت، الأندية، هيئة الترفيه، المستثمرون',
+          deliverables: 'نموذج عملي، تقرير جدوى، خطة تنفيذ',
+        },
+        {
+          n: '02',
+          title: 'اكتشاف المواهب الرياضية ورعايتها',
+          desc: 'ربط البيانات بين الأندية والأكاديميات لاكتشاف المواهب الواعدة ودعم مسيرتها.',
+          examples: [
+            'منصات كشف وتقييم ذكية',
+            'تحليل فيديو لأداء اللاعبين الناشئين',
+            'قواعد بيانات موهبة موحّدة',
+            'تتبّع مسار التطور باستخدام Blockchain',
+            'أدوات رعاية ومتابعة للأكاديميات',
+          ],
+          types: 'AI/ML، تتبع، تحليل فيديو، Blockchain',
+          who: 'الاتحادات، الأكاديميات، اللاعبون الناشئون، الكشافون',
+          deliverables: 'نموذج تقييم ذكي، MVP، تقرير تحليلي',
+        },
+        {
+          n: '03',
+          title: 'تطوير اللاعبين الحاليين',
+          desc: 'رفع أداء اللاعبين والمدربين عبر التحليل الذكي والبيانات اللحظية.',
+          examples: [
+            'Wearables لمتابعة المؤشرات الحيوية',
+            'منصات تدريب ذكية وبرامج فردية',
+            'تحليل بيانات الأداء واللياقة',
+            'تطبيقات صحية وتغذية رياضية',
+            'خطط تأهيل ذكية للإصابات',
+          ],
+          types: 'تطبيقات صحية، Wearables، تدريب ذكية، تحليل بيانات',
+          who: 'المحترفون، المدربون، الأندية، الأطباء',
+          deliverables: 'تطبيق متابعة، لوحة تحكم تحليلية، خطة تأهيل ذكية',
+        },
+        {
+          n: '04',
+          title: 'إشراك الجمهور وتجربة المشجع',
+          desc: 'بناء تجربة مشجع مميزة عبر المحتوى الحصري والتفاعل اللحظي.',
+          examples: [
+            'تطبيقات جوال للمشجع',
+            'تجارب AR/VR داخل المدرجات',
+            'أنظمة ولاء وعضويات',
+            'Gamification للتفاعل مع الفرق',
+            'محتوى حصري ومتابعة لحظية',
+            'حلول للرعاة والمعلنين',
+          ],
+          types: 'جوال، AR/VR، Gamification، ولاء',
+          who: 'الجماهير، الأندية، الرعاة، المنظومة الإعلامية',
+          deliverables: 'تطبيق تجربة مشجع، نموذج ولاء، تجربة AR',
+        },
+      ],
+    },
+    journey: {
+      title: 'رحلة 7 أيام',
+      subtitle: 'من المشكلة إلى الحل',
+      onsiteLabel: 'حضوري',
+      steps: [
+        { day: '1', date: '26 أبريل', title: 'الإطلاق', desc: 'إطلاق البرنامج والتعريف بالتحديات.' },
+        { day: '2', date: '27 أبريل', title: 'الاكتشاف', desc: 'تحليل المشكلة وتشكيل الفرق.' },
+        { day: '3', date: '28 أبريل', title: 'البناء', desc: 'تطوير الفكرة وبناء النموذج الأولي.' },
+        { day: '4', date: '29 أبريل', title: 'التحقق', desc: 'اختبار الفرضيات وتطوير الحل.' },
+        { day: '5', date: '30 أبريل', title: 'التجهيز', desc: 'إعداد العرض النهائي.' },
+        { day: '6', date: '3 مايو', title: 'المتأهلون', desc: 'إعلان المتأهلين للمرحلة الختامية.', onsite: true },
+        { day: '7', date: '4 مايو', title: 'Demo Day', desc: 'عرض المشاريع أمام لجنة التحكيم وتكريم الفائزين.', onsite: true },
+      ],
+    },
+    benefits: {
+      title: 'ما يقدمه برنامج SEU Velocity',
+      subtitle: 'مزايا حصرية لجميع المشاركين',
+      items: [
+        { icon: 'certificate', title: 'شهادات معتمدة', desc: 'شهادات مشاركة وإنجاز لجميع المشاركين.' },
+        { icon: 'rocket', title: 'الانضمام للمسرعة', desc: 'فرصة الانضمام إلى مسرعة سيو الرياضية للفرق المؤهلة.' },
+        { icon: 'partners', title: 'فرص شراكة', desc: 'فرص تجريبية (Pilot) مع جهات من المنظومة الرياضية.' },
+        { icon: 'mentor', title: 'توجيه مكثف', desc: 'إرشاد من مرشدين وخبراء متخصصين طوال فيلوسيتي.' },
+        { icon: 'trophy', title: 'جوائز للفرق الفائزة', desc: 'جوائز مالية وعينية قيّمة للفرق المتميزة.' },
+      ],
+    },
+    audience: {
+      title: 'من يمكنه المشاركة؟',
+      subtitle: 'يستهدف البرنامج المشاركين من التخصصات التالية',
+      items: [
+        { icon: 'code', title: 'المطورون', desc: 'Web / Mobile / AI / Data' },
+        { icon: 'design', title: 'مصممون', desc: 'UI/UX' },
+        { icon: 'bulb', title: 'رواد أعمال وطلبة', desc: 'أفكار ريادية ومشاريع ناشئة.' },
+        { icon: 'target', title: 'مختصون رياضيون', desc: 'مدربون، إداريون، لاعبون.' },
+        { icon: 'media', title: 'صناع محتوى', desc: 'إعلام رياضي ودعم للفريق.' },
+      ],
+    },
+    technologies: {
+      title: 'التقنيات التي يدعمها البرنامج',
+      subtitle: 'أدوات وبنية تقنية جاهزة لبناء حلول حقيقية',
+      items: [
+        { icon: 'ai', title: 'الذكاء الاصطناعي', desc: 'AI / Machine Learning لبناء حلول ذكية.' },
+        { icon: 'data', title: 'Data Analytics', desc: 'تحليل البيانات لاتخاذ قرارات دقيقة.' },
+        { icon: 'wearable', title: 'Wearables', desc: 'أجهزة قابلة للارتداء وبيانات لحظية.' },
+      ],
+    },
+    partners: {
+      title: 'الشركاء والجهات الداعمة',
+      items: [
+        { name: 'وزارة الاتصالات وتقنية المعلومات' },
+        { name: 'وزارة الرياضة' },
+        { name: 'اتحاد الرياضة الثقافية' },
+      ],
+    },
+    faq: {
+      title: 'الأسئلة الشائعة',
+      items: [
+        {
+          q: 'من يمكنه المشاركة في البرنامج؟',
+          a: 'المشاركة متاحة للمطورين ورواد الأعمال والطلاب والمصممين والمهتمين بالتقنية والابتكار في قطاع الرياضة، سواء بشكل فردي أو ضمن فريق.',
+        },
+        {
+          q: 'هل البرنامج حضوري؟',
+          a: 'البرنامج هجين؛ حيث يتم تنفيذ الأيام الخمسة الأولى افتراضياً، بينما تُقام اليومان الختاميان حضورياً.',
+        },
+        {
+          q: 'كم عدد أعضاء الفريق؟',
+          a: 'يمكن المشاركة بشكل فردي أو ضمن فريق يتكوّن من 2 إلى 5 أعضاء.',
+        },
+        {
+          q: 'كيف يتم تقييم المشاريع؟',
+          a: 'يتم تقييم المشاريع وفق معايير تشمل: الابتكار، قابلية التطبيق، القيمة المضافة للقطاع الرياضي، جودة النموذج الأولي، وجودة العرض النهائي.',
+        },
+        {
+          q: 'من يملك حقوق المشروع؟',
+          a: 'تظل حقوق الملكية الفكرية للمشاريع مملوكة بالكامل لأصحابها.',
+        },
+        {
+          q: 'هل يوجد ورش عمل؟',
+          a: 'نعم، يتضمن البرنامج ورش عمل وجلسات إرشادية لدعم تطوير المشاريع.',
+        },
+        {
+          q: 'هل يمكن تقديم أكثر من مشروع؟',
+          a: 'نعم، يمكن تقديم أكثر من فكرة مع تسجيل مستقل لكل مشروع.',
+        },
+        {
+          q: 'هل يمكن للمشاركين من خارج المملكة التسجيل؟',
+          a: 'نعم، يمكن المشاركة افتراضياً من خارج المملكة، بينما يتطلب الحضور النهائي التواجد في موقع الفعالية.',
+        },
+        {
+          q: 'ما لغة العرض؟',
+          a: 'يمكن تقديم العروض باللغة العربية أو الإنجليزية.',
+        },
+      ],
+    },
+    finalCta: {
+      title: 'جاهز لتبنّي تحديات الرياضة وبناء حل حقيقي؟',
+      lead: 'سجّل الآن وابدأ رحلتك في سيو فيلوسيتي خلال 7 أيام من الابتكار والتطوير والعرض أمام خبراء المنظومة الرياضية.',
+      ctaPrimary: { label: 'سجّل اهتمامك', href: '#register' },
+      ctaSecondary: { label: 'حمّل كتيب التحديات', href: '#brief' },
+    },
+    footer: {
+      tagline: 'تابعنا على',
+      socials: [
+        { label: 'X', icon: 'x', href: 'https://x.com/abusiness_seu?s=11' },
+        { label: 'LinkedIn', icon: 'linkedin', href: 'https://www.linkedin.com/in/seu-accelerator-477324389/' },
+      ],
+      links: [
+        { label: 'عن سيو', href: `${AR_ROOT}#about` },
+        { label: 'مميزات المسرّعة', href: `${AR_ROOT}#features` },
+        { label: 'شركة ناشئة', href: `${AR_ROOT}#startup` },
+        { label: 'مستثمر', href: `${AR_ROOT}#investor` },
+      ],
+      legal: [
+        { label: 'الشروط والأحكام', href: '/velocity/ar/terms/' },
+        { label: 'سياسة الخصوصية', href: '/velocity/ar/privacy/' },
+      ],
+      rights: '© 2025 سيو. جميع الحقوق محفوظة.',
+    },
+    legal: {
+      backToHome: 'العودة للرئيسية',
+      contactEmail: 'BA.RSI@seu.edu.sa',
+      contactWebsite: { label: 'sportstechaccelerator.seu.edu.sa', href: AR_ROOT },
+      terms: {
+        title: 'الشروط والأحكام',
+        program: 'برنامج SEU Velocity — مسرعة سيو للتكنولوجيا الرياضية',
+        intro:
+          'يُعد التسجيل أو المشاركة في البرنامج موافقةً على جميع الشروط والأحكام الواردة في هذه الصفحة.',
+        sections: [
+          {
+            title: 'التعريف بالبرنامج',
+            body: [
+              'برنامج SEU Velocity هو برنامج ابتكار تنظّمه مسرعة سيو للتكنولوجيا الرياضية التابعة للجامعة السعودية الإلكترونية، ويهدف إلى دعم تطوير حلول تقنية مبتكرة في قطاع الرياضة من خلال برنامج مكثف يجمع بين الإرشاد والتطوير وعرض المشاريع.',
+            ],
+          },
+          {
+            title: 'أهلية المشاركة',
+            body: ['يمكن المشاركة في البرنامج للأفراد أو الفرق الذين لديهم اهتمام بتطوير حلول مبتكرة في قطاع الرياضة، ويشمل ذلك:'],
+            list: ['رواد الأعمال', 'المطورين', 'المصممين', 'الباحثين والطلاب', 'المهتمين بالتقنية والابتكار'],
+            footer: 'كما يمكن المشاركة بشكل فردي أو ضمن فريق.',
+          },
+          {
+            title: 'تشكيل الفرق',
+            body: ['يجوز للمشاركين التسجيل بشكل فردي أو ضمن فريق، على أن:'],
+            list: [
+              'يتكوّن الفريق من عدد مناسب من الأعضاء لضمان تطوير المشروع.',
+              'يلتزم جميع أعضاء الفريق بالشروط والأحكام الخاصة بالبرنامج.',
+              'يتم اختيار ممثل رسمي للفريق للتواصل مع الجهة المنظّمة.',
+            ],
+          },
+          {
+            title: 'طبيعة البرنامج',
+            body: ['يُقام برنامج SEU Velocity بصيغة هجين تجمع بين المشاركة الافتراضية والحضور الفعلي في بعض مراحل البرنامج. وقد يتضمن البرنامج:'],
+            list: ['جلسات تعريفية', 'ورش عمل', 'جلسات إرشاد', 'تطوير نماذج أولية', 'عرض المشاريع أمام لجنة تحكيم'],
+            footer: 'ويجوز للجهة المنظّمة تعديل جدول البرنامج أو آلية تنفيذه عند الحاجة.',
+          },
+          {
+            title: 'تقديم المشاريع',
+            body: ['يجب أن تستوفي المشاريع المشاركة المتطلبات التالية:'],
+            list: ['أن تكون فكرة أصلية وغير منسوخة.', 'ألا تنتهك حقوق الملكية الفكرية لأي طرف ثالث.', 'أن تكون مرتبطة بقطاع الرياضة أو التكنولوجيا الرياضية.'],
+            footer: 'ويحق للجنة التنظيمية استبعاد أي مشروع لا يلتزم بهذه المعايير.',
+          },
+          {
+            title: 'التقييم والتحكيم',
+            body: ['يتم تقييم المشاريع من قِبل لجنة مختصة وفق مجموعة من المعايير، والتي قد تشمل:'],
+            list: ['مستوى الابتكار', 'قابلية التطبيق', 'القيمة المضافة للقطاع الرياضي', 'جودة النموذج الأولي', 'جودة العرض النهائي'],
+            footer: 'وتُعدّ قرارات لجنة التحكيم نهائية.',
+          },
+          {
+            title: 'الملكية الفكرية',
+            body: [
+              'تظل جميع حقوق الملكية الفكرية للمشاريع المقدّمة خلال البرنامج مملوكة لأصحابها.',
+              'ومع ذلك، يحق للجهة المنظّمة استخدام المعلومات العامة المتعلقة بالمشاريع المشاركة لأغراض إعلامية أو ترويجية مرتبطة بالبرنامج.',
+            ],
+          },
+          {
+            title: 'المسؤولية القانونية',
+            body: ['يتحمل المشاركون المسؤولية الكاملة عن:'],
+            list: ['صحة المعلومات المقدّمة.', 'أصالة المشاريع.', 'عدم انتهاك حقوق الملكية الفكرية أو الحقوق القانونية لأي طرف ثالث.'],
+            footer: 'ولا تتحمل الجهة المنظّمة أي مسؤولية قانونية عن أي نزاع ينشأ بين المشاركين أو مع أطراف أخرى.',
+          },
+          {
+            title: 'استخدام الصور والمحتوى',
+            body: [
+              'يوافق المشاركون على إمكانية استخدام صورهم أو لقطات من مشاركتهم في البرنامج ضمن المواد الإعلامية أو التوثيقية الخاصة بالبرنامج.',
+            ],
+          },
+          {
+            title: 'تعديل الشروط',
+            body: [
+              'تحتفظ الجهة المنظّمة بالحق في تعديل أو تحديث هذه الشروط والأحكام عند الحاجة. وسيتم نشر أي تحديثات عبر الموقع الرسمي للبرنامج.',
+            ],
+          },
+        ],
+      },
+      privacy: {
+        title: 'سياسة الخصوصية',
+        program: 'برنامج SEU Velocity — مسرعة سيو للتكنولوجيا الرياضية',
+        sections: [
+          {
+            title: 'مقدمة',
+            body: [
+              'تحرص مسرعة سيو للتكنولوجيا الرياضية التابعة للجامعة السعودية الإلكترونية على حماية خصوصية المشاركين والمستخدمين لمنصة برنامج SEU Velocity.',
+              'تهدف هذه السياسة إلى توضيح كيفية جمع المعلومات الشخصية للمشاركين، وآلية استخدامها، والإجراءات المتّبعة للحفاظ على سرية هذه البيانات.',
+              'باستخدامك للمنصة أو التسجيل في البرنامج، فإنك توافق على سياسة الخصوصية الموضّحة في هذه الصفحة.',
+            ],
+          },
+          {
+            title: 'البيانات التي يتم جمعها',
+            subtitle: 'ما نوع البيانات التي قد يتم جمعها؟',
+            body: ['عند التسجيل في برنامج SEU Velocity قد يُطلب منك تزويدنا ببعض المعلومات الأساسية مثل:'],
+            list: ['الاسم الكامل', 'البريد الإلكتروني', 'رقم الهاتف', 'جهة العمل أو الدراسة', 'التخصص أو المجال المهني', 'بيانات الفريق أو المشروع', 'أي معلومات أخرى يتم إدخالها أثناء التسجيل'],
+            extra: {
+              title: 'كيف يتم جمع البيانات؟',
+              body: [
+                'قد يتم جمع المعلومات بالطرق التالية:',
+              ],
+              list: [
+                'عبر التسجيل في المنصة — حيث يقوم المشارك بإدخال بياناته الشخصية عند التسجيل.',
+                'عبر استخدام المنصة — قد يتم تسجيل بعض بيانات الاستخدام مثل تاريخ ووقت الدخول، الصفحات التي يتم زيارتها، ومراحل التقديم والمشاركة في البرنامج، وذلك لأغراض تشغيلية وتحليلية.',
+              ],
+            },
+          },
+          {
+            title: 'استخدام المعلومات',
+            body: ['يتم استخدام البيانات التي يتم جمعها لأغراض مرتبطة بتنظيم البرنامج، مثل:'],
+            list: [
+              'إدارة التسجيل في البرنامج',
+              'التواصل مع المشاركين',
+              'إرسال الإشعارات والتحديثات المتعلقة بالبرنامج',
+              'تنظيم جلسات الإرشاد وورش العمل',
+              'تقييم المشاريع المشاركة',
+              'تحسين تجربة المنصة والبرامج المستقبلية',
+            ],
+            footer: 'ولا يتم استخدام البيانات لأي أغراض خارج نطاق البرنامج دون موافقة المستخدم أو وفق ما يقتضيه النظام.',
+          },
+          {
+            title: 'حماية البيانات وسريتها',
+            body: [
+              'تلتزم الجهة المنظّمة باتخاذ الإجراءات المناسبة لحماية البيانات الشخصية من الوصول غير المصرح به أو الاستخدام غير المشروع.',
+              'كما يتم التعامل مع جميع المعلومات المقدّمة بسرية تامة، ولا يتم الإفصاح عنها إلا في الحالات التي يقتضيها النظام أو عند الضرورة لتنفيذ متطلبات البرنامج.',
+            ],
+          },
+          {
+            title: 'الاحتفاظ بالبيانات',
+            body: [
+              'يتم الاحتفاظ بالبيانات الشخصية خلال فترة إدارة وتنفيذ البرنامج، وقد يتم الاحتفاظ بها لفترة إضافية لأغراض تنظيمية أو نظامية أو لأغراض تحليلية تتعلق بتطوير البرامج المستقبلية.',
+            ],
+          },
+          {
+            title: 'تحديث سياسة الخصوصية',
+            body: [
+              'تحتفظ الجهة المنظّمة بالحق في تعديل أو تحديث سياسة الخصوصية في أي وقت.',
+              'وسيتم نشر أي تحديثات على هذه الصفحة، ويُعد استمرار استخدام المنصة بعد نشر التعديلات موافقةً ضمنيةً على النسخة المحدّثة من السياسة.',
+            ],
+          },
+          {
+            title: 'التواصل والاستفسارات',
+            body: [
+              'في حال وجود أي استفسارات حول سياسة الخصوصية أو كيفية استخدام البيانات، يمكن التواصل مع فريق البرنامج عبر:',
+            ],
+            contact: true,
+          },
+        ],
+      },
+    },
+  },
+
+  en: {
+    dir: 'ltr' as const,
+    lang: 'en',
+    meta: {
+      title: 'SEU Velocity | Sports Tech Innovation Program',
+      description:
+        'SEU Velocity — an intensive 7-day program to turn sports-sector challenges into viable technology solutions. An initiative by Saudi Electronic University.',
+    },
+    nav: {
+      brand: 'SEU Velocity',
+      back: { label: 'SEU Accelerator', href: EN_ROOT },
+      sections: [
+        { label: 'About', href: '#why' },
+        { label: 'Tracks', href: '#tracks' },
+        { label: 'Journey', href: '#journey' },
+        { label: 'Benefits', href: '#benefits' },
+        { label: 'FAQ', href: '#faq' },
+      ],
+      register: { label: 'Register now', href: '#register' },
+      langSwitch: 'ع',
+      langSwitchHref: '/velocity/ar/',
+    },
+    hero: {
+      eyebrow: 'An initiative by Saudi Electronic University',
+      title: 'SEU Velocity',
+      lead: 'SEU Velocity is an intensive 7-day innovation program for building viable technology solutions in the sports sector and turning ideas into working prototypes.',
+      ctaPrimary: { label: 'Register now', href: '#register' },
+      ctaSecondary: { label: 'Download the challenge brief', href: '#brief' },
+      deadlineLabel: 'Registration closes',
+      deadlineValue: 'April 15',
+    },
+    countdown: {
+      title: 'Program starts in',
+      units: { days: 'days', hours: 'hours', minutes: 'min', seconds: 'sec' },
+      live: 'The program is live now',
+    },
+    infobar: [
+      { icon: 'clock', label: 'Duration', value: '5 days online + 2 days on-site' },
+      { icon: 'pin', label: 'Location', value: 'Riyadh — SEU Sports Accelerator' },
+      { icon: 'users', label: 'Audience', value: 'Developers, designers, athletes, entrepreneurs' },
+      { icon: 'target', label: 'Outputs', value: 'Prototype + final pitch + accelerator fast-track' },
+    ],
+    why: {
+      title: 'What is Velocity?',
+      lead: 'An intensive program designed to support innovators and entrepreneurs in building technology solutions for the sports sector — turning ideas into viable prototypes with guidance from sector experts and the opportunity to present to partners from the sports ecosystem.',
+      stats: [
+        { value: '7', label: 'Intensive days' },
+        { value: '4', label: 'Challenge tracks' },
+        { value: '+20', label: 'Mentors & experts' },
+        { value: '+100', label: 'Investor opportunities' },
+      ],
+    },
+    tracks: {
+      title: 'Challenge Tracks',
+      lead: 'Pick your track and build a solution that moves the sports ecosystem forward.',
+      legend: {
+        examples: 'Challenge examples',
+        types: 'Solution types',
+        who: 'Beneficiaries',
+        deliverables: 'Deliverables',
+      },
+      items: [
+        {
+          n: '01',
+          title: 'Sports Infrastructure & Facilities',
+          desc: 'Elevate fan attendance and venue operations through smart technology.',
+          examples: [
+            'Smart ticketing & booking systems',
+            'Crowd management inside stadiums',
+            'IoT for operational performance',
+            'Integrated safety & security',
+            'Personalised in-venue experience',
+            'Predictive analytics for facility use',
+          ],
+          types: 'Digital platforms, IoT, predictive AI',
+          who: 'Venues, clubs, Entertainment Authority, investors',
+          deliverables: 'Working model, feasibility report, execution plan',
+        },
+        {
+          n: '02',
+          title: 'Talent Discovery & Development',
+          desc: 'Connect data across clubs and academies to surface promising talent and support their journey.',
+          examples: [
+            'Smart scouting & evaluation platforms',
+            'Video analysis for rising players',
+            'Unified talent databases',
+            'Progress tracking on Blockchain',
+            'Academy nurture & follow-up tools',
+          ],
+          types: 'AI/ML, tracking, video analysis, Blockchain',
+          who: 'Federations, academies, rising players, scouts',
+          deliverables: 'Smart scouting model, MVP, analytics report',
+        },
+        {
+          n: '03',
+          title: 'Developing Current Athletes',
+          desc: 'Level up athletes and coaches with smart analysis and real-time data.',
+          examples: [
+            'Wearables for vital-sign tracking',
+            'Smart coaching & personalised programs',
+            'Performance & fitness analytics',
+            'Health & sports-nutrition apps',
+            'Smart rehabilitation plans',
+          ],
+          types: 'Health apps, wearables, smart coaching, data analytics',
+          who: 'Pros, coaches, clubs, physicians',
+          deliverables: 'Tracking app, analytics dashboard, smart rehab plan',
+        },
+        {
+          n: '04',
+          title: 'Fan Engagement & Experience',
+          desc: 'Craft standout fan experiences through exclusive content and real-time interaction.',
+          examples: [
+            'Mobile apps for fans',
+            'AR/VR in the stands',
+            'Loyalty & membership systems',
+            'Gamification of team engagement',
+            'Exclusive content & live follow-through',
+            'Solutions for sponsors & advertisers',
+          ],
+          types: 'Mobile, AR/VR, gamification, loyalty',
+          who: 'Fans, clubs, sponsors, media ecosystem',
+          deliverables: 'Fan experience app, loyalty model, AR experience',
+        },
+      ],
+    },
+    journey: {
+      title: 'A 7-day journey',
+      subtitle: 'From problem to solution',
+      onsiteLabel: 'On-site',
+      steps: [
+        { day: '1', date: 'Apr 26', title: 'Kick-off', desc: 'Program launch and challenge briefings.' },
+        { day: '2', date: 'Apr 27', title: 'Discovery', desc: 'Problem analysis and team formation.' },
+        { day: '3', date: 'Apr 28', title: 'Build', desc: 'Idea development and prototype construction.' },
+        { day: '4', date: 'Apr 29', title: 'Validate', desc: 'Test hypotheses and refine the solution.' },
+        { day: '5', date: 'Apr 30', title: 'Prepare', desc: 'Prepare the final pitch.' },
+        { day: '6', date: 'May 3', title: 'Finalists', desc: 'Finalists announced for the closing stage.', onsite: true },
+        { day: '7', date: 'May 4', title: 'Demo Day', desc: 'Project presentations to the jury and winners celebration.', onsite: true },
+      ],
+    },
+    benefits: {
+      title: 'What SEU Velocity offers',
+      subtitle: 'Exclusive perks for every participant',
+      items: [
+        { icon: 'certificate', title: 'Accredited certificates', desc: 'Participation and achievement certificates for all participants.' },
+        { icon: 'rocket', title: 'Accelerator fast-track', desc: 'A chance to join SEU Sports Tech Accelerator for qualifying teams.' },
+        { icon: 'partners', title: 'Partnership opportunities', desc: 'Pilot opportunities with partners across the sports ecosystem.' },
+        { icon: 'mentor', title: 'Intensive mentorship', desc: 'Guidance from specialist mentors and experts throughout Velocity.' },
+        { icon: 'trophy', title: 'Prizes for winning teams', desc: 'Valuable cash and in-kind prizes for standout teams.' },
+      ],
+    },
+    audience: {
+      title: 'Who can join?',
+      subtitle: 'The program targets participants from the following disciplines',
+      items: [
+        { icon: 'code', title: 'Developers', desc: 'Web / Mobile / AI / Data' },
+        { icon: 'design', title: 'Designers', desc: 'UI/UX' },
+        { icon: 'bulb', title: 'Entrepreneurs & students', desc: 'Entrepreneurial ideas and early-stage ventures.' },
+        { icon: 'target', title: 'Sports specialists', desc: 'Coaches, administrators, players.' },
+        { icon: 'media', title: 'Content creators', desc: 'Sports media and team-facing content.' },
+      ],
+    },
+    technologies: {
+      title: 'Technologies supported',
+      subtitle: 'A ready-to-use technical stack for building real solutions',
+      items: [
+        { icon: 'ai', title: 'Artificial Intelligence', desc: 'AI / Machine Learning for intelligent solutions.' },
+        { icon: 'data', title: 'Data Analytics', desc: 'Turn data into precise decisions.' },
+        { icon: 'wearable', title: 'Wearables', desc: 'Wearable devices and real-time data.' },
+      ],
+    },
+    partners: {
+      title: 'Partners & supporters',
+      items: [
+        { name: 'Ministry of Communications & IT' },
+        { name: 'Ministry of Sport' },
+        { name: 'Cultural Sports Federation' },
+      ],
+    },
+    faq: {
+      title: 'Frequently Asked Questions',
+      items: [
+        {
+          q: 'Who can join the program?',
+          a: 'The program is open to developers, entrepreneurs, students, designers, and anyone interested in technology and innovation in the sports sector — whether individually or as part of a team.',
+        },
+        {
+          q: 'Is the program in person?',
+          a: 'The program is hybrid — the first five days run virtually, while the final two days are held on-site.',
+        },
+        {
+          q: 'How many members can a team have?',
+          a: 'You can take part solo, or as a team of 2 to 5 members.',
+        },
+        {
+          q: 'How are projects evaluated?',
+          a: 'Projects are assessed against criteria including: innovation, feasibility, added value to the sports sector, prototype quality, and the quality of the final pitch.',
+        },
+        {
+          q: 'Who owns the project rights?',
+          a: 'Intellectual property rights remain fully owned by the project creators.',
+        },
+        {
+          q: 'Are there workshops?',
+          a: 'Yes — the program includes workshops and mentoring sessions to help develop your project.',
+        },
+        {
+          q: 'Can I submit more than one project?',
+          a: 'Yes — you may submit multiple ideas, with a separate registration per project.',
+        },
+        {
+          q: 'Can participants from outside Saudi Arabia register?',
+          a: 'Yes — virtual participation is open from outside Saudi Arabia. Final on-site attendance requires being at the event venue.',
+        },
+        {
+          q: 'Which language is used for pitches?',
+          a: 'Pitches may be delivered in Arabic or English.',
+        },
+      ],
+    },
+    finalCta: {
+      title: 'Ready to take on sports challenges and build a real solution?',
+      lead: 'Register now and start your Velocity journey — 7 days of innovation, development and pitching to sports-ecosystem experts.',
+      ctaPrimary: { label: 'Register your interest', href: '#register' },
+      ctaSecondary: { label: 'Download the challenge brief', href: '#brief' },
+    },
+    footer: {
+      tagline: 'Follow us',
+      socials: [
+        { label: 'X', icon: 'x', href: 'https://x.com/abusiness_seu?s=11' },
+        { label: 'LinkedIn', icon: 'linkedin', href: 'https://www.linkedin.com/in/seu-accelerator-477324389/' },
+      ],
+      links: [
+        { label: 'About SEU', href: `${EN_ROOT}#about` },
+        { label: 'Accelerator Benefits', href: `${EN_ROOT}#features` },
+        { label: 'For Startups', href: `${EN_ROOT}#startup` },
+        { label: 'For Investors', href: `${EN_ROOT}#investor` },
+      ],
+      legal: [
+        { label: 'Terms & Conditions', href: '/velocity/en/terms/' },
+        { label: 'Privacy Policy', href: '/velocity/en/privacy/' },
+      ],
+      rights: '© 2025 SEU. All rights reserved.',
+    },
+    legal: {
+      backToHome: 'Back to home',
+      contactEmail: 'BA.RSI@seu.edu.sa',
+      contactWebsite: { label: 'sportstechaccelerator.seu.edu.sa', href: EN_ROOT },
+      terms: {
+        title: 'Terms & Conditions',
+        program: 'SEU Velocity — SEU Sports Tech Accelerator',
+        intro:
+          'Registering or participating in the program constitutes acceptance of all terms and conditions set out on this page.',
+        sections: [
+          {
+            title: 'About the program',
+            body: [
+              'SEU Velocity is an innovation program organised by the Sports Tech Accelerator of Saudi Electronic University. It aims to support the development of innovative technology solutions in the sports sector through an intensive program combining mentorship, development and project pitching.',
+            ],
+          },
+          {
+            title: 'Eligibility',
+            body: ['Participation is open to individuals and teams with an interest in developing innovative sports-sector solutions, including:'],
+            list: ['Entrepreneurs', 'Developers', 'Designers', 'Researchers and students', 'Anyone interested in technology and innovation'],
+            footer: 'Participation is allowed individually or as part of a team.',
+          },
+          {
+            title: 'Team formation',
+            body: ['Participants may register individually or as part of a team, provided that:'],
+            list: [
+              'The team has an appropriate number of members to deliver the project.',
+              'All team members comply with the program’s terms and conditions.',
+              'An official team representative is designated to communicate with the organiser.',
+            ],
+          },
+          {
+            title: 'Program format',
+            body: ['SEU Velocity runs in a hybrid format, combining virtual participation with in-person attendance at certain stages. The program may include:'],
+            list: ['Introductory sessions', 'Workshops', 'Mentoring sessions', 'Prototype development', 'Presentations before a jury'],
+            footer: 'The organiser may adjust the program schedule or delivery method when required.',
+          },
+          {
+            title: 'Project submissions',
+            body: ['Submitted projects must meet the following requirements:'],
+            list: ['Be an original, non-plagiarised idea.', 'Not infringe any third-party intellectual property rights.', 'Be related to the sports sector or sports technology.'],
+            footer: 'The organising committee may exclude any project that fails to meet these criteria.',
+          },
+          {
+            title: 'Evaluation & judging',
+            body: ['Projects are evaluated by a specialist committee against criteria that may include:'],
+            list: ['Level of innovation', 'Feasibility', 'Added value to the sports sector', 'Prototype quality', 'Quality of the final pitch'],
+            footer: 'Decisions of the judging committee are final.',
+          },
+          {
+            title: 'Intellectual property',
+            body: [
+              'All intellectual property rights in projects submitted during the program remain owned by their creators.',
+              'However, the organiser may use general information related to participating projects for media and promotional purposes connected to the program.',
+            ],
+          },
+          {
+            title: 'Legal responsibility',
+            body: ['Participants bear full responsibility for:'],
+            list: ['Accuracy of information provided.', 'Originality of projects.', 'Not infringing the intellectual or legal rights of any third party.'],
+            footer: 'The organiser bears no legal responsibility for disputes between participants or with other parties.',
+          },
+          {
+            title: 'Use of images & content',
+            body: [
+              'Participants agree to the possible use of their images or program footage within the program’s media or documentary materials.',
+            ],
+          },
+          {
+            title: 'Changes to terms',
+            body: [
+              'The organiser reserves the right to modify or update these terms and conditions when required. Updates will be published on the program’s official website.',
+            ],
+          },
+        ],
+      },
+      privacy: {
+        title: 'Privacy Policy',
+        program: 'SEU Velocity — SEU Sports Tech Accelerator',
+        sections: [
+          {
+            title: 'Introduction',
+            body: [
+              'The SEU Sports Tech Accelerator at Saudi Electronic University is committed to protecting the privacy of participants and users of the SEU Velocity platform.',
+              'This policy explains how personal information is collected, how it is used, and the measures taken to keep it confidential.',
+              'By using the platform or registering for the program, you agree to the privacy policy set out on this page.',
+            ],
+          },
+          {
+            title: 'Data collected',
+            subtitle: 'What data may be collected?',
+            body: ['When registering for SEU Velocity you may be asked to provide basic information such as:'],
+            list: ['Full name', 'Email', 'Phone number', 'Work or study affiliation', 'Specialisation or professional field', 'Team or project details', 'Any other information entered during registration'],
+            extra: {
+              title: 'How data is collected',
+              body: [
+                'Data may be collected in the following ways:',
+              ],
+              list: [
+                'Through platform registration — where participants enter their personal information at sign-up.',
+                'Through platform usage — some usage data may be recorded such as sign-in date and time, pages visited, and stages of submission and participation, for operational and analytical purposes.',
+              ],
+            },
+          },
+          {
+            title: 'Use of information',
+            body: ['Collected data is used for purposes related to running the program, such as:'],
+            list: [
+              'Managing program registration',
+              'Communicating with participants',
+              'Sending program-related notifications and updates',
+              'Organising mentoring and workshop sessions',
+              'Evaluating participating projects',
+              'Improving the platform experience and future programs',
+            ],
+            footer: 'Data is not used for purposes outside the scope of the program without the user’s consent or where required by law.',
+          },
+          {
+            title: 'Data protection & confidentiality',
+            body: [
+              'The organiser takes appropriate measures to protect personal data from unauthorised access or unlawful use.',
+              'All information provided is treated in strict confidence and is not disclosed except where required by law or necessary to deliver the program.',
+            ],
+          },
+          {
+            title: 'Data retention',
+            body: [
+              'Personal data is retained during the period of program administration and delivery, and may be kept for an additional period for regulatory or legal reasons, or for analytical purposes connected to improving future programs.',
+            ],
+          },
+          {
+            title: 'Updates to this policy',
+            body: [
+              'The organiser reserves the right to modify or update this privacy policy at any time.',
+              'Updates will be posted on this page. Continued use of the platform after updates are posted constitutes implicit consent to the updated version of the policy.',
+            ],
+          },
+          {
+            title: 'Contact & enquiries',
+            body: [
+              'For any questions about this privacy policy or how data is used, you can contact the program team via:',
+            ],
+            contact: true,
+          },
+        ],
+      },
+    },
+  },
+} as const;
+
+export type Content = (typeof content)[Locale];

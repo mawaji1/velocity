@@ -1,0 +1,15 @@
+---
+import Legal from '../../layouts/Legal.astro';
+import { content } from '../../i18n/content';
+
+const locale = 'ar' as const;
+const t = content[locale];
+const privacy = t.legal.privacy;
+---
+<Legal
+  t={t}
+  locale={locale}
+  title={privacy.title}
+  program={privacy.program}
+  sections={privacy.sections}
+/>

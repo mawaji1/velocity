@@ -1,0 +1,46 @@
+---
+import type { Content } from '../i18n/content';
+interface Props { t: Content }
+const { t } = Astro.props;
+---
+<section id="journey" class="relative border-y border-white/5 bg-white/[0.02] py-20 md:py-28">
+  <div class="mx-auto max-w-[1240px] px-5 sm:px-8">
+    <div class="mb-12 text-center md:mb-16">
+      <h2 class="text-3xl font-extrabold text-white md:text-4xl">{t.journey.title}</h2>
+      <p class="mt-3 text-[15px] text-white/60">{t.journey.subtitle}</p>
+    </div>
+
+    <div class="relative">
+      <div class="pointer-events-none absolute top-[56px] start-0 end-0 hidden h-px bg-gradient-to-r from-transparent via-[color:var(--color-red-primary)]/40 to-transparent lg:block"></div>
+
+      <ol class="grid gap-5 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7">
+        {t.journey.steps.map((step, idx) => {
+          const last = idx === t.journey.steps.length - 1;
+          const nodeCls = last
+            ? 'bg-[color:var(--color-red-primary)] text-white shadow-[0_10px_30px_-10px_rgba(223,51,38,0.7)]'
+            : 'bg-white/[0.05] text-white/90 border border-white/10';
+          return (
+            <li class="relative flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-5">
+              <div class={`relative mx-auto flex h-14 w-14 items-center justify-center rounded-2xl text-xl font-extrabold ${nodeCls}`}>
+                {step.day}
+              </div>
+              <div class="mt-3 text-center text-[11px] font-semibold uppercase tracking-[0.18em] text-[color:var(--color-red-primary)]">
+                {step.date}
+              </div>
+              <h3 class="mt-1.5 text-center text-[15px] font-bold text-white md:text-base">{step.title}</h3>
+              <p class="mt-2 text-center text-[12.5px] leading-6 text-white/65 md:text-[13px]">
+                {step.desc}
+              </p>
+              {step.onsite && (
+                <div class="mx-auto mt-3 inline-flex items-center gap-1.5 rounded-full border border-[color:var(--color-red-primary)]/40 bg-[color:var(--color-red-primary)]/10 px-2.5 py-0.5 text-[10.5px] font-semibold text-white/90">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[color:var(--color-red-primary)]"></span>
+                  {t.journey.onsiteLabel}
+                </div>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+    </div>
+  </div>
+</section>

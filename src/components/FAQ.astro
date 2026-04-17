@@ -1,0 +1,25 @@
+---
+import type { Content } from '../i18n/content';
+interface Props { t: Content }
+const { t } = Astro.props;
+---
+<section id="faq" class="relative py-20 md:py-28">
+  <div class="mx-auto max-w-[900px] px-5 sm:px-8">
+    <div class="mb-10 text-center md:mb-14">
+      <h2 class="text-3xl font-extrabold text-white md:text-4xl">{t.faq.title}</h2>
+    </div>
+    <div class="space-y-3">
+      {t.faq.items.map((item) => (
+        <details class="group rounded-2xl border border-white/10 bg-white/[0.03] transition hover:border-white/20">
+          <summary class="flex items-center justify-between gap-6 px-5 py-5 md:px-6 md:py-6">
+            <span class="text-[15px] font-semibold text-white md:text-base">{item.q}</span>
+            <span class="faq-chevron shrink-0 text-2xl leading-none text-white transition-transform duration-300">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-[14px] leading-8 text-white/70 md:px-6 md:pb-6 md:text-[15px]">
+            {item.a}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
