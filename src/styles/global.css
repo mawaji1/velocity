@@ -8,8 +8,26 @@
   --color-surface-2: #242428;
   --color-muted: #9ca3af;
 
-  --font-ibm: "IBM Plex Arabic", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-ibm: "IBM Plex Sans Arabic", "IBM Plex Arabic", system-ui, sans-serif;
   --font-poppins: "Poppins", "IBM Plex Sans Arabic", system-ui, sans-serif;
+}
+
+/* Cap headings at weight 700 in RTL — IBM Plex Sans Arabic has no 800 face,
+   and synthesized faux-800 on Arabic glyphs renders noticeably different
+   from body text. */
+html[dir="rtl"] .font-extrabold {
+  font-weight: 700;
+}
+
+/* Arabic letters are cursive and must connect to adjacent letters. CSS
+   `letter-spacing` severs those connections and makes words look broken,
+   and `text-transform: uppercase` is meaningless in Arabic (can corrupt
+   rendering in some shapers). Neutralize both for RTL. */
+html[dir="rtl"] .uppercase {
+  text-transform: none;
+}
+html[dir="rtl"] [class*="tracking-"] {
+  letter-spacing: 0 !important;
 }
 
 html {

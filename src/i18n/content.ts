@@ -51,7 +51,7 @@ export const content = {
       { icon: 'target', label: 'المخرجات', value: 'نموذج أولي + عرض نهائي + فرصة انضمام للمسرعة' },
     ],
     why: {
-      title: 'ما هو برنامج فيلوسيتي؟',
+      title: 'عن فيلوسيتي',
       lead: 'برنامج مكثف يهدف إلى دعم المبتكرين ورواد الأعمال لتطوير حلول تقنية في قطاع الرياضة وتحويل الأفكار إلى نماذج أولية قابلة للتطبيق، بدعم من خبراء القطاع وفرصة عرض المشاريع أمام شركاء من المنظومة الرياضية.',
       stats: [
         { value: '7', label: 'أيام مكثفة' },
@@ -182,9 +182,19 @@ export const content = {
     partners: {
       title: 'الشركاء والجهات الداعمة',
       items: [
-        { name: 'وزارة الاتصالات وتقنية المعلومات' },
-        { name: 'وزارة الرياضة' },
-        { name: 'اتحاد الرياضة الثقافية' },
+        { name: 'وزارة الاتصالات وتقنية المعلومات', logo: 'mcit.png', invert: true },
+        { name: 'وزارة الرياضة', logo: 'ministry-sport.svg', invert: true },
+        { name: 'الاتحاد السعودي للثقافة الرياضية', logo: 'cultural-sport.webp', invert: false },
+      ],
+    },
+    prizes: {
+      title: 'جوائز الفرق الفائزة',
+      lead: 'تحصل الفرق الفائزة على جوائز مالية تقديرًا لتميزها وابتكارها.',
+      currency: 'ر.س',
+      items: [
+        { rank: 'المركز الأول', amount: '50,000', highlight: true },
+        { rank: 'المركز الثاني', amount: '30,000' },
+        { rank: 'المركز الثالث', amount: '20,000' },
       ],
     },
     faq: {
@@ -444,7 +454,7 @@ export const content = {
       { icon: 'target', label: 'Outputs', value: 'Prototype + final pitch + accelerator fast-track' },
     ],
     why: {
-      title: 'What is Velocity?',
+      title: 'About Velocity',
       lead: 'An intensive program designed to support innovators and entrepreneurs in building technology solutions for the sports sector — turning ideas into viable prototypes with guidance from sector experts and the opportunity to present to partners from the sports ecosystem.',
       stats: [
         { value: '7', label: 'Intensive days' },
@@ -575,9 +585,19 @@ export const content = {
     partners: {
       title: 'Partners & supporters',
       items: [
-        { name: 'Ministry of Communications & IT' },
-        { name: 'Ministry of Sport' },
-        { name: 'Cultural Sports Federation' },
+        { name: 'Ministry of Communications & IT', logo: 'mcit.png', invert: true },
+        { name: 'Ministry of Sport', logo: 'ministry-sport.svg', invert: true },
+        { name: 'Saudi Sports Culture Federation', logo: 'cultural-sport.webp', invert: false },
+      ],
+    },
+    prizes: {
+      title: 'Winning team prizes',
+      lead: 'Winning teams receive cash prizes in recognition of their innovation and excellence.',
+      currency: 'SAR',
+      items: [
+        { rank: '1st place', amount: '50,000', highlight: true },
+        { rank: '2nd place', amount: '30,000' },
+        { rank: '3rd place', amount: '20,000' },
       ],
     },
     faq: {

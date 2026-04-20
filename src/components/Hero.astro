@@ -10,9 +10,9 @@ const infoIcons: Record<string, string> = {
   target: 'M12 22a10 10 0 100-20 10 10 0 000 20z M12 18a6 6 0 100-12 6 6 0 000 12z M12 14a2 2 0 100-4 2 2 0 000 4z',
 };
 ---
-<section class="relative overflow-hidden">
+<section class="hero-section relative overflow-hidden">
   <!-- Background only: stadium-light glow + subtle grid + ambient motion arcs -->
-  <div class="pointer-events-none absolute inset-0">
+  <div class="hero-bg pointer-events-none absolute inset-0">
     <!-- Subtle grid with radial fade -->
     <div
       class="absolute inset-0 opacity-[0.06]"
@@ -21,17 +21,17 @@ const infoIcons: Record<string, string> = {
 
     <!-- Top-center stadium glow -->
     <div
-      class="absolute top-[-12%] left-1/2 h-[900px] w-[900px] -translate-x-1/2 rounded-full"
-      style="background: radial-gradient(closest-side, rgba(223,51,38,0.28), transparent 72%); filter: blur(16px);"
+      class="hero-glow-layer absolute top-[-12%] left-1/2 h-[900px] w-[900px] -translate-x-1/2 rounded-full"
+      style="background: radial-gradient(closest-side, rgba(223,51,38,0.28), transparent 72%);"
     ></div>
     <!-- Secondary side glows (stadium floodlights) -->
     <div
-      class="absolute top-[14%] left-[8%] h-[320px] w-[320px] rounded-full"
-      style="background: radial-gradient(closest-side, rgba(255,255,255,0.06), transparent 70%); filter: blur(14px);"
+      class="hero-glow-layer absolute top-[14%] left-[8%] h-[320px] w-[320px] rounded-full"
+      style="background: radial-gradient(closest-side, rgba(255,255,255,0.06), transparent 70%);"
     ></div>
     <div
-      class="absolute top-[10%] right-[10%] h-[360px] w-[360px] rounded-full"
-      style="background: radial-gradient(closest-side, rgba(255,255,255,0.05), transparent 70%); filter: blur(14px);"
+      class="hero-glow-layer absolute top-[10%] right-[10%] h-[360px] w-[360px] rounded-full"
+      style="background: radial-gradient(closest-side, rgba(255,255,255,0.05), transparent 70%);"
     ></div>
 
     <!-- Ambient motion arcs (very subtle, behind the title) -->
@@ -58,7 +58,7 @@ const infoIcons: Record<string, string> = {
   </div>
 
   <!-- Hero content: centered text only -->
-  <div class="relative mx-auto max-w-[960px] px-5 pt-20 pb-20 text-center sm:px-8 md:pt-28 md:pb-28">
+  <div class="hero-content relative mx-auto max-w-[960px] px-5 pt-20 pb-20 text-center sm:px-8 md:pt-28 md:pb-28">
     <h1 class="text-[56px] font-extrabold leading-[1.05] tracking-tight text-white md:text-[104px]">
       {t.hero.title}
     </h1>
@@ -100,6 +100,39 @@ const infoIcons: Record<string, string> = {
     </div>
   </div>
 </section>
+
+<style>
+  /* Ensure the hero always has space and its content is composited above
+     decorative blurred layers — fixes iOS/Safari mobile where heavy
+     `filter: blur()` on large absolute layers could delay first paint
+     and make the hero look empty until a scroll repaint. */
+  .hero-section {
+    min-height: 520px;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    transform: translateZ(0);
+  }
+  .hero-bg {
+    z-index: 0;
+    will-change: transform;
+    transform: translateZ(0);
+  }
+  .hero-glow-layer {
+    filter: blur(14px);
+    will-change: transform, filter;
+    transform: translate3d(0, 0, 0);
+  }
+  /* Lighter blur radius on small screens — iOS Safari's compositor
+     struggles with large blurred surfaces and can fail to paint them
+     until a scroll event. */
+  @media (max-width: 640px) {
+    .hero-glow-layer {
+      filter: blur(8px);
+    }
+  }
+</style>
 
 <!-- Info-bar with icons -->
 <section class="relative border-y border-white/5 bg-white/[0.03]">
