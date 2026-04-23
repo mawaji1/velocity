@@ -1,5 +1,6 @@
 ---
 import type { Content } from '../i18n/content';
+import { PROGRAM_START_ISO } from '../i18n/content';
 interface Props { t: Content }
 const { t } = Astro.props;
 
@@ -58,7 +59,7 @@ const infoIcons: Record<string, string> = {
   </div>
 
   <!-- Hero content: centered text only -->
-  <div class="hero-content relative mx-auto max-w-[960px] px-5 pt-20 pb-20 text-center sm:px-8 md:pt-28 md:pb-28">
+  <div class="hero-content relative mx-auto max-w-[960px] px-5 pt-20 pb-16 text-center sm:px-8 md:pt-28 md:pb-20">
     <h1 class="text-[56px] font-extrabold leading-[1.05] tracking-tight text-white md:text-[104px]">
       {t.hero.title}
     </h1>
@@ -88,18 +89,72 @@ const infoIcons: Record<string, string> = {
           <path d="M5 12h14 M13 5l7 7-7 7"></path>
         </svg>
       </a>
-      <a
-        href={t.hero.ctaSecondary.href}
-        class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white/90 backdrop-blur transition hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/10 md:text-[15px]"
-      >
-        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4 M7 10l5 5 5-5 M12 15V3"></path>
-        </svg>
-        {t.hero.ctaSecondary.label}
-      </a>
+    </div>
+
+    <!-- Countdown (inside hero) -->
+    <div
+      class="mx-auto mt-12 max-w-[720px] rounded-3xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur md:mt-14 md:p-6"
+      data-countdown
+      data-target={PROGRAM_START_ISO}
+      data-live-text={t.countdown.live}
+    >
+      <div class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[color:var(--color-red-primary)]">
+        {t.countdown.title}
+      </div>
+      <div class="mt-4 flex flex-wrap items-center justify-center gap-2.5 md:gap-4" data-countdown-units>
+        <div class="flex min-w-[70px] flex-col items-center rounded-2xl border border-white/10 bg-black/30 px-3 py-3 md:min-w-[82px]">
+          <span class="text-2xl font-bold tabular-nums text-white md:text-4xl" data-unit="days">--</span>
+          <span class="mt-1 text-[11px] text-white/60">{t.countdown.units.days}</span>
+        </div>
+        <div class="flex min-w-[70px] flex-col items-center rounded-2xl border border-white/10 bg-black/30 px-3 py-3 md:min-w-[82px]">
+          <span class="text-2xl font-bold tabular-nums text-white md:text-4xl" data-unit="hours">--</span>
+          <span class="mt-1 text-[11px] text-white/60">{t.countdown.units.hours}</span>
+        </div>
+        <div class="flex min-w-[70px] flex-col items-center rounded-2xl border border-white/10 bg-black/30 px-3 py-3 md:min-w-[82px]">
+          <span class="text-2xl font-bold tabular-nums text-white md:text-4xl" data-unit="minutes">--</span>
+          <span class="mt-1 text-[11px] text-white/60">{t.countdown.units.minutes}</span>
+        </div>
+        <div class="flex min-w-[70px] flex-col items-center rounded-2xl border border-white/10 bg-black/30 px-3 py-3 md:min-w-[82px]">
+          <span class="text-2xl font-bold tabular-nums text-white md:text-4xl" data-unit="seconds">--</span>
+          <span class="mt-1 text-[11px] text-white/60">{t.countdown.units.seconds}</span>
+        </div>
+      </div>
+      <div class="mt-4 hidden text-sm font-semibold text-white" data-countdown-live></div>
     </div>
   </div>
 </section>
+
+<script>
+  const el = document.querySelector<HTMLElement>('[data-countdown]');
+  if (el) {
+    const target = new Date(el.dataset.target ?? '').getTime();
+    const liveText = el.dataset.liveText ?? '';
+    const units = el.querySelector<HTMLElement>('[data-countdown-units]');
+    const live = el.querySelector<HTMLElement>('[data-countdown-live]');
+    const set = (name: string, value: number) => {
+      const node = el.querySelector<HTMLElement>(`[data-unit="${name}"]`);
+      if (node) node.textContent = String(value).padStart(2, '0');
+    };
+    const tick = () => {
+      const diff = target - Date.now();
+      if (diff <= 0) {
+        if (units) units.classList.add('hidden');
+        if (live) {
+          live.textContent = liveText;
+          live.classList.remove('hidden');
+        }
+        return;
+      }
+      const sec = Math.floor(diff / 1000);
+      set('days', Math.floor(sec / 86400));
+      set('hours', Math.floor((sec % 86400) / 3600));
+      set('minutes', Math.floor((sec % 3600) / 60));
+      set('seconds', sec % 60);
+    };
+    tick();
+    setInterval(tick, 1000);
+  }
+</script>
 
 <style>
   /* Ensure the hero always has space and its content is composited above
@@ -136,10 +191,10 @@ const infoIcons: Record<string, string> = {
 
 <!-- Info-bar with icons -->
 <section class="relative border-y border-white/5 bg-white/[0.03]">
-  <div class="mx-auto grid max-w-[1240px] grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+  <div class="mx-auto grid max-w-[1240px] grid-cols-1 sm:grid-cols-2">
     {t.infobar.map((item, i) => (
       <div
-        class={`relative flex items-start gap-4 px-6 py-6 text-start md:py-8 ${i < 3 ? 'md:after:absolute md:after:inset-y-6 md:after:end-0 md:after:w-px md:after:bg-white/10' : ''} ${i % 2 === 0 ? 'sm:after:absolute sm:after:inset-y-6 sm:after:end-0 sm:after:w-px sm:after:bg-white/10 md:after:bg-transparent' : ''}`}
+        class={`relative flex items-start gap-4 px-6 py-6 text-start md:py-8 ${i === 0 ? 'sm:after:absolute sm:after:inset-y-6 sm:after:end-0 sm:after:w-px sm:after:bg-white/10' : ''}`}
       >
         <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[color:var(--color-red-primary)]/15 text-[color:var(--color-red-primary)] ring-1 ring-inset ring-[color:var(--color-red-primary)]/25">
           <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">

@@ -1,0 +1,858 @@
+---
+import type { Locale } from '../i18n/content';
+import { registerContent } from '../i18n/register-schema';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const copy = registerContent[locale];
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const homeHref = `${base}/${locale}/`;
+
+const isAr = locale === 'ar';
+const reviewLabel = isAr ? 'مراجعة وإرسال' : 'Review & submit';
+const reviewEyebrow = isAr ? 'المراجعة النهائية' : 'Final review';
+const reviewLead = isAr
+  ? 'راجع معلوماتك قبل الإرسال. يمكنك الرجوع لأي قسم لتعديله.'
+  : 'Review your answers before submitting. You can go back to edit any section.';
+const editLabel = isAr ? 'تعديل' : 'Edit';
+const nextLabel = isAr ? 'التالي' : 'Next';
+const prevLabel = isAr ? 'السابق' : 'Previous';
+const stepCounter = (a: number, b: number) =>
+  isAr ? `الخطوة ${a} من ${b}` : `Step ${a} of ${b}`;
+const emptyValueLabel = isAr ? 'لم يُدخل' : 'Not provided';
+const refPrefix = isAr ? 'رقم المرجع' : 'Reference no.';
+---
+<section class="register-shell relative overflow-hidden py-12 md:py-20">
+  <!-- Background: lane lines (RTL-aware) -->
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div
+      class="absolute inset-0 opacity-[0.05]"
+      style="background-image: repeating-linear-gradient(135deg, transparent 0, transparent 58px, rgba(255,255,255,0.7) 58px, rgba(255,255,255,0.7) 59px); mask-image: radial-gradient(ellipse at top, black 20%, transparent 72%); -webkit-mask-image: radial-gradient(ellipse at top, black 20%, transparent 72%);"
+    ></div>
+    <div
+      class="absolute left-1/2 top-[-220px] h-[520px] w-[820px] -translate-x-1/2 rounded-full"
+      style="background: radial-gradient(closest-side, rgba(223,51,38,0.22), transparent 72%); filter: blur(22px);"
+    ></div>
+  </div>
+
+  <div class="relative mx-auto max-w-[960px] px-5 sm:px-8">
+    <a
+      href={homeHref}
+      class="group mb-8 inline-flex items-center gap-2 text-[13px] text-white/55 transition hover:text-white"
+    >
+      <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 rtl:rotate-180" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 18l-6-6 6-6"></path>
+      </svg>
+      <span class="transition group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5">{copy.header.backToHome}</span>
+    </a>
+
+    <!-- Header -->
+    <header class="mb-10 md:mb-14">
+      <div class="inline-flex items-center gap-2 text-[10.5px] font-semibold uppercase tracking-[0.3em] text-[color:var(--color-red-primary)]">
+        <span class="h-1.5 w-6 rounded-full bg-[color:var(--color-red-primary)]"></span>
+        {copy.header.eyebrow}
+      </div>
+      <h1 class="mt-4 text-[34px] font-bold leading-[1.05] tracking-tight text-white sm:text-[44px] md:text-[56px]">
+        {copy.header.title}
+      </h1>
+      <p class="mt-5 max-w-2xl text-[15px] leading-8 text-white/65 md:text-base">
+        {copy.header.lead}
+      </p>
+    </header>
+
+    <!-- Progress track -->
+    <div class="progress-track mb-10 md:mb-14" data-progress data-edit-label={editLabel}>
+      <ol class="hidden items-center justify-between gap-2 md:flex">
+        {copy.sections.map((s, i) => (
+          <li class="progress-station flex flex-1 items-center gap-2" data-station={i}>
+            <div class="station-dot relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 bg-black/40 text-[12px] font-semibold text-white/60 transition-all duration-300">
+              <span class="station-num">{s.number}</span>
+              <svg class="station-check absolute h-4 w-4 text-white opacity-0 transition-opacity duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20 6L9 17l-5-5"></path>
+              </svg>
+            </div>
+            {i < copy.sections.length - 1 && (
+              <div class="station-bar h-px flex-1 bg-white/10 transition-colors duration-500"></div>
+            )}
+          </li>
+        ))}
+        <li class="progress-station flex items-center gap-2" data-station={copy.sections.length}>
+          <div class="station-dot relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 bg-black/40 text-white/60 transition-all duration-300" title={reviewEyebrow}>
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 11l3 3L22 4 M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+            </svg>
+          </div>
+        </li>
+      </ol>
+
+      <div class="md:hidden">
+        <div class="mb-2 flex items-baseline justify-between">
+          <span class="text-[11px] font-semibold uppercase tracking-[0.24em] text-[color:var(--color-red-primary)]" data-step-counter>
+            {stepCounter(1, copy.sections.length + 1)}
+          </span>
+          <span class="text-[11px] text-white/45" data-step-title>—</span>
+        </div>
+        <div class="relative h-1.5 w-full overflow-hidden rounded-full bg-white/8">
+          <div class="progress-fill absolute inset-y-0 start-0 rounded-full bg-gradient-to-r from-[color:var(--color-red-primary)] to-[#ff5a4e] transition-[width] duration-500" style="width: 0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <form
+      id="velocity-register-form"
+      class="relative"
+      novalidate
+      data-validation-required={copy.validation.required}
+      data-validation-email={copy.validation.invalidEmail}
+      data-validation-url={copy.validation.invalidUrl}
+      data-validation-word-limit={copy.validation.wordLimitExceeded(0).replace('0', '{limit}')}
+      data-error-generic={copy.error.generic}
+      data-submit-label={copy.submit.label}
+      data-submit-loading={copy.submit.loading}
+      data-word-counter-template={copy.wordCounter(0, 0).replace('0 / 0', '{used} / {limit}')}
+      data-empty-label={emptyValueLabel}
+      data-total-steps={copy.sections.length + 1}
+    >
+      {copy.sections.map((section, sIdx) => (
+        <div class="step" data-step={sIdx} data-step-title-text={section.title} hidden={sIdx !== 0}>
+          <article class="relative overflow-hidden rounded-[28px] border border-white/10 bg-gradient-to-b from-white/[0.045] to-white/[0.015] p-7 md:p-10">
+            <div class="section-ghost pointer-events-none absolute select-none text-[180px] font-bold leading-none md:text-[260px]" aria-hidden="true">
+              {section.number}
+            </div>
+
+            <div class="relative">
+              <div class="flex items-center gap-3">
+                <span class="inline-flex h-7 items-center rounded-full bg-[color:var(--color-red-primary)]/12 px-3 text-[10.5px] font-semibold uppercase tracking-[0.24em] text-[color:var(--color-red-primary)]">
+                  {isAr ? `قسم ${section.number}` : `Section ${section.number}`}
+                </span>
+              </div>
+              <h2 class="mt-4 text-[26px] font-bold leading-[1.15] text-white md:text-[34px]">{section.title}</h2>
+
+              <div class="mt-8 space-y-5 md:mt-10 md:space-y-6">
+                {section.fields.map((field) => (
+                  <div
+                    class="field"
+                    data-field={field.name}
+                    data-field-label={field.label}
+                    data-depends-on-name={field.dependsOn?.name ?? ''}
+                    data-depends-on-value={field.dependsOn?.equals ?? ''}
+                  >
+                    {field.type !== 'checkbox-single' && (
+                      <label for={field.name} class="mb-2 block text-[12.5px] font-semibold uppercase tracking-[0.12em] text-white/80 md:text-[13px]">
+                        {field.label}
+                        {field.required && <span class="ms-1 text-[color:var(--color-red-primary)]">*</span>}
+                      </label>
+                    )}
+
+                    {field.help && field.type !== 'checkbox-single' && (
+                      <p class="mb-2 text-[11.5px] text-white/45 md:text-[12.5px]">{field.help}</p>
+                    )}
+
+                    {['text', 'email', 'tel', 'url', 'number'].includes(field.type) && (
+                      <div class="input-wrap relative">
+                        <input
+                          id={field.name}
+                          name={field.name}
+                          type={field.type}
+                          placeholder={field.placeholder}
+                          required={field.required}
+                          min={field.min}
+                          max={field.max}
+                          class="peer block w-full rounded-2xl border border-white/12 bg-black/25 px-5 py-4 text-[15px] text-white placeholder-white/25 outline-none transition focus:border-[color:var(--color-red-primary)]/70 focus:bg-black/35"
+                        />
+                        <span class="pointer-events-none absolute inset-y-0 start-0 w-[3px] scale-y-0 rounded-s-2xl bg-[color:var(--color-red-primary)] transition-transform duration-300 peer-focus:scale-y-100"></span>
+                      </div>
+                    )}
+
+                    {field.type === 'textarea' && (
+                      <>
+                        <div class="input-wrap relative">
+                          <textarea
+                            id={field.name}
+                            name={field.name}
+                            rows={field.rows ?? 4}
+                            placeholder={field.placeholder}
+                            required={field.required}
+                            data-word-limit={field.wordLimit ?? ''}
+                            class="peer block w-full resize-y rounded-2xl border border-white/12 bg-black/25 px-5 py-4 text-[15px] leading-7 text-white placeholder-white/25 outline-none transition focus:border-[color:var(--color-red-primary)]/70 focus:bg-black/35"
+                          ></textarea>
+                          <span class="pointer-events-none absolute inset-y-0 start-0 w-[3px] scale-y-0 rounded-s-2xl bg-[color:var(--color-red-primary)] transition-transform duration-300 peer-focus:scale-y-100"></span>
+                        </div>
+                        {field.wordLimit && (
+                          <div class="mt-1.5 text-end text-[11.5px] font-medium tabular-nums text-white/45" data-word-count-for={field.name}>
+                            {copy.wordCounter(0, field.wordLimit)}
+                          </div>
+                        )}
+                      </>
+                    )}
+
+                    {field.type === 'select' && (
+                      <div class="input-wrap relative">
+                        <select
+                          id={field.name}
+                          name={field.name}
+                          required={field.required}
+                          class="peer block w-full appearance-none rounded-2xl border border-white/12 bg-black/25 ps-5 pe-12 py-4 text-[15px] text-white outline-none transition focus:border-[color:var(--color-red-primary)]/70 focus:bg-black/35"
+                        >
+                          <option value="" class="bg-[color:var(--color-black-primary)]">—</option>
+                          {field.options?.map((opt) => (
+                            <option value={opt.value} class="bg-[color:var(--color-black-primary)]">{opt.label}</option>
+                          ))}
+                        </select>
+                        <span class="pointer-events-none absolute inset-y-0 start-0 w-[3px] scale-y-0 rounded-s-2xl bg-[color:var(--color-red-primary)] transition-transform duration-300 peer-focus:scale-y-100"></span>
+                        <svg viewBox="0 0 24 24" class="pointer-events-none absolute top-1/2 end-4 h-4 w-4 -translate-y-1/2 text-white/50" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M6 9l6 6 6-6"></path>
+                        </svg>
+                      </div>
+                    )}
+
+                    {field.type === 'radio' && (
+                      <div class="flex flex-wrap gap-2.5">
+                        {field.options?.map((opt) => (
+                          <label class="group inline-flex cursor-pointer items-center gap-2.5 rounded-2xl border border-white/12 bg-black/20 px-4 py-3 text-[14px] transition hover:border-white/25 hover:bg-black/30 has-[:checked]:border-[color:var(--color-red-primary)]/60 has-[:checked]:bg-[color:var(--color-red-primary)]/12 has-[:checked]:text-white">
+                            <input type="radio" name={field.name} value={opt.value} required={field.required} class="peer sr-only" data-label={opt.label} />
+                            <span class="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-white/30 transition peer-checked:border-[color:var(--color-red-primary)]">
+                              <span class="h-2 w-2 rounded-full bg-[color:var(--color-red-primary)] opacity-0 transition peer-checked:opacity-100"></span>
+                            </span>
+                            <span class="text-white/85">{opt.label}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+
+                    {field.type === 'checkbox-group' && (
+                      <div class="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                        {field.options?.map((opt) => (
+                          <label class="inline-flex cursor-pointer items-center gap-3 rounded-2xl border border-white/12 bg-black/20 px-4 py-3 text-[14px] transition hover:border-white/25 hover:bg-black/30 has-[:checked]:border-[color:var(--color-red-primary)]/60 has-[:checked]:bg-[color:var(--color-red-primary)]/12">
+                            <input type="checkbox" name={field.name} value={opt.value} class="peer sr-only" data-label={opt.label} />
+                            <span class="flex h-4 w-4 shrink-0 items-center justify-center rounded border border-white/30 transition peer-checked:border-[color:var(--color-red-primary)] peer-checked:bg-[color:var(--color-red-primary)]">
+                              <svg viewBox="0 0 24 24" class="h-3 w-3 text-white opacity-0 transition peer-checked:opacity-100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 6L9 17l-5-5"></path>
+                              </svg>
+                            </span>
+                            <span class="text-white/85">{opt.label}</span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+
+                    {field.type === 'checkbox-single' && (
+                      <label class="flex cursor-pointer items-start gap-3 rounded-2xl border border-white/12 bg-black/20 px-4 py-4 transition hover:border-white/25 hover:bg-black/30 has-[:checked]:border-[color:var(--color-red-primary)]/60 has-[:checked]:bg-[color:var(--color-red-primary)]/12">
+                        <input id={field.name} type="checkbox" name={field.name} required={field.required} class="peer sr-only" />
+                        <span class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border border-white/30 transition peer-checked:border-[color:var(--color-red-primary)] peer-checked:bg-[color:var(--color-red-primary)]">
+                          <svg viewBox="0 0 24 24" class="h-3 w-3 text-white opacity-0 transition peer-checked:opacity-100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 6L9 17l-5-5"></path>
+                          </svg>
+                        </span>
+                        <span class="text-[14px] leading-6 text-white/85 md:text-[15px]">
+                          {field.label}
+                          {field.required && <span class="ms-1 text-[color:var(--color-red-primary)]">*</span>}
+                        </span>
+                      </label>
+                    )}
+
+                    <p class="field-error mt-2 hidden items-center gap-1.5 text-[12px] text-[color:var(--color-red-primary)]"></p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </article>
+        </div>
+      ))}
+
+      <!-- Review step -->
+      <div class="step" data-step={copy.sections.length} data-step-title-text={reviewEyebrow} hidden>
+        <article class="relative overflow-hidden rounded-[28px] border border-[color:var(--color-red-primary)]/25 bg-gradient-to-b from-[color:var(--color-red-primary)]/10 via-white/[0.035] to-white/[0.015] p-7 md:p-10">
+          <div class="section-ghost pointer-events-none absolute select-none text-[180px] font-bold leading-none md:text-[260px]" aria-hidden="true">
+            ✓
+          </div>
+          <div class="relative">
+            <div class="flex items-center gap-3">
+              <span class="inline-flex h-7 items-center rounded-full bg-[color:var(--color-red-primary)]/12 px-3 text-[10.5px] font-semibold uppercase tracking-[0.24em] text-[color:var(--color-red-primary)]">
+                {reviewEyebrow}
+              </span>
+            </div>
+            <h2 class="mt-4 text-[26px] font-bold leading-[1.15] text-white md:text-[34px]">{reviewLabel}</h2>
+            <p class="mt-3 text-[14.5px] leading-7 text-white/65">{reviewLead}</p>
+
+            <div id="review-content" class="mt-8 space-y-6"></div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="mt-8 flex flex-col-reverse items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between md:mt-10">
+        <button
+          type="button"
+          data-prev
+          class="group inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-5 py-3 text-[13px] font-semibold text-white/75 transition hover:border-white/30 hover:bg-white/[0.08] hover:text-white disabled:cursor-not-allowed disabled:opacity-40 md:px-6 md:py-3.5 md:text-[14px]"
+          disabled
+        >
+          <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 rtl:rotate-180 transition-transform group-hover:-translate-x-0.5 rtl:group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 18l-6-6 6-6"></path>
+          </svg>
+          {prevLabel}
+        </button>
+
+        <div class="hidden items-center gap-3 sm:flex">
+          <span class="text-[11px] font-semibold uppercase tracking-[0.24em] text-white/45" data-step-counter-desktop>
+            {stepCounter(1, copy.sections.length + 1)}
+          </span>
+        </div>
+
+        <div class="flex items-center gap-3 sm:justify-end">
+          <p class="form-error hidden text-[12.5px] text-[color:var(--color-red-primary)]"></p>
+
+          <button
+            type="button"
+            data-next
+            class="group inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--color-red-primary)] px-6 py-3 text-[13px] font-semibold text-white shadow-[0_16px_50px_-12px_rgba(223,51,38,0.7)] transition hover:-translate-y-0.5 hover:bg-[color:var(--color-red-primary-hover)] md:px-7 md:py-3.5 md:text-[14px]"
+          >
+            <span data-next-label>{nextLabel}</span>
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 rtl:rotate-180 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14 M13 5l7 7-7 7"></path>
+            </svg>
+          </button>
+
+          <button
+            type="submit"
+            data-submit
+            hidden
+            class="group inline-flex items-center justify-center gap-2 rounded-full bg-[color:var(--color-red-primary)] px-6 py-3 text-[13px] font-semibold text-white shadow-[0_16px_50px_-12px_rgba(223,51,38,0.7)] transition hover:-translate-y-0.5 hover:bg-[color:var(--color-red-primary-hover)] disabled:cursor-not-allowed disabled:opacity-60 md:px-7 md:py-3.5 md:text-[14px]"
+          >
+            <span class="submit-label">{copy.submit.label}</span>
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14 M13 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </form>
+
+    <!-- Success state -->
+    <div
+      id="velocity-register-success"
+      class="hidden"
+      data-success-cta={copy.success.cta}
+      data-home-href={homeHref}
+      data-ref-prefix={refPrefix}
+    >
+      <article class="relative overflow-hidden rounded-[28px] border border-[color:var(--color-red-primary)]/40 bg-gradient-to-b from-[color:var(--color-red-primary)]/15 via-white/[0.035] to-white/[0.015] p-10 text-center md:p-14">
+        <div class="pointer-events-none absolute inset-x-0 top-0 h-3" style="background-image: repeating-linear-gradient(90deg, #fff 0 14px, transparent 14px 28px), repeating-linear-gradient(90deg, transparent 0 14px, #fff 14px 28px); background-size: 28px 6px; background-position: 0 0, 0 6px; background-repeat: repeat-x; opacity: 0.14;"></div>
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 h-3" style="background-image: repeating-linear-gradient(90deg, #fff 0 14px, transparent 14px 28px), repeating-linear-gradient(90deg, transparent 0 14px, #fff 14px 28px); background-size: 28px 6px; background-position: 0 0, 0 6px; background-repeat: repeat-x; opacity: 0.14;"></div>
+
+        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[color:var(--color-red-primary)] text-white shadow-[0_20px_50px_-16px_rgba(223,51,38,0.9)]">
+          <svg viewBox="0 0 24 24" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6L9 17l-5-5"></path>
+          </svg>
+        </div>
+        <h2 class="mt-6 text-[28px] font-bold text-white md:text-4xl">{copy.success.title}</h2>
+        <p class="mx-auto mt-3 max-w-xl text-[15px] leading-7 text-white/70">{copy.success.body}</p>
+        <div class="mt-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-4 py-1.5 text-[12px] font-medium text-white/75">
+          <span class="text-white/50">{refPrefix}</span>
+          <span class="font-semibold tabular-nums text-white" data-ref-id>—</span>
+        </div>
+        <div class="mt-8">
+          <a
+            href={homeHref}
+            class="inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-2.5 text-[13px] font-semibold text-white transition hover:bg-white/15 md:text-[14px]"
+          >
+            {copy.success.cta}
+            <svg viewBox="0 0 24 24" class="h-4 w-4 rtl:rotate-180" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14 M13 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .register-shell { isolation: isolate; }
+
+  /* Oversized section number — anchored to the start-edge, RTL-aware */
+  .section-ghost {
+    top: -0.25em;
+    font-feature-settings: "tnum";
+    letter-spacing: -0.06em;
+    color: rgba(255, 255, 255, 0.04);
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
+  }
+  html[dir="ltr"] .section-ghost { right: -0.05em; }
+  html[dir="rtl"] .section-ghost { left: -0.05em; }
+
+  /* Step transitions */
+  .step[hidden] { display: none; }
+  .step { animation: step-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+  @keyframes step-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Progress stations */
+  .progress-station[data-state="active"] .station-dot {
+    border-color: var(--color-red-primary);
+    background: var(--color-red-primary);
+    color: #fff;
+    box-shadow: 0 0 0 4px rgba(223, 51, 38, 0.15), 0 10px 28px -12px rgba(223, 51, 38, 0.7);
+  }
+  .progress-station[data-state="active"] .station-dot::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 9999px;
+    border: 1px solid rgba(223, 51, 38, 0.55);
+    animation: station-pulse 1.8s ease-out infinite;
+  }
+  @keyframes station-pulse {
+    0%   { transform: scale(0.9); opacity: 0.85; }
+    80%  { transform: scale(1.25); opacity: 0; }
+    100% { transform: scale(1.25); opacity: 0; }
+  }
+  .progress-station[data-state="done"] .station-dot {
+    border-color: var(--color-red-primary);
+    background: rgba(223, 51, 38, 0.18);
+    color: transparent;
+  }
+  .progress-station[data-state="done"] .station-num { opacity: 0; }
+  .progress-station[data-state="done"] .station-check { opacity: 1; color: var(--color-red-primary); }
+  .progress-station[data-state="done"] .station-bar { background: var(--color-red-primary); }
+
+  /* Field error shake */
+  .field[data-invalid="true"] input:not(.sr-only),
+  .field[data-invalid="true"] textarea,
+  .field[data-invalid="true"] select {
+    border-color: rgba(223, 51, 38, 0.7) !important;
+  }
+  .field[data-invalid="true"] {
+    animation: field-shake 360ms cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  }
+  @keyframes field-shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-4px); }
+    40%, 80% { transform: translateX(4px); }
+  }
+  html[dir="rtl"] .field[data-invalid="true"] { animation-name: field-shake-rtl; }
+  @keyframes field-shake-rtl {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(4px); }
+    40%, 80% { transform: translateX(-4px); }
+  }
+
+  .field-error:not(.hidden) { display: inline-flex; }
+
+  /* Review groups */
+  .review-group {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 18px 20px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .review-group + .review-group { margin-top: 12px; }
+  .review-group-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .review-group-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  html[dir="rtl"] .review-group-title { text-transform: none; letter-spacing: 0; }
+  .review-edit {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--color-red-primary);
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(223, 51, 38, 0.3);
+    background: rgba(223, 51, 38, 0.08);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .review-edit:hover { background: rgba(223, 51, 38, 0.16); }
+  .review-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 10px 0;
+    border-top: 1px dashed rgba(255, 255, 255, 0.06);
+  }
+  .review-row:first-child { border-top: 0; padding-top: 0; }
+  @media (min-width: 640px) {
+    .review-row { grid-template-columns: 200px 1fr; gap: 16px; }
+  }
+  .review-label { font-size: 12px; color: rgba(255, 255, 255, 0.5); }
+  .review-value {
+    font-size: 13.5px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    word-break: break-word;
+    white-space: pre-wrap;
+  }
+  .review-value.empty { color: rgba(255, 255, 255, 0.3); font-style: italic; }
+</style>
+
+<script>
+  (() => {
+    const form = document.getElementById('velocity-register-form') as HTMLFormElement | null;
+    if (!form) return;
+
+    // === Endpoint configuration ===
+    // When a backend is chosen, set FORM_ENDPOINT to its POST URL.
+    // Until then, submissions are logged to the console and the success
+    // state is shown directly so the form is testable end-to-end.
+    const FORM_ENDPOINT: string | null = null;
+
+    const successEl = document.getElementById('velocity-register-success');
+    const progressEl = document.querySelector('[data-progress]') as HTMLElement | null;
+    const stations = progressEl ? Array.from(progressEl.querySelectorAll<HTMLElement>('.progress-station')) : [];
+    const progressFill = progressEl?.querySelector<HTMLElement>('.progress-fill') ?? null;
+    const stepCounterMobile = progressEl?.querySelector<HTMLElement>('[data-step-counter]') ?? null;
+    const stepTitleMobile = progressEl?.querySelector<HTMLElement>('[data-step-title]') ?? null;
+    const stepCounterDesktop = document.querySelector<HTMLElement>('[data-step-counter-desktop]');
+
+    const prevBtn = form.querySelector('[data-prev]') as HTMLButtonElement;
+    const nextBtn = form.querySelector('[data-next]') as HTMLButtonElement;
+    const submitBtn = form.querySelector('[data-submit]') as HTMLButtonElement;
+    const submitLabelEl = form.querySelector('.submit-label') as HTMLElement;
+    const formErrorEl = form.querySelector('.form-error') as HTMLElement;
+
+    const steps = Array.from(form.querySelectorAll<HTMLElement>('.step'));
+    const reviewContent = document.getElementById('review-content');
+    const editLabelText = progressEl?.dataset.editLabel
+      || (document.documentElement.lang === 'ar' ? 'تعديل' : 'Edit');
+
+    const totalSteps = parseInt(form.dataset.totalSteps ?? String(steps.length), 10);
+    const requiredMsg = form.dataset.validationRequired ?? 'Required';
+    const emailMsg = form.dataset.validationEmail ?? 'Invalid email';
+    const urlMsg = form.dataset.validationUrl ?? 'Invalid URL';
+    const wordLimitTmpl = form.dataset.validationWordLimit ?? 'Exceeds {limit} words';
+    const genericError = form.dataset.errorGeneric ?? 'Error';
+    const submitLabel = form.dataset.submitLabel ?? 'Submit';
+    const submitLoading = form.dataset.submitLoading ?? 'Submitting…';
+    const wordCounterTmpl = form.dataset.wordCounterTemplate ?? '{used} / {limit}';
+    const emptyLabel = form.dataset.emptyLabel ?? '—';
+
+    const lastStepIndex = steps.length - 1;
+    let currentIndex = 0;
+
+    const countWords = (s: string) => s.trim().split(/\s+/).filter(Boolean).length;
+
+    // "Step {n} of {total}" template rebuilt from the server-rendered string
+    const stepCounterTemplate = (() => {
+      const initial = stepCounterMobile?.textContent?.trim()
+        ?? stepCounterDesktop?.textContent?.trim()
+        ?? 'Step 1 of 9';
+      const nums = initial.match(/\d+/g);
+      if (!nums || nums.length < 2) return (n: number, t: number) => `Step ${n} of ${t}`;
+      const [a, b] = nums;
+      return (n: number, t: number) => initial.replace(a, String(n)).replace(b, String(t));
+    })();
+
+    // === Conditional visibility ===
+    const applyConditionalFields = () => {
+      form.querySelectorAll<HTMLElement>('.field[data-depends-on-name]').forEach((el) => {
+        const depName = el.dataset.dependsOnName;
+        const depValue = el.dataset.dependsOnValue;
+        if (!depName || !depValue) return;
+        const controller = form.querySelector<HTMLInputElement>(`[name="${depName}"]:checked`);
+        const visible = controller?.value === depValue;
+        el.classList.toggle('hidden', !visible);
+        if (!visible) {
+          el.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea, select').forEach((i) => {
+            if (i.type === 'checkbox' || i.type === 'radio') (i as HTMLInputElement).checked = false;
+            else i.value = '';
+          });
+        }
+      });
+    };
+    form.addEventListener('change', applyConditionalFields);
+    applyConditionalFields();
+
+    // === Word counters ===
+    form.querySelectorAll<HTMLTextAreaElement>('textarea[data-word-limit]').forEach((ta) => {
+      const limit = parseInt(ta.dataset.wordLimit ?? '0', 10);
+      if (!limit) return;
+      const counter = form.querySelector<HTMLElement>(`[data-word-count-for="${ta.name}"]`);
+      if (!counter) return;
+      const render = () => {
+        const used = countWords(ta.value);
+        counter.textContent = wordCounterTmpl
+          .replace('{used}', String(used))
+          .replace('{limit}', String(limit));
+        counter.classList.toggle('text-[color:var(--color-red-primary)]', used > limit);
+        counter.classList.toggle('text-white/45', used <= limit);
+      };
+      ta.addEventListener('input', render);
+      render();
+    });
+
+    // === Validation ===
+    const setFieldError = (fieldEl: HTMLElement, msg: string | null) => {
+      const err = fieldEl.querySelector<HTMLElement>('.field-error');
+      if (!err) return;
+      if (msg) {
+        err.textContent = msg;
+        err.classList.remove('hidden');
+        fieldEl.setAttribute('data-invalid', 'true');
+      } else {
+        err.textContent = '';
+        err.classList.add('hidden');
+        fieldEl.removeAttribute('data-invalid');
+      }
+    };
+
+    const validateField = (fieldEl: HTMLElement): boolean => {
+      if (fieldEl.classList.contains('hidden')) return true;
+
+      const textlike = fieldEl.querySelector<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(
+        'input[type="text"], input[type="email"], input[type="tel"], input[type="url"], input[type="number"], textarea, select',
+      );
+      const radios = fieldEl.querySelectorAll<HTMLInputElement>('input[type="radio"]');
+      const checkboxes = fieldEl.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+
+      if (textlike) {
+        const required = (textlike as HTMLInputElement).required;
+        const value = (textlike.value ?? '').trim();
+        if (required && !value) return setFieldError(fieldEl, requiredMsg), false;
+        if ((textlike as HTMLInputElement).type === 'email' && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return setFieldError(fieldEl, emailMsg), false;
+        if ((textlike as HTMLInputElement).type === 'url' && value && !/^https?:\/\/.+/i.test(value)) return setFieldError(fieldEl, urlMsg), false;
+        if (textlike.tagName === 'TEXTAREA') {
+          const ta = textlike as HTMLTextAreaElement;
+          const limit = parseInt(ta.dataset.wordLimit ?? '0', 10);
+          if (limit && countWords(value) > limit) return setFieldError(fieldEl, wordLimitTmpl.replace('{limit}', String(limit))), false;
+        }
+      }
+      if (radios.length) {
+        const anyRequired = Array.from(radios).some((r) => r.required);
+        const anyChecked = Array.from(radios).some((r) => r.checked);
+        if (anyRequired && !anyChecked) return setFieldError(fieldEl, requiredMsg), false;
+      }
+      if (checkboxes.length && !radios.length) {
+        const anyRequired = Array.from(checkboxes).some((c) => c.required);
+        const anyChecked = Array.from(checkboxes).some((c) => c.checked);
+        if (anyRequired && !anyChecked) return setFieldError(fieldEl, requiredMsg), false;
+      }
+      setFieldError(fieldEl, null);
+      return true;
+    };
+
+    form.querySelectorAll<HTMLElement>('.field').forEach((f) => {
+      const reval = () => {
+        if (f.getAttribute('data-invalid')) validateField(f);
+      };
+      f.addEventListener('change', reval);
+      f.addEventListener('focusout', reval);
+    });
+
+    const validateStep = (i: number): boolean => {
+      const step = steps[i];
+      if (!step) return true;
+      const fields = Array.from(step.querySelectorAll<HTMLElement>('.field'));
+      let firstInvalid: HTMLElement | null = null;
+      for (const f of fields) {
+        if (!validateField(f) && !firstInvalid) firstInvalid = f;
+      }
+      if (firstInvalid) firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return !firstInvalid;
+    };
+
+    // === Progress + step navigation ===
+    const renderProgress = () => {
+      stations.forEach((st, idx) => {
+        st.removeAttribute('data-state');
+        if (idx < currentIndex) st.setAttribute('data-state', 'done');
+        else if (idx === currentIndex) st.setAttribute('data-state', 'active');
+      });
+      if (progressFill) {
+        progressFill.style.width = `${(currentIndex / (totalSteps - 1)) * 100}%`;
+      }
+      const counterText = stepCounterTemplate(currentIndex + 1, totalSteps);
+      if (stepCounterMobile) stepCounterMobile.textContent = counterText;
+      if (stepCounterDesktop) stepCounterDesktop.textContent = counterText;
+      const activeStep = steps[currentIndex];
+      if (stepTitleMobile && activeStep) {
+        stepTitleMobile.textContent = activeStep.dataset.stepTitleText ?? '';
+      }
+    };
+
+    const showStep = (i: number, opts: { scroll?: boolean } = {}) => {
+      currentIndex = Math.max(0, Math.min(i, lastStepIndex));
+      steps.forEach((s, idx) => { s.hidden = idx !== currentIndex; });
+      prevBtn.disabled = currentIndex === 0;
+      const onReview = currentIndex === lastStepIndex;
+      nextBtn.hidden = onReview;
+      submitBtn.hidden = !onReview;
+      renderProgress();
+      if (opts.scroll !== false) {
+        const shell = document.querySelector('.register-shell');
+        shell?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    };
+
+    // === Review rendering ===
+    const valueOfField = (field: HTMLElement): string => {
+      if (field.classList.contains('hidden')) return '';
+      const textlike = field.querySelector<HTMLInputElement | HTMLTextAreaElement>(
+        'input[type="text"], input[type="email"], input[type="tel"], input[type="url"], input[type="number"], textarea',
+      );
+      if (textlike) return (textlike.value ?? '').trim();
+
+      const select = field.querySelector<HTMLSelectElement>('select');
+      if (select) {
+        const opt = select.options[select.selectedIndex];
+        return opt && opt.value ? (opt.textContent ?? '').trim() : '';
+      }
+
+      const radios = field.querySelectorAll<HTMLInputElement>('input[type="radio"]');
+      if (radios.length) {
+        const checked = Array.from(radios).find((r) => r.checked);
+        if (!checked) return '';
+        return checked.dataset.label ?? checked.value;
+      }
+
+      const checkboxes = field.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
+      if (checkboxes.length) {
+        if (checkboxes.length === 1) return checkboxes[0].checked ? '✓' : '';
+        return Array.from(checkboxes)
+          .filter((c) => c.checked)
+          .map((c) => c.dataset.label ?? c.value)
+          .join(document.documentElement.lang === 'ar' ? '، ' : ', ');
+      }
+      return '';
+    };
+
+    const renderReview = () => {
+      if (!reviewContent) return;
+      while (reviewContent.firstChild) reviewContent.removeChild(reviewContent.firstChild);
+
+      steps.forEach((step, stepIdx) => {
+        if (stepIdx === lastStepIndex) return;
+        const titleEl = step.querySelector('article h2');
+        const fields = Array.from(step.querySelectorAll<HTMLElement>('.field'));
+        const visibleFields = fields.filter((f) => !f.classList.contains('hidden'));
+        if (!visibleFields.length) return;
+
+        const group = document.createElement('div');
+        group.className = 'review-group';
+
+        const head = document.createElement('div');
+        head.className = 'review-group-head';
+        const h = document.createElement('div');
+        h.className = 'review-group-title';
+        h.textContent = titleEl?.textContent?.trim() ?? '';
+        head.appendChild(h);
+
+        const edit = document.createElement('button');
+        edit.type = 'button';
+        edit.className = 'review-edit';
+        edit.textContent = editLabelText;
+        edit.addEventListener('click', () => showStep(stepIdx));
+        head.appendChild(edit);
+        group.appendChild(head);
+
+        visibleFields.forEach((f) => {
+          const label = f.dataset.fieldLabel ?? '';
+          const value = valueOfField(f).trim();
+          const row = document.createElement('div');
+          row.className = 'review-row';
+          const l = document.createElement('div');
+          l.className = 'review-label';
+          l.textContent = label;
+          const v = document.createElement('div');
+          v.className = 'review-value' + (value ? '' : ' empty');
+          v.textContent = value || emptyLabel;
+          row.appendChild(l);
+          row.appendChild(v);
+          group.appendChild(row);
+        });
+        reviewContent.appendChild(group);
+      });
+    };
+
+    // Nav wiring
+    nextBtn.addEventListener('click', () => {
+      if (!validateStep(currentIndex)) return;
+      if (currentIndex === lastStepIndex - 1) renderReview();
+      showStep(currentIndex + 1);
+    });
+    prevBtn.addEventListener('click', () => showStep(currentIndex - 1));
+
+    form.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') return;
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'TEXTAREA') return;
+      if (currentIndex < lastStepIndex) {
+        e.preventDefault();
+        nextBtn.click();
+      }
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      formErrorEl.classList.add('hidden');
+
+      for (let i = 0; i < lastStepIndex; i++) {
+        if (!validateStep(i)) {
+          showStep(i);
+          return;
+        }
+      }
+
+      const fd = new FormData(form);
+      const payload: Record<string, unknown> = {};
+      const seen = new Set<string>();
+      for (const [key] of Array.from(fd.entries())) {
+        if (seen.has(key)) continue;
+        seen.add(key);
+        const values = fd.getAll(key);
+        payload[key] = values.length > 1 ? values : values[0];
+      }
+
+      submitBtn.disabled = true;
+      submitLabelEl.textContent = submitLoading;
+
+      try {
+        if (FORM_ENDPOINT) {
+          const res = await fetch(FORM_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        } else {
+          console.info('[velocity-register] payload (no endpoint configured):', payload);
+          await new Promise((r) => setTimeout(r, 400));
+        }
+
+        const ref = 'VEL-' + Math.random().toString(36).slice(2, 6).toUpperCase() + '-' + Math.random().toString(36).slice(2, 6).toUpperCase();
+        const refEl = document.querySelector('[data-ref-id]');
+        if (refEl) refEl.textContent = ref;
+
+        form.classList.add('hidden');
+        if (progressEl) progressEl.classList.add('hidden');
+        if (successEl) {
+          successEl.classList.remove('hidden');
+          const shell = document.querySelector('.register-shell');
+          shell?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      } catch (err) {
+        console.error(err);
+        formErrorEl.textContent = genericError;
+        formErrorEl.classList.remove('hidden');
+      } finally {
+        submitBtn.disabled = false;
+        submitLabelEl.textContent = submitLabel;
+      }
+    });
+
+    showStep(0, { scroll: false });
+  })();
+</script>

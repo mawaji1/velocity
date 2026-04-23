@@ -26,7 +26,7 @@ export const content = {
         { label: 'المزايا', href: '#benefits' },
         { label: 'الأسئلة', href: '#faq' },
       ],
-      register: { label: 'سجّل الآن', href: '#register' },
+      register: { label: 'سجّل الآن', href: '/velocity/ar/register/' },
       langSwitch: 'En',
       langSwitchHref: '/velocity/en/',
     },
@@ -34,8 +34,7 @@ export const content = {
       eyebrow: 'مبادرة من الجامعة السعودية الإلكترونية',
       title: 'سيو فيلوسيتي',
       lead: 'برنامج SEU Velocity هو برنامج ابتكار مكثف مدته 7 أيام يهدف إلى تطوير حلول تقنية مبتكرة في قطاع الرياضة وتحويل الأفكار إلى نماذج أولية قابلة للتطبيق.',
-      ctaPrimary: { label: 'سجّل الآن', href: '#register' },
-      ctaSecondary: { label: 'حمّل كتيب التحديات', href: '#brief' },
+      ctaPrimary: { label: 'سجّل الآن', href: '/velocity/ar/register/' },
       deadlineLabel: 'آخر موعد للتسجيل',
       deadlineValue: '15 أبريل',
     },
@@ -47,8 +46,6 @@ export const content = {
     infobar: [
       { icon: 'clock', label: 'المدة', value: '5 أيام (اونلاين) + 2 أيام (الموقع)' },
       { icon: 'pin', label: 'الموقع', value: 'الرياض — مسرعة سيو الرياضية' },
-      { icon: 'users', label: 'الفئة', value: 'مطورون، مصممون، رياضيون، رواد أعمال' },
-      { icon: 'target', label: 'المخرجات', value: 'نموذج أولي + عرض نهائي + فرصة انضمام للمسرعة' },
     ],
     why: {
       title: 'عن فيلوسيتي',
@@ -154,7 +151,7 @@ export const content = {
       items: [
         { icon: 'certificate', title: 'شهادات معتمدة', desc: 'شهادات مشاركة وإنجاز لجميع المشاركين.' },
         { icon: 'rocket', title: 'الانضمام للمسرعة', desc: 'فرصة الانضمام إلى مسرعة سيو الرياضية للفرق المؤهلة.' },
-        { icon: 'partners', title: 'فرص شراكة', desc: 'فرص تجريبية (Pilot) مع جهات من المنظومة الرياضية.' },
+        { icon: 'partners', title: 'فرص شراكة', desc: 'فرص شراكة مع جهات رائدة بالمجال.' },
         { icon: 'mentor', title: 'توجيه مكثف', desc: 'إرشاد من مرشدين وخبراء متخصصين طوال فيلوسيتي.' },
         { icon: 'trophy', title: 'جوائز للفرق الفائزة', desc: 'جوائز مالية وعينية قيّمة للفرق المتميزة.' },
       ],
@@ -230,7 +227,7 @@ export const content = {
         },
         {
           q: 'هل يمكن للمشاركين من خارج المملكة التسجيل؟',
-          a: 'نعم، يمكن المشاركة افتراضياً من خارج المملكة، بينما يتطلب الحضور النهائي التواجد في موقع الفعالية.',
+          a: 'نعم، يمكن المشاركة افتراضياً من خارج المملكة، بينما يتطلب الحضور النهائي التواجد في موقع الفعالية. يرجى ملاحظة أن البرنامج لا يتكفل بتوفير المواصلات أو ترتيبات السفر والإقامة.',
         },
         {
           q: 'ما لغة العرض؟',
@@ -241,8 +238,7 @@ export const content = {
     finalCta: {
       title: 'جاهز لتبنّي تحديات الرياضة وبناء حل حقيقي؟',
       lead: 'سجّل الآن وابدأ رحلتك في سيو فيلوسيتي خلال 7 أيام من الابتكار والتطوير والعرض أمام خبراء المنظومة الرياضية.',
-      ctaPrimary: { label: 'سجّل اهتمامك', href: '#register' },
-      ctaSecondary: { label: 'حمّل كتيب التحديات', href: '#brief' },
+      ctaPrimary: { label: 'سجّل اهتمامك', href: '/velocity/ar/register/' },
     },
     footer: {
       tagline: 'تابعنا على',
@@ -429,7 +425,7 @@ export const content = {
         { label: 'Benefits', href: '#benefits' },
         { label: 'FAQ', href: '#faq' },
       ],
-      register: { label: 'Register now', href: '#register' },
+      register: { label: 'Register now', href: '/velocity/en/register/' },
       langSwitch: 'ع',
       langSwitchHref: '/velocity/ar/',
     },
@@ -437,8 +433,7 @@ export const content = {
       eyebrow: 'An initiative by Saudi Electronic University',
       title: 'SEU Velocity',
       lead: 'SEU Velocity is an intensive 7-day innovation program for building viable technology solutions in the sports sector and turning ideas into working prototypes.',
-      ctaPrimary: { label: 'Register now', href: '#register' },
-      ctaSecondary: { label: 'Download the challenge brief', href: '#brief' },
+      ctaPrimary: { label: 'Register now', href: '/velocity/en/register/' },
       deadlineLabel: 'Registration closes',
       deadlineValue: 'April 15',
     },
@@ -450,8 +445,6 @@ export const content = {
     infobar: [
       { icon: 'clock', label: 'Duration', value: '5 days online + 2 days on-site' },
       { icon: 'pin', label: 'Location', value: 'Riyadh — SEU Sports Accelerator' },
-      { icon: 'users', label: 'Audience', value: 'Developers, designers, athletes, entrepreneurs' },
-      { icon: 'target', label: 'Outputs', value: 'Prototype + final pitch + accelerator fast-track' },
     ],
     why: {
       title: 'About Velocity',
@@ -557,7 +550,7 @@ export const content = {
       items: [
         { icon: 'certificate', title: 'Accredited certificates', desc: 'Participation and achievement certificates for all participants.' },
         { icon: 'rocket', title: 'Accelerator fast-track', desc: 'A chance to join SEU Sports Tech Accelerator for qualifying teams.' },
-        { icon: 'partners', title: 'Partnership opportunities', desc: 'Pilot opportunities with partners across the sports ecosystem.' },
+        { icon: 'partners', title: 'Partnership opportunities', desc: 'Partnership opportunities with leading organizations in the field.' },
         { icon: 'mentor', title: 'Intensive mentorship', desc: 'Guidance from specialist mentors and experts throughout Velocity.' },
         { icon: 'trophy', title: 'Prizes for winning teams', desc: 'Valuable cash and in-kind prizes for standout teams.' },
       ],
@@ -633,7 +626,7 @@ export const content = {
         },
         {
           q: 'Can participants from outside Saudi Arabia register?',
-          a: 'Yes — virtual participation is open from outside Saudi Arabia. Final on-site attendance requires being at the event venue.',
+          a: 'Yes — virtual participation is open from outside Saudi Arabia. Final on-site attendance requires being at the event venue. Please note that the program does not cover transportation, travel, or accommodation arrangements.',
         },
         {
           q: 'Which language is used for pitches?',
@@ -644,8 +637,7 @@ export const content = {
     finalCta: {
       title: 'Ready to take on sports challenges and build a real solution?',
       lead: 'Register now and start your Velocity journey — 7 days of innovation, development and pitching to sports-ecosystem experts.',
-      ctaPrimary: { label: 'Register your interest', href: '#register' },
-      ctaSecondary: { label: 'Download the challenge brief', href: '#brief' },
+      ctaPrimary: { label: 'Register your interest', href: '/velocity/en/register/' },
     },
     footer: {
       tagline: 'Follow us',

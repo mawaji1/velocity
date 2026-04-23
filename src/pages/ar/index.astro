@@ -2,7 +2,6 @@
 import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Hero from '../../components/Hero.astro';
-import Countdown from '../../components/Countdown.astro';
 import Stats from '../../components/Stats.astro';
 import Tracks from '../../components/Tracks.astro';
 import Journey from '../../components/Journey.astro';
@@ -22,7 +21,6 @@ const t = content[locale];
 <Base locale={locale}>
   <Header slot="header" t={t} locale={locale} />
   <Hero t={t} />
-  <Countdown t={t} />
   <Stats t={t} />
   <Tracks t={t} />
   <Journey t={t} />
