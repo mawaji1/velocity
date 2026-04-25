@@ -21,8 +21,8 @@ export const content = {
       back: { label: 'مسرعة سيو', href: AR_ROOT },
       sections: [
         { label: 'عن البرنامج', href: '#why' },
-        { label: 'المسارات', href: '#tracks' },
         { label: 'الرحلة', href: '#journey' },
+        { label: 'المسارات', href: '#tracks' },
         { label: 'المزايا', href: '#benefits' },
         { label: 'الأسئلة', href: '#faq' },
       ],
@@ -44,8 +44,8 @@ export const content = {
       live: 'البرنامج منطلق الآن',
     },
     infobar: [
-      { icon: 'clock', label: 'المدة', value: '5 أيام (اونلاين) + 2 أيام (الموقع)' },
-      { icon: 'pin', label: 'الموقع', value: 'الرياض — مسرعة سيو الرياضية' },
+      { icon: 'clock', label: 'المدة', value: '٧ أيام (هجين)' },
+      { icon: 'pin', label: 'الموقع', value: 'الرياض' },
     ],
     why: {
       title: 'عن فيلوسيتي',
@@ -420,8 +420,8 @@ export const content = {
       back: { label: 'SEU Accelerator', href: EN_ROOT },
       sections: [
         { label: 'About', href: '#why' },
-        { label: 'Tracks', href: '#tracks' },
         { label: 'Journey', href: '#journey' },
+        { label: 'Tracks', href: '#tracks' },
         { label: 'Benefits', href: '#benefits' },
         { label: 'FAQ', href: '#faq' },
       ],
@@ -443,8 +443,8 @@ export const content = {
       live: 'The program is live now',
     },
     infobar: [
-      { icon: 'clock', label: 'Duration', value: '5 days online + 2 days on-site' },
-      { icon: 'pin', label: 'Location', value: 'Riyadh — SEU Sports Accelerator' },
+      { icon: 'clock', label: 'Duration', value: '7 days (hybrid)' },
+      { icon: 'pin', label: 'Location', value: 'Riyadh' },
     ],
     why: {
       title: 'About Velocity',

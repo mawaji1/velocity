@@ -187,7 +187,7 @@ export const registerContent: Record<Locale, RegisterCopy> = {
         ],
       },
       {
-        number: '6',
+        number: '5',
         title: 'الالتزام',
         fields: [
           {
@@ -224,7 +224,7 @@ export const registerContent: Record<Locale, RegisterCopy> = {
         ],
       },
       {
-        number: '7',
+        number: '6',
         title: 'الأهداف من المشاركة',
         fields: [
           {
@@ -249,7 +249,7 @@ export const registerContent: Record<Locale, RegisterCopy> = {
         ],
       },
       {
-        number: '8',
+        number: '7',
         title: 'المرفقات (اختياري)',
         fields: [
           { name: 'pitchDeckUrl', label: 'رابط Pitch Deck', type: 'url', placeholder: 'https://' },
@@ -258,7 +258,7 @@ export const registerContent: Record<Locale, RegisterCopy> = {
         ],
       },
       {
-        number: '9',
+        number: '8',
         title: 'الإقرار',
         fields: [
           {
@@ -427,7 +427,7 @@ export const registerContent: Record<Locale, RegisterCopy> = {
         ],
       },
       {
-        number: '6',
+        number: '5',
         title: 'Commitment',
         fields: [
           {
@@ -464,7 +464,7 @@ export const registerContent: Record<Locale, RegisterCopy> = {
         ],
       },
       {
-        number: '7',
+        number: '6',
         title: 'Participation Goals',
         fields: [
           {
@@ -489,7 +489,7 @@ export const registerContent: Record<Locale, RegisterCopy> = {
         ],
       },
       {
-        number: '8',
+        number: '7',
         title: 'Attachments (optional)',
         fields: [
           { name: 'pitchDeckUrl', label: 'Pitch deck URL', type: 'url', placeholder: 'https://' },
@@ -498,7 +498,7 @@ export const registerContent: Record<Locale, RegisterCopy> = {
         ],
       },
       {
-        number: '9',
+        number: '8',
         title: 'Acknowledgement',
         fields: [
           {

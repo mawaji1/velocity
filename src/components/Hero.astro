@@ -3,6 +3,7 @@ import type { Content } from '../i18n/content';
 import { PROGRAM_START_ISO } from '../i18n/content';
 interface Props { t: Content }
 const { t } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const infoIcons: Record<string, string> = {
   clock: 'M12 7v5l3 2 M12 22a10 10 0 100-20 10 10 0 000 20z',
@@ -79,18 +80,6 @@ const infoIcons: Record<string, string> = {
       <span class="font-bold text-white">{t.hero.deadlineValue}</span>
     </div>
 
-    <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
-      <a
-        href={t.hero.ctaPrimary.href}
-        class="group inline-flex items-center gap-2 rounded-full bg-[color:var(--color-red-primary)] px-6 py-3.5 text-sm font-semibold text-white shadow-[0_16px_50px_-12px_rgba(223,51,38,0.7)] transition hover:-translate-y-0.5 hover:bg-[color:var(--color-red-primary-hover)] md:text-[15px]"
-      >
-        {t.hero.ctaPrimary.label}
-        <svg viewBox="0 0 24 24" class="h-4 w-4 transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 12h14 M13 5l7 7-7 7"></path>
-        </svg>
-      </a>
-    </div>
-
     <!-- Countdown (inside hero) -->
     <div
       class="mx-auto mt-12 max-w-[720px] rounded-3xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur md:mt-14 md:p-6"
@@ -120,6 +109,23 @@ const infoIcons: Record<string, string> = {
         </div>
       </div>
       <div class="mt-4 hidden text-sm font-semibold text-white" data-countdown-live></div>
+    </div>
+
+    <!-- Partner logos (inside hero) -->
+    <div class="mx-auto mt-12 max-w-[860px] md:mt-14">
+      <div class="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">
+        {t.partners.title}
+      </div>
+      <div class="mt-5 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 md:gap-x-14">
+        {t.partners.items.map((p) => (
+          <img
+            src={`${base}/images/partners/${p.logo}`}
+            alt={p.name}
+            class={`max-h-12 w-auto max-w-[160px] object-contain opacity-80 transition hover:opacity-100 md:max-h-14 ${p.invert ? 'partner-logo-invert' : ''}`}
+            loading="lazy"
+          />
+        ))}
+      </div>
     </div>
   </div>
 </section>
@@ -186,6 +192,9 @@ const infoIcons: Record<string, string> = {
     .hero-glow-layer {
       filter: blur(8px);
     }
+  }
+  .partner-logo-invert {
+    filter: brightness(0) invert(1);
   }
 </style>
 
