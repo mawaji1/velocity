@@ -4,58 +4,87 @@ interface Props { t: Content }
 const { t } = Astro.props;
 const prizes = t.prizes;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+type Tier = 'gold' | 'silver' | 'bronze';
+
+const tierStyles: Record<Tier, {
+  card: string;
+  rank: string;
+  badge: string;
+  iconColor: string;
+  topAccent: string;
+  amount: string;
+}> = {
+  gold: {
+    card: 'border-amber-300/50 bg-gradient-to-b from-amber-300/22 via-amber-300/8 to-white/[0.03] shadow-[0_30px_70px_-30px_rgba(252,211,77,0.55)] md:-translate-y-3 md:scale-[1.04]',
+    rank: 'bg-amber-300 text-amber-950',
+    badge: 'bg-amber-300/15 text-amber-100 border border-amber-300/40',
+    iconColor: 'text-amber-300',
+    topAccent: 'bg-gradient-to-r from-transparent via-amber-300 to-transparent',
+    amount: 'text-white',
+  },
+  silver: {
+    card: 'border-slate-300/30 bg-gradient-to-b from-slate-200/15 via-slate-300/5 to-white/[0.02] shadow-[0_24px_60px_-30px_rgba(203,213,225,0.4)]',
+    rank: 'bg-slate-200 text-slate-800',
+    badge: 'bg-slate-200/12 text-slate-100 border border-slate-300/30',
+    iconColor: 'text-slate-200',
+    topAccent: 'bg-gradient-to-r from-transparent via-slate-200/80 to-transparent',
+    amount: 'text-white/95',
+  },
+  bronze: {
+    card: 'border-orange-700/35 bg-gradient-to-b from-orange-700/15 via-orange-800/4 to-white/[0.02] shadow-[0_20px_55px_-30px_rgba(180,83,9,0.45)]',
+    rank: 'bg-orange-600 text-orange-50',
+    badge: 'bg-orange-700/15 text-orange-200 border border-orange-700/35',
+    iconColor: 'text-orange-400',
+    topAccent: 'bg-gradient-to-r from-transparent via-orange-500 to-transparent',
+    amount: 'text-white/90',
+  },
+};
 ---
 <section id="prizes" class="relative py-20 md:py-28">
   <div class="mx-auto max-w-[1180px] px-5 sm:px-8">
-    <div class="mb-12 text-center md:mb-14">
+    <div class="mb-12 text-center md:mb-16">
       <h2 class="text-3xl font-bold text-white md:text-4xl">{prizes.title}</h2>
       <p class="mx-auto mt-4 max-w-2xl text-[15px] text-white/70">{prizes.lead}</p>
     </div>
 
     <div class="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6 md:items-stretch">
-      {prizes.items.map((item, i) => (
-        <article
-          class={`prize-card relative flex flex-col overflow-hidden rounded-3xl border p-7 transition md:p-8 ${
-            item.highlight
-              ? 'border-[color:var(--color-red-primary)]/50 bg-gradient-to-b from-[color:var(--color-red-primary)]/20 via-[color:var(--color-red-primary)]/8 to-white/[0.03] shadow-[0_24px_60px_-30px_rgba(223,51,38,0.55)] md:-translate-y-2'
-              : 'border-white/10 bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.05]'
-          }`}
-        >
-          <div class="flex items-center justify-between gap-3">
-            <div class="flex items-center gap-3">
-              <span
-                class={`inline-flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold ${
-                  item.highlight
-                    ? 'bg-[color:var(--color-red-primary)] text-white'
-                    : 'bg-white/10 text-white/85'
-                }`}
-              >
-                {i + 1}
-              </span>
-              <span class="text-[13px] font-semibold uppercase tracking-[0.18em] text-white/65">{item.rank}</span>
-            </div>
-            {item.highlight && (
-              <svg viewBox="0 0 24 24" class="h-5 w-5 text-[color:var(--color-red-primary)]" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      {prizes.items.map((item, i) => {
+        const tier = item.tier as Tier;
+        const s = tierStyles[tier];
+        const isGold = tier === 'gold';
+        return (
+          <article
+            class={`prize-card relative flex flex-col overflow-hidden rounded-3xl border p-7 transition md:p-8 ${s.card}`}
+          >
+            <div class={`pointer-events-none absolute inset-x-0 top-0 h-[3px] ${s.topAccent}`}></div>
+
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <span
+                  class={`inline-flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold ${s.rank}`}
+                >
+                  {i + 1}
+                </span>
+                <span class={`text-[12px] font-semibold uppercase tracking-[0.18em] rounded-full px-2.5 py-1 ${s.badge}`}>{item.rank}</span>
+              </div>
+              <svg viewBox="0 0 24 24" class={`${isGold ? 'h-6 w-6' : 'h-5 w-5'} ${s.iconColor}`} fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M8 21h8 M12 17v4 M7 4h10v5a5 5 0 0 1-10 0V4z M17 5h3v2a3 3 0 0 1-3 3 M7 5H4v2a3 3 0 0 0 3 3"></path>
               </svg>
-            )}
-          </div>
+            </div>
 
-          <div class="mt-8 flex items-baseline gap-3 rtl:flex-row-reverse">
-            <img
-              src={`${base}/images/sar.svg`}
-              alt={prizes.currency}
-              class="h-9 w-auto md:h-11"
-              style="filter: brightness(0) invert(1);"
-            />
-            <span class="text-5xl font-bold tabular-nums leading-none text-white md:text-6xl">{item.amount}</span>
-          </div>
-
-          {item.highlight && (
-            <div class="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-[color:var(--color-red-primary)] to-transparent"></div>
-          )}
-        </article>
-      ))}
+            <div class="mt-8 flex items-baseline gap-3 rtl:flex-row-reverse">
+              <img
+                src={`${base}/images/sar.svg`}
+                alt={prizes.currency}
+                class={`w-auto ${isGold ? 'h-10 md:h-12' : 'h-8 md:h-10'}`}
+                style="filter: brightness(0) invert(1);"
+              />
+              <span class={`tabular-nums font-bold leading-none ${s.amount} ${isGold ? 'text-6xl md:text-7xl' : 'text-5xl md:text-6xl'}`}>{item.amount}</span>
+            </div>
+          </article>
+        );
+      })}
     </div>
   </div>
 </section>

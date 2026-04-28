@@ -6,6 +6,9 @@ const iconPaths: Record<string, string> = {
   ai: 'M12 4a4 4 0 00-4 4v1a3 3 0 00-3 3 3 3 0 003 3v1a4 4 0 004 4 4 4 0 004-4v-1a3 3 0 003-3 3 3 0 00-3-3V8a4 4 0 00-4-4z M9 10h.01 M15 10h.01 M9 14l3 2 3-2',
   data: 'M3 3h7v7H3z M14 3h7v4h-7z M14 10h7v11h-7z M3 14h7v7H3z',
   wearable: 'M6 7h12v10H6z M9 4h6l1 3H8z M9 20h6l-1-3H10z M9 11h6v2H9z',
+  mobile: 'M7 3h10a2 2 0 012 2v14a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2z M11 18h2',
+  iot: 'M12 4a8 8 0 00-8 8 M12 4a8 8 0 018 8 M12 8a4 4 0 00-4 4 M12 8a4 4 0 014 4 M12 12v.01 M5 20h14',
+  vision: 'M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z M12 9a3 3 0 100 6 3 3 0 000-6z',
 };
 ---
 <section id="technologies" class="relative border-y border-white/5 bg-white/[0.02] py-20 md:py-28">
@@ -15,7 +18,7 @@ const iconPaths: Record<string, string> = {
       <p class="mx-auto mt-3 max-w-2xl text-[15px] text-white/60">{t.technologies.subtitle}</p>
     </div>
 
-    <div class="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
       {t.technologies.items.map((it) => (
         <div class="rounded-3xl border border-white/10 bg-white/[0.03] p-7 text-center transition hover:border-white/20 hover:bg-white/[0.05] md:p-8">
           <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[color:var(--color-red-primary)] text-white shadow-[0_10px_30px_-10px_rgba(223,51,38,0.7)]">

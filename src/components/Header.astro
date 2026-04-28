@@ -17,19 +17,6 @@ const sectionHref = (h: string) => (h.startsWith('#') ? `${homeHref}${h}` : h);
       <span class="whitespace-nowrap text-sm font-semibold tracking-wide text-white/90">{t.nav.brand}</span>
     </a>
 
-    <!-- Back to parent (accelerator) -->
-    <a
-      href={t.nav.back.href}
-      target="_blank"
-      rel="noopener"
-      class="hidden shrink-0 items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-[12px] text-white/75 transition hover:border-white/25 hover:text-white lg:inline-flex"
-    >
-      <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 rtl:rotate-180" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M15 18l-6-6 6-6"></path>
-      </svg>
-      <span>{t.nav.back.label}</span>
-    </a>
-
     <!-- Section nav -->
     <nav class="mx-auto hidden items-center gap-6 text-[13.5px] text-white/80 lg:flex">
       {t.nav.sections.map((item) => (
@@ -37,13 +24,19 @@ const sectionHref = (h: string) => (h.startsWith('#') ? `${homeHref}${h}` : h);
       ))}
     </nav>
 
-    <!-- Right cluster: lang switch + mobile menu -->
+    <!-- Right cluster: lang switch + apply now + mobile menu -->
     <div class="ms-auto flex shrink-0 items-center gap-2.5">
       <a
         href={t.nav.langSwitchHref}
         class="rounded-full border border-white/15 px-3 py-1.5 text-xs font-medium text-white/85 transition hover:border-white/40 hover:text-white"
       >
         {t.nav.langSwitch}
+      </a>
+      <a
+        href={`${base}/${locale}/register/`}
+        class="inline-flex items-center rounded-full bg-[color:var(--color-red-primary)] px-4 py-2 text-[12.5px] font-semibold text-white shadow-[0_10px_30px_-10px_rgba(223,51,38,0.7)] transition hover:bg-[color:var(--color-red-primary-hover)]"
+      >
+        {t.nav.register.label}
       </a>
       <button
         type="button"
@@ -73,15 +66,10 @@ const sectionHref = (h: string) => (h.startsWith('#') ? `${homeHref}${h}` : h);
         </a>
       ))}
       <a
-        href={t.nav.back.href}
-        target="_blank"
-        rel="noopener"
-        class="mt-2 flex items-center gap-2 rounded-md border border-white/10 px-3 py-2 text-xs text-white/75 transition hover:border-white/25 hover:text-white"
+        href={`${base}/${locale}/register/`}
+        class="mt-2 flex items-center justify-center gap-2 rounded-full bg-[color:var(--color-red-primary)] px-4 py-2.5 text-[13px] font-semibold text-white transition hover:bg-[color:var(--color-red-primary-hover)]"
       >
-        <svg viewBox="0 0 24 24" class="h-3.5 w-3.5 rtl:rotate-180" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M15 18l-6-6 6-6"></path>
-        </svg>
-        {t.nav.back.label}
+        {t.nav.register.label}
       </a>
     </div>
   </div>

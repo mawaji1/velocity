@@ -10,6 +10,8 @@ const infoIcons: Record<string, string> = {
   pin: 'M12 22s-7-7.58-7-13a7 7 0 1114 0c0 5.42-7 13-7 13z M12 11a2 2 0 100-4 2 2 0 000 4z',
   users: 'M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2 M9 11a4 4 0 100-8 4 4 0 000 8z M22 21v-2a4 4 0 00-3-3.87 M16 3.13A4 4 0 0119 7a4 4 0 01-3 3.87',
   target: 'M12 22a10 10 0 100-20 10 10 0 000 20z M12 18a6 6 0 100-12 6 6 0 000 12z M12 14a2 2 0 100-4 2 2 0 000 4z',
+  cloud: 'M17.5 19a4.5 4.5 0 100-9h-1.26A8 8 0 104 16.25',
+  trophy: 'M8 21h8 M12 17v4 M6 3h12v4a6 6 0 01-12 0V3z M6 5H3v2a3 3 0 003 3 M18 5h3v2a3 3 0 01-3 3',
 };
 ---
 <section class="hero-section relative overflow-hidden">
@@ -61,6 +63,14 @@ const infoIcons: Record<string, string> = {
 
   <!-- Hero content: centered text only -->
   <div class="hero-content relative mx-auto max-w-[960px] px-5 pt-20 pb-16 text-center sm:px-8 md:pt-28 md:pb-20">
+    {t.hero.editionBadge && (
+      <div class="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-amber-300/35 bg-amber-300/8 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-200/95 backdrop-blur md:text-[12px]">
+        <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2l2.39 4.84 5.34.78-3.86 3.77.91 5.32L12 14.27 7.22 16.71l.91-5.32L4.27 7.62l5.34-.78z"></path>
+        </svg>
+        <span>{t.hero.editionBadge}</span>
+      </div>
+    )}
     <h1 class="text-[56px] font-extrabold leading-[1.05] tracking-tight text-white md:text-[104px]">
       {t.hero.title}
     </h1>
@@ -70,14 +80,33 @@ const infoIcons: Record<string, string> = {
       {t.hero.lead}
     </p>
 
-    <div class="mt-7 inline-flex items-center gap-3 rounded-full border border-[color:var(--color-red-primary)]/45 bg-[color:var(--color-red-primary)]/12 px-4 py-2 text-xs backdrop-blur md:text-[13px]">
-      <span class="relative flex h-2 w-2">
-        <span class="absolute inset-0 animate-ping rounded-full bg-[color:var(--color-red-primary)] opacity-75"></span>
-        <span class="relative inline-flex h-2 w-2 rounded-full bg-[color:var(--color-red-primary)]"></span>
-      </span>
-      <span class="font-medium text-white/75">{t.hero.deadlineLabel}</span>
-      <span class="h-3 w-px bg-white/20"></span>
-      <span class="font-bold text-white">{t.hero.deadlineValue}</span>
+    <!-- Primary CTA -->
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href={t.hero.ctaPrimary.href}
+        class="rounded-full bg-[color:var(--color-red-primary)] px-7 py-3.5 text-[14px] font-semibold text-white shadow-[0_16px_50px_-12px_rgba(223,51,38,0.7)] transition hover:-translate-y-0.5 hover:bg-[color:var(--color-red-primary-hover)] md:text-[15px]"
+      >
+        {t.hero.ctaPrimary.label}
+      </a>
+    </div>
+
+    <!-- Deadlines: Priority + Registration close -->
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-2.5">
+      {t.hero.priorityDeadlineLabel && (
+        <div class="inline-flex items-center gap-2.5 rounded-full border border-amber-300/35 bg-amber-300/8 px-3.5 py-1.5 text-[11px] backdrop-blur md:text-[12px]">
+          <span class="h-1.5 w-1.5 rounded-full bg-amber-300"></span>
+          <span class="font-medium text-white/70">{t.hero.priorityDeadlineLabel}</span>
+          <span class="font-semibold text-white">{t.hero.priorityDeadlineValue}</span>
+        </div>
+      )}
+      <div class="inline-flex items-center gap-2.5 rounded-full border border-[color:var(--color-red-primary)]/45 bg-[color:var(--color-red-primary)]/12 px-3.5 py-1.5 text-[11px] backdrop-blur md:text-[12px]">
+        <span class="relative flex h-2 w-2">
+          <span class="absolute inset-0 animate-ping rounded-full bg-[color:var(--color-red-primary)] opacity-75"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-[color:var(--color-red-primary)]"></span>
+        </span>
+        <span class="font-medium text-white/75">{t.hero.deadlineLabel}</span>
+        <span class="font-bold text-white">{t.hero.deadlineValue}</span>
+      </div>
     </div>
 
     <!-- Countdown (inside hero) -->
@@ -198,12 +227,12 @@ const infoIcons: Record<string, string> = {
   }
 </style>
 
-<!-- Info-bar with icons -->
+<!-- Info-bar: 4 stat tiles (Duration · Online · On-site · Prizes) -->
 <section class="relative border-y border-white/5 bg-white/[0.03]">
-  <div class="mx-auto grid max-w-[1240px] grid-cols-1 sm:grid-cols-2">
+  <div class="mx-auto grid max-w-[1240px] grid-cols-2 lg:grid-cols-4">
     {t.infobar.map((item, i) => (
       <div
-        class={`relative flex items-start gap-4 px-6 py-6 text-start md:py-8 ${i === 0 ? 'sm:after:absolute sm:after:inset-y-6 sm:after:end-0 sm:after:w-px sm:after:bg-white/10' : ''}`}
+        class={`relative flex items-start gap-4 px-5 py-5 text-start md:px-6 md:py-7 ${i < t.infobar.length - 1 ? 'after:pointer-events-none after:absolute after:inset-x-5 after:bottom-0 after:h-px after:bg-white/10 lg:after:inset-x-0 lg:after:inset-y-6 lg:after:end-0 lg:after:bottom-auto lg:after:h-auto lg:after:w-px' : ''}`}
       >
         <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[color:var(--color-red-primary)]/15 text-[color:var(--color-red-primary)] ring-1 ring-inset ring-[color:var(--color-red-primary)]/25">
           <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -212,7 +241,7 @@ const infoIcons: Record<string, string> = {
         </div>
         <div class="min-w-0">
           <div class="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">{item.label}</div>
-          <div class="mt-1.5 text-[13.5px] font-semibold leading-6 text-white md:text-[14.5px]">{item.value}</div>
+          <div class="mt-1.5 text-[13px] font-semibold leading-6 text-white md:text-[14px]">{item.value}</div>
         </div>
       </div>
     ))}

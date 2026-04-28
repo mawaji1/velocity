@@ -1,0 +1,88 @@
+---
+import type { Content } from '../i18n/content';
+interface Props { t: Content }
+const { t } = Astro.props;
+const ap = t.accelPipeline;
+---
+<section id="accelerator-pipeline" class="relative border-y border-white/5 bg-white/[0.02] py-20 md:py-28">
+  <div class="mx-auto max-w-[1180px] px-5 sm:px-8">
+    <div class="mb-12 text-center md:mb-14">
+      <h2 class="text-3xl font-extrabold text-white md:text-4xl">{ap.title}</h2>
+      <p class="mt-3 text-[15px] text-white/60">{ap.subtitle}</p>
+    </div>
+
+    <div class="grid items-stretch gap-5 md:grid-cols-[1fr_auto_1fr] md:gap-4">
+      <!-- Left: Velocity (current) -->
+      <article class="relative flex flex-col rounded-3xl border border-[color:var(--color-red-primary)]/35 bg-gradient-to-b from-[color:var(--color-red-primary)]/10 to-white/[0.03] p-6 md:p-8">
+        <div class="inline-flex w-fit items-center gap-2 rounded-full bg-[color:var(--color-red-primary)]/15 px-3 py-1 text-[10.5px] font-semibold uppercase tracking-[0.22em] text-[color:var(--color-red-primary)]">
+          <span class="h-1.5 w-1.5 rounded-full bg-[color:var(--color-red-primary)]"></span>
+          Phase 1
+        </div>
+        <h3 class="mt-4 text-2xl font-bold text-white md:text-[26px]">{ap.velocity.title}</h3>
+        <p class="mt-1 text-[13.5px] text-white/65">{ap.velocity.desc}</p>
+
+        <ul class="mt-5 space-y-2.5">
+          {ap.velocity.bullets.map((b) => (
+            <li class="flex items-start gap-2.5 text-[14px] text-white/85">
+              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--color-red-primary)]"></span>
+              <span>{b}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-auto pt-6">
+          <div class="rounded-xl border border-[color:var(--color-red-primary)]/30 bg-[color:var(--color-red-primary)]/8 px-4 py-3 text-[12.5px] font-semibold leading-6 text-white">
+            {ap.velocity.footer}
+          </div>
+        </div>
+      </article>
+
+      <!-- Arrow connector -->
+      <div class="flex items-center justify-center md:px-2">
+        <div class="flex flex-col items-center gap-2 text-white/65">
+          <svg viewBox="0 0 24 24" class="h-8 w-8 rotate-90 text-[color:var(--color-red-primary)] md:h-10 md:w-10 md:rotate-0 rtl:md:rotate-180" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14 M13 5l7 7-7 7"></path>
+          </svg>
+          <span class="text-[10.5px] font-semibold uppercase tracking-[0.22em] text-white/55">{ap.arrow}</span>
+        </div>
+      </div>
+
+      <!-- Right: Accelerator (next phase) -->
+      <article class="relative flex flex-col rounded-3xl border border-amber-300/30 bg-gradient-to-b from-amber-300/10 to-white/[0.03] p-6 md:p-8">
+        <div class="inline-flex w-fit items-center gap-2 rounded-full bg-amber-300/15 px-3 py-1 text-[10.5px] font-semibold uppercase tracking-[0.22em] text-amber-200">
+          <span class="h-1.5 w-1.5 rounded-full bg-amber-300"></span>
+          Phase 2
+        </div>
+        <h3 class="mt-4 text-2xl font-bold text-white md:text-[26px]">{ap.accelerator.title}</h3>
+        <p class="mt-1 text-[13.5px] text-amber-100/85">{ap.accelerator.desc}</p>
+
+        <ul class="mt-5 space-y-2.5">
+          {ap.accelerator.bullets.map((b) => (
+            <li class="flex items-start gap-2.5 text-[14px] text-white/85">
+              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-300"></span>
+              <span>{b}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-auto pt-6 space-y-3">
+          <div class="flex items-baseline justify-between gap-3 rounded-xl border border-amber-300/30 bg-amber-300/8 px-4 py-3 text-[12.5px] text-white/90">
+            <span class="font-semibold uppercase tracking-[0.18em] text-amber-100/80">{ap.accelerator.applicationsOpenLabel}</span>
+            <span class="font-semibold text-white">{ap.accelerator.applicationsOpenDate}</span>
+          </div>
+          <a
+            href={ap.accelerator.href}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex w-full items-center justify-center gap-2 rounded-full border border-amber-300/45 bg-amber-300/10 px-4 py-2.5 text-[13px] font-semibold text-amber-100 transition hover:bg-amber-300/15 hover:text-white"
+          >
+            {ap.accelerator.learnMore}
+            <svg viewBox="0 0 24 24" class="h-4 w-4 rtl:rotate-180" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14 M13 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

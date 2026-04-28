@@ -196,13 +196,13 @@ export const registerContent: Record<Locale, RegisterCopy> = {
             type: 'radio',
             required: true,
             options: [
-              { value: 'onsite', label: 'حضوري' },
-              { value: 'online', label: 'أونلاين' },
+              { value: 'yes', label: 'نعم' },
+              { value: 'no', label: 'لا' },
             ],
           },
           {
             name: 'canAttendRiyadh',
-            label: 'القدرة على الحضور في الرياض (لليومين الختاميين)',
+            label: 'القدرة على الحضور في الرياض في حال التأهل للنهائيات (5–7 يوليو)',
             type: 'radio',
             required: true,
             options: [
@@ -436,13 +436,13 @@ export const registerContent: Record<Locale, RegisterCopy> = {
             type: 'radio',
             required: true,
             options: [
-              { value: 'onsite', label: 'On-site' },
-              { value: 'online', label: 'Online' },
+              { value: 'yes', label: 'Yes' },
+              { value: 'no', label: 'No' },
             ],
           },
           {
             name: 'canAttendRiyadh',
-            label: 'Ability to attend in Riyadh (final two days)',
+            label: 'Ability to attend in Riyadh if selected as a finalist (July 5–7)',
             type: 'radio',
             required: true,
             options: [
