@@ -266,12 +266,12 @@ export const content = {
     },
     prizes: {
       title: 'جوائز الفرق الفائزة',
-      lead: 'مجموع الجوائز يصل إلى 50,000 ر.س للفرق المتميزة.',
+      lead: 'تحصل الفرق الفائزة على جوائز مالية تقديرًا لتميزها وابتكارها.',
       currency: 'ر.س',
       items: [
-        { rank: 'المركز الأول', tier: 'gold' as const, amount: '25,000', highlight: true },
-        { rank: 'المركز الثاني', tier: 'silver' as const, amount: '15,000' },
-        { rank: 'المركز الثالث', tier: 'bronze' as const, amount: '10,000' },
+        { rank: 'المركز الأول', tier: 'gold' as const, amount: '50,000', highlight: true },
+        { rank: 'المركز الثاني', tier: 'silver' as const, amount: '30,000' },
+        { rank: 'المركز الثالث', tier: 'bronze' as const, amount: '20,000' },
       ],
     },
     faq: {
@@ -744,12 +744,12 @@ export const content = {
     },
     prizes: {
       title: 'Winning team prizes',
-      lead: 'A combined prize pool of up to SAR 50,000 awarded to the standout teams.',
+      lead: 'Winning teams receive cash prizes in recognition of their innovation and excellence.',
       currency: 'SAR',
       items: [
-        { rank: '1st place', tier: 'gold' as const, amount: '25,000', highlight: true },
-        { rank: '2nd place', tier: 'silver' as const, amount: '15,000' },
-        { rank: '3rd place', tier: 'bronze' as const, amount: '10,000' },
+        { rank: '1st place', tier: 'gold' as const, amount: '50,000', highlight: true },
+        { rank: '2nd place', tier: 'silver' as const, amount: '30,000' },
+        { rank: '3rd place', tier: 'bronze' as const, amount: '20,000' },
       ],
     },
     faq: {
