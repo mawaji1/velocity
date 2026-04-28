@@ -63,12 +63,12 @@ export const registerContent: Record<Locale, RegisterCopy> = {
   ar: {
     meta: {
       title: 'نموذج التسجيل | سيو فيلوسيتي',
-      description: 'سجّل في برنامج SEU Velocity للتكنولوجيا الرياضية.',
+      description: 'قدّم على برنامج سيو فيلوسيتي للتكنولوجيا الرياضية.',
     },
     header: {
       eyebrow: 'نموذج التسجيل',
-      title: 'سجّل في برنامج سيو فيلوسيتي',
-      lead: 'عبّئ النموذج أدناه للمشاركة في البرنامج. جميع الحقول المميزة بعلامة (*) إلزامية.',
+      title: 'قدّم على برنامج سيو فيلوسيتي',
+      lead: 'أكمل النموذج التالي للمشاركة في البرنامج. جميع الحقول المشار إليها بعلامة (*) مطلوبة.',
       backToHome: 'العودة للرئيسية',
     },
     sections: [
@@ -82,7 +82,7 @@ export const registerContent: Record<Locale, RegisterCopy> = {
           { name: 'location', label: 'المدينة / الدولة', type: 'text', required: true },
           {
             name: 'status',
-            label: 'الحالة',
+            label: 'الصفة الحالية',
             type: 'select',
             required: true,
             options: [
@@ -124,10 +124,10 @@ export const registerContent: Record<Locale, RegisterCopy> = {
           },
           {
             name: 'teamMembers',
-            label: 'أسماء أعضاء الفريق + تخصصاتهم',
+            label: 'أسماء أعضاء الفريق وتخصصاتهم',
             type: 'textarea',
             rows: 4,
-            placeholder: 'الاسم — التخصص (سطر لكل عضو)',
+            placeholder: 'الاسم — التخصص، سطر لكل عضو',
             dependsOn: { name: 'applicationType', equals: 'team' },
           },
         ],
@@ -143,10 +143,10 @@ export const registerContent: Record<Locale, RegisterCopy> = {
             type: 'select',
             required: true,
             options: [
-              { value: 'sports-tech', label: 'Sports Tech' },
-              { value: 'health-fitness', label: 'Health & Fitness' },
-              { value: 'ai-data', label: 'AI & Data' },
-              { value: 'fan-engagement', label: 'Fan Engagement' },
+              { value: 'sports-tech', label: 'التقنية الرياضية' },
+              { value: 'health-fitness', label: 'الصحة واللياقة' },
+              { value: 'ai-data', label: 'الذكاء الاصطناعي والبيانات' },
+              { value: 'fan-engagement', label: 'تفاعل الجماهير' },
               { value: 'other', label: 'أخرى' },
             ],
           },
@@ -157,7 +157,7 @@ export const registerContent: Record<Locale, RegisterCopy> = {
             required: true,
             rows: 6,
             wordLimit: 150,
-            help: 'حد أقصى 150 كلمة',
+            help: 'بحد أقصى 150 كلمة',
           },
           {
             name: 'problemSolved',
@@ -179,8 +179,8 @@ export const registerContent: Record<Locale, RegisterCopy> = {
             required: true,
             options: [
               { value: 'idea', label: 'فكرة' },
-              { value: 'prototype', label: 'Prototype' },
-              { value: 'mvp', label: 'MVP' },
+              { value: 'prototype', label: 'نموذج أولي' },
+              { value: 'mvp', label: 'منتج أولي (MVP)' },
               { value: 'startup', label: 'شركة ناشئة' },
             ],
           },
@@ -202,7 +202,7 @@ export const registerContent: Record<Locale, RegisterCopy> = {
           },
           {
             name: 'canAttendRiyadh',
-            label: 'القدرة على الحضور في الرياض في حال التأهل للنهائيات (5–7 يوليو)',
+            label: 'هل يمكنك الحضور إلى الرياض في حال التأهل للنهائيات (٥–٧ يوليو)؟',
             type: 'radio',
             required: true,
             options: [
@@ -216,8 +216,8 @@ export const registerContent: Record<Locale, RegisterCopy> = {
             type: 'radio',
             required: true,
             options: [
-              { value: 'yes', label: 'نعم، متفرغ بشكل كامل' },
-              { value: 'partial', label: 'متفرغ جزئياً' },
+              { value: 'yes', label: 'نعم، متفرغ بالكامل' },
+              { value: 'partial', label: 'متفرغ جزئيًا' },
               { value: 'no', label: 'لا' },
             ],
           },
@@ -252,8 +252,8 @@ export const registerContent: Record<Locale, RegisterCopy> = {
         number: '7',
         title: 'المرفقات (اختياري)',
         fields: [
-          { name: 'pitchDeckUrl', label: 'رابط Pitch Deck', type: 'url', placeholder: 'https://' },
-          { name: 'linkedinUrl', label: 'رابط LinkedIn', type: 'url', placeholder: 'https://linkedin.com/in/' },
+          { name: 'pitchDeckUrl', label: 'رابط العرض التعريفي', type: 'url', placeholder: 'https://' },
+          { name: 'linkedinUrl', label: 'رابط لينكدإن', type: 'url', placeholder: 'https://linkedin.com/in/' },
           { name: 'videoUrl', label: 'فيديو تعريفي (إن وجد)', type: 'url', placeholder: 'https://' },
         ],
       },
