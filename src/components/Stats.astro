@@ -5,18 +5,14 @@ const { t } = Astro.props;
 ---
 <section id="why" class="relative py-20 md:py-28">
   <div class="mx-auto max-w-[1100px] px-5 sm:px-8">
-    <div class="mb-12 max-w-3xl md:mb-14">
-      <h2 class="text-3xl font-extrabold text-white md:text-4xl">{t.why.title}</h2>
-      <p class="mt-5 text-[15px] leading-8 text-white/70 md:text-base">{t.why.lead}</p>
-    </div>
-
-    <div class="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
-      {t.why.stats.map((s) => (
-        <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-center transition hover:border-white/20 hover:bg-white/[0.05]">
-          <div class="text-4xl font-extrabold text-[color:var(--color-red-primary)] md:text-5xl">{s.value}</div>
-          <div class="mt-2 text-xs font-medium text-white/70 md:text-sm">{s.label}</div>
-        </div>
-      ))}
+    <div class="max-w-3xl">
+      <h2 class="text-3xl font-extrabold text-white md:text-5xl">{t.why.title}</h2>
+      <div class="mt-6 text-[color:var(--color-red-primary)] text-base font-bold tracking-wide md:text-lg">{t.why.programName}</div>
+      <div class="mt-5 space-y-5 text-[15px] leading-8 text-white/75 md:text-[17px] md:leading-9">
+        {t.why.paragraphs.map((p) => (
+          <p>{p}</p>
+        ))}
+      </div>
     </div>
   </div>
 </section>

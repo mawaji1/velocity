@@ -20,7 +20,7 @@ const iconPaths: Record<string, string> = {
 
     <div class="flex flex-wrap justify-center gap-5 md:gap-6">
       {t.benefits.items.map((b) => (
-        <div class="relative flex w-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-7 text-center transition hover:border-white/20 hover:bg-white/[0.05] md:w-[calc(50%-0.75rem)] md:p-8 lg:w-[calc(33.333%-1rem)]">
+        <div class="relative flex w-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-7 text-center transition hover:border-white/20 hover:bg-white/[0.05] md:w-[calc(50%-0.75rem)] md:p-8">
           <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[color:var(--color-red-primary)] text-white shadow-[0_10px_30px_-10px_rgba(223,51,38,0.7)]">
             <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <path d={iconPaths[b.icon] ?? iconPaths.trophy}></path>

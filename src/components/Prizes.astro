@@ -48,8 +48,8 @@ const tierStyles: Record<Tier, {
       <p class="mx-auto mt-4 max-w-2xl text-[15px] text-white/70">{prizes.lead}</p>
     </div>
 
-    <div class="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6 md:items-stretch">
-      {prizes.items.map((item, i) => {
+    {(() => {
+      const renderCard = (item: typeof prizes.items[number], i: number) => {
         const tier = item.tier as Tier;
         const s = tierStyles[tier];
         const isGold = tier === 'gold';
@@ -84,7 +84,19 @@ const tierStyles: Record<Tier, {
             </div>
           </article>
         );
-      })}
-    </div>
+      };
+      const first = prizes.items[0];
+      const rest = prizes.items.slice(1);
+      return (
+        <div class="space-y-5 md:space-y-6">
+          <div class="md:flex md:justify-center">
+            <div class="md:w-[60%] lg:w-[52%]">{renderCard(first, 0)}</div>
+          </div>
+          <div class="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
+            {rest.map((item, i) => renderCard(item, i + 1))}
+          </div>
+        </div>
+      );
+    })()}
   </div>
 </section>

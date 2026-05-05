@@ -15,145 +15,94 @@ const infoIcons: Record<string, string> = {
 };
 ---
 <section class="hero-section relative overflow-hidden">
-  <!-- Background only: stadium-light glow + subtle grid + ambient motion arcs -->
+  <!-- Background -->
   <div class="hero-bg pointer-events-none absolute inset-0">
-    <!-- Subtle grid with radial fade -->
+    <!-- Faint grid -->
     <div
-      class="absolute inset-0 opacity-[0.06]"
-      style="background-image: linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px); background-size: 72px 72px; mask-image: radial-gradient(ellipse at center, black 40%, transparent 82%); -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 82%);"
+      class="absolute inset-0 opacity-[0.05]"
+      style="background-image: linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px); background-size: 80px 80px; mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%); -webkit-mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%);"
     ></div>
 
-    <!-- Top-center stadium glow -->
+    <!-- Soft top glow -->
     <div
-      class="hero-glow-layer absolute top-[-12%] left-1/2 h-[900px] w-[900px] -translate-x-1/2 rounded-full"
-      style="background: radial-gradient(closest-side, rgba(223,51,38,0.28), transparent 72%);"
-    ></div>
-    <!-- Secondary side glows (stadium floodlights) -->
-    <div
-      class="hero-glow-layer absolute top-[14%] left-[8%] h-[320px] w-[320px] rounded-full"
-      style="background: radial-gradient(closest-side, rgba(255,255,255,0.06), transparent 70%);"
-    ></div>
-    <div
-      class="hero-glow-layer absolute top-[10%] right-[10%] h-[360px] w-[360px] rounded-full"
-      style="background: radial-gradient(closest-side, rgba(255,255,255,0.05), transparent 70%);"
+      class="hero-glow-layer absolute top-[-25%] left-1/2 h-[700px] w-[1200px] -translate-x-1/2 rounded-full"
+      style="background: radial-gradient(closest-side, rgba(223,51,38,0.22), transparent 70%);"
     ></div>
 
-    <!-- Ambient motion arcs (very subtle, behind the title) -->
-    <svg class="absolute inset-x-0 top-0 h-full w-full" viewBox="0 0 1440 820" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <defs>
-        <linearGradient id="hero-arc-a" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#df3326" stop-opacity="0"></stop>
-          <stop offset="50%" stop-color="#df3326" stop-opacity="0.55"></stop>
-          <stop offset="100%" stop-color="#df3326" stop-opacity="0"></stop>
-        </linearGradient>
-        <linearGradient id="hero-arc-b" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#ffffff" stop-opacity="0"></stop>
-          <stop offset="50%" stop-color="#ffffff" stop-opacity="0.18"></stop>
-          <stop offset="100%" stop-color="#ffffff" stop-opacity="0"></stop>
-        </linearGradient>
-      </defs>
-      <path d="M-40 640 Q 720 380 1480 640" fill="none" stroke="url(#hero-arc-a)" stroke-width="2" opacity="0.6" />
-      <path d="M-40 700 Q 720 460 1480 700" fill="none" stroke="url(#hero-arc-b)" stroke-width="1" opacity="0.6" />
-      <path d="M-40 760 Q 720 540 1480 760" fill="none" stroke="url(#hero-arc-b)" stroke-width="1" opacity="0.5" />
-    </svg>
-
-    <!-- Bottom vignette -->
-    <div class="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[color:var(--color-black-primary)] to-transparent"></div>
+    <!-- Bottom vignette to blend hero into the next section -->
+    <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[color:var(--color-black-primary)] to-transparent"></div>
   </div>
 
-  <!-- Hero content: centered text only -->
-  <div class="hero-content relative mx-auto max-w-[960px] px-5 pt-20 pb-16 text-center sm:px-8 md:pt-28 md:pb-20">
-    {t.hero.editionBadge && (
-      <div class="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-amber-300/35 bg-amber-300/8 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-200/95 backdrop-blur md:text-[12px]">
-        <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2l2.39 4.84 5.34.78-3.86 3.77.91 5.32L12 14.27 7.22 16.71l.91-5.32L4.27 7.62l5.34-.78z"></path>
-        </svg>
-        <span>{t.hero.editionBadge}</span>
+  <!-- Hero content: 2-column grid -->
+  <div class="hero-content relative mx-auto max-w-[1280px] px-5 pt-20 pb-24 sm:px-8 md:pt-28 md:pb-32">
+    <div class="grid items-center gap-12 md:grid-cols-[1.05fr_1fr] md:gap-14 lg:gap-20">
+      <!-- Title block (right in RTL via natural grid order) -->
+      <div class="text-start">
+        <h1 class="hero-title text-[68px] font-extrabold leading-[0.95] tracking-tight text-white md:text-[120px] lg:text-[140px]">
+          {t.hero.title}
+        </h1>
+        <div class="mt-6 h-[3px] w-24 rounded-full bg-gradient-to-r from-[color:var(--color-red-primary)] to-transparent md:w-32"></div>
+        <p class="mt-6 max-w-[520px] text-[19px] font-medium leading-[1.5] text-white/80 md:mt-8 md:text-[26px] md:leading-[1.35]">
+          {t.hero.subtitle}
+        </p>
+        <a
+          href={t.hero.ctaPrimary.href}
+          class="mt-8 inline-flex rounded-full bg-[color:var(--color-red-primary)] px-8 py-4 text-[15px] font-semibold text-white shadow-[0_16px_50px_-12px_rgba(223,51,38,0.7)] transition hover:-translate-y-0.5 hover:bg-[color:var(--color-red-primary-hover)] md:mt-10 md:text-[16px]"
+        >
+          {t.hero.ctaPrimary.label}
+        </a>
       </div>
-    )}
-    <h1 class="text-[56px] font-extrabold leading-[1.05] tracking-tight text-white md:text-[104px]">
-      {t.hero.title}
-    </h1>
-    <div class="mx-auto mt-5 h-[3px] w-24 rounded-full bg-gradient-to-r from-transparent via-[color:var(--color-red-primary)] to-transparent md:w-32"></div>
 
-    <p class="mx-auto mt-7 max-w-3xl text-[15px] leading-8 text-white/75 md:text-lg md:leading-9">
-      {t.hero.lead}
-    </p>
+      <!-- Countdown + partners stack (left in RTL via natural grid order) -->
+      <div class="flex flex-col gap-7 md:gap-9">
+        <!-- Countdown -->
+        <div
+          class="rounded-3xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur md:p-7"
+          data-countdown
+          data-target={PROGRAM_START_ISO}
+          data-live-text={t.countdown.live}
+          data-lang={t.lang}
+        >
+          <div class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[color:var(--color-red-primary)]">
+            {t.countdown.title}
+          </div>
+          <div class="mt-5 grid grid-cols-4 gap-2 md:gap-3" data-countdown-units>
+            <div class="flex flex-col items-center rounded-2xl border border-white/10 bg-black/30 px-1.5 py-3.5 md:px-2 md:py-4">
+              <span class="text-[28px] font-bold tabular-nums text-white md:text-[42px]" data-unit="days">--</span>
+              <span class="mt-1 text-[10px] text-white/60 md:text-[11px]">{t.countdown.units.days}</span>
+            </div>
+            <div class="flex flex-col items-center rounded-2xl border border-white/10 bg-black/30 px-1.5 py-3.5 md:px-2 md:py-4">
+              <span class="text-[28px] font-bold tabular-nums text-white md:text-[42px]" data-unit="hours">--</span>
+              <span class="mt-1 text-[10px] text-white/60 md:text-[11px]">{t.countdown.units.hours}</span>
+            </div>
+            <div class="flex flex-col items-center rounded-2xl border border-white/10 bg-black/30 px-1.5 py-3.5 md:px-2 md:py-4">
+              <span class="text-[28px] font-bold tabular-nums text-white md:text-[42px]" data-unit="minutes">--</span>
+              <span class="mt-1 text-[10px] text-white/60 md:text-[11px]">{t.countdown.units.minutes}</span>
+            </div>
+            <div class="flex flex-col items-center rounded-2xl border border-white/10 bg-black/30 px-1.5 py-3.5 md:px-2 md:py-4">
+              <span class="text-[28px] font-bold tabular-nums text-white md:text-[42px]" data-unit="seconds">--</span>
+              <span class="mt-1 text-[10px] text-white/60 md:text-[11px]">{t.countdown.units.seconds}</span>
+            </div>
+          </div>
+          <div class="mt-4 hidden text-sm font-semibold text-white" data-countdown-live></div>
+        </div>
 
-    <!-- Primary CTA -->
-    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-      <a
-        href={t.hero.ctaPrimary.href}
-        class="rounded-full bg-[color:var(--color-red-primary)] px-7 py-3.5 text-[14px] font-semibold text-white shadow-[0_16px_50px_-12px_rgba(223,51,38,0.7)] transition hover:-translate-y-0.5 hover:bg-[color:var(--color-red-primary-hover)] md:text-[15px]"
-      >
-        {t.hero.ctaPrimary.label}
-      </a>
-    </div>
-
-    <!-- Deadlines: Priority + Registration close -->
-    <div class="mt-6 flex flex-wrap items-center justify-center gap-2.5">
-      {t.hero.priorityDeadlineLabel && (
-        <div class="inline-flex items-center gap-2.5 rounded-full border border-amber-300/35 bg-amber-300/8 px-3.5 py-1.5 text-[11px] backdrop-blur md:text-[12px]">
-          <span class="h-1.5 w-1.5 rounded-full bg-amber-300"></span>
-          <span class="font-medium text-white/70">{t.hero.priorityDeadlineLabel}</span>
-          <span class="font-semibold text-white">{t.hero.priorityDeadlineValue}</span>
+        <!-- Partners -->
+        <div>
+          <div class="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">
+            {t.partners.title}
+          </div>
+          <div class="mt-4 flex flex-wrap items-center gap-x-8 gap-y-4 md:gap-x-12">
+            {t.partners.items.map((p) => (
+              <img
+                src={`${base}/images/partners/${p.logo}`}
+                alt={p.name}
+                class={`max-h-11 w-auto max-w-[140px] object-contain opacity-85 transition hover:opacity-100 md:max-h-14 ${p.invert ? 'partner-logo-invert' : ''}`}
+                loading="lazy"
+              />
+            ))}
+          </div>
         </div>
-      )}
-      <div class="inline-flex items-center gap-2.5 rounded-full border border-[color:var(--color-red-primary)]/45 bg-[color:var(--color-red-primary)]/12 px-3.5 py-1.5 text-[11px] backdrop-blur md:text-[12px]">
-        <span class="relative flex h-2 w-2">
-          <span class="absolute inset-0 animate-ping rounded-full bg-[color:var(--color-red-primary)] opacity-75"></span>
-          <span class="relative inline-flex h-2 w-2 rounded-full bg-[color:var(--color-red-primary)]"></span>
-        </span>
-        <span class="font-medium text-white/75">{t.hero.deadlineLabel}</span>
-        <span class="font-bold text-white">{t.hero.deadlineValue}</span>
-      </div>
-    </div>
-
-    <!-- Countdown (inside hero) -->
-    <div
-      class="mx-auto mt-12 max-w-[720px] rounded-3xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur md:mt-14 md:p-6"
-      data-countdown
-      data-target={PROGRAM_START_ISO}
-      data-live-text={t.countdown.live}
-    >
-      <div class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[color:var(--color-red-primary)]">
-        {t.countdown.title}
-      </div>
-      <div class="mt-4 flex flex-wrap items-center justify-center gap-2.5 md:gap-4" data-countdown-units>
-        <div class="flex min-w-[70px] flex-col items-center rounded-2xl border border-white/10 bg-black/30 px-3 py-3 md:min-w-[82px]">
-          <span class="text-2xl font-bold tabular-nums text-white md:text-4xl" data-unit="days">--</span>
-          <span class="mt-1 text-[11px] text-white/60">{t.countdown.units.days}</span>
-        </div>
-        <div class="flex min-w-[70px] flex-col items-center rounded-2xl border border-white/10 bg-black/30 px-3 py-3 md:min-w-[82px]">
-          <span class="text-2xl font-bold tabular-nums text-white md:text-4xl" data-unit="hours">--</span>
-          <span class="mt-1 text-[11px] text-white/60">{t.countdown.units.hours}</span>
-        </div>
-        <div class="flex min-w-[70px] flex-col items-center rounded-2xl border border-white/10 bg-black/30 px-3 py-3 md:min-w-[82px]">
-          <span class="text-2xl font-bold tabular-nums text-white md:text-4xl" data-unit="minutes">--</span>
-          <span class="mt-1 text-[11px] text-white/60">{t.countdown.units.minutes}</span>
-        </div>
-        <div class="flex min-w-[70px] flex-col items-center rounded-2xl border border-white/10 bg-black/30 px-3 py-3 md:min-w-[82px]">
-          <span class="text-2xl font-bold tabular-nums text-white md:text-4xl" data-unit="seconds">--</span>
-          <span class="mt-1 text-[11px] text-white/60">{t.countdown.units.seconds}</span>
-        </div>
-      </div>
-      <div class="mt-4 hidden text-sm font-semibold text-white" data-countdown-live></div>
-    </div>
-
-    <!-- Partner logos (inside hero) -->
-    <div class="mx-auto mt-12 max-w-[860px] md:mt-14">
-      <div class="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">
-        {t.partners.title}
-      </div>
-      <div class="mt-5 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 md:gap-x-14">
-        {t.partners.items.map((p) => (
-          <img
-            src={`${base}/images/partners/${p.logo}`}
-            alt={p.name}
-            class={`max-h-12 w-auto max-w-[160px] object-contain opacity-80 transition hover:opacity-100 md:max-h-14 ${p.invert ? 'partner-logo-invert' : ''}`}
-            loading="lazy"
-          />
-        ))}
       </div>
     </div>
   </div>
@@ -164,11 +113,17 @@ const infoIcons: Record<string, string> = {
   if (el) {
     const target = new Date(el.dataset.target ?? '').getTime();
     const liveText = el.dataset.liveText ?? '';
+    const lang = el.dataset.lang ?? 'en';
     const units = el.querySelector<HTMLElement>('[data-countdown-units]');
     const live = el.querySelector<HTMLElement>('[data-countdown-live]');
+    const arDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+    const fmt = (n: number) => {
+      const s = String(n).padStart(2, '0');
+      return lang === 'ar' ? s.replace(/\d/g, (d) => arDigits[+d]) : s;
+    };
     const set = (name: string, value: number) => {
       const node = el.querySelector<HTMLElement>(`[data-unit="${name}"]`);
-      if (node) node.textContent = String(value).padStart(2, '0');
+      if (node) node.textContent = fmt(value);
     };
     const tick = () => {
       const diff = target - Date.now();
@@ -192,12 +147,8 @@ const infoIcons: Record<string, string> = {
 </script>
 
 <style>
-  /* Ensure the hero always has space and its content is composited above
-     decorative blurred layers — fixes iOS/Safari mobile where heavy
-     `filter: blur()` on large absolute layers could delay first paint
-     and make the hero look empty until a scroll repaint. */
   .hero-section {
-    min-height: 520px;
+    min-height: 600px;
   }
   .hero-content {
     position: relative;
@@ -210,16 +161,16 @@ const infoIcons: Record<string, string> = {
     transform: translateZ(0);
   }
   .hero-glow-layer {
-    filter: blur(14px);
+    filter: blur(18px);
     will-change: transform, filter;
     transform: translate3d(0, 0, 0);
   }
-  /* Lighter blur radius on small screens — iOS Safari's compositor
-     struggles with large blurred surfaces and can fail to paint them
-     until a scroll event. */
+  .hero-title {
+    text-shadow: 0 6px 50px rgba(223, 51, 38, 0.2);
+  }
   @media (max-width: 640px) {
     .hero-glow-layer {
-      filter: blur(8px);
+      filter: blur(10px);
     }
   }
   .partner-logo-invert {
@@ -241,7 +192,24 @@ const infoIcons: Record<string, string> = {
         </div>
         <div class="min-w-0">
           <div class="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">{item.label}</div>
-          <div class="mt-1.5 text-[13px] font-semibold leading-6 text-white md:text-[14px]">{item.value}</div>
+          {('currencyIcon' in item && item.currencyIcon) ? (
+            <div class="mt-1.5 flex items-baseline gap-2 text-[13px] font-semibold leading-6 text-white md:text-[14px]">
+              {('valuePrefix' in item && item.valuePrefix) && (
+                <span>{item.valuePrefix}</span>
+              )}
+              <span class="flex items-baseline gap-1.5 rtl:flex-row-reverse">
+                <img
+                  src={`${base}/images/sar.svg`}
+                  alt="SAR"
+                  class="h-4 w-auto md:h-[18px]"
+                  style="filter: brightness(0) invert(1);"
+                />
+                <span class="tabular-nums">{item.value}</span>
+              </span>
+            </div>
+          ) : (
+            <div class="mt-1.5 text-[13px] font-semibold leading-6 text-white md:text-[14px]">{item.value}</div>
+          )}
         </div>
       </div>
     ))}

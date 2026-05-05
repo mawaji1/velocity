@@ -15,7 +15,7 @@ export const content = {
     meta: {
       title: 'سيو فيلوسيتي | برنامج الابتكار للتكنولوجيا الرياضية',
       description:
-        'سيو فيلوسيتي برنامج ابتكار مكثّف لمدة 7 أيام لتطوير حلول تقنية تخدم القطاع الرياضي، بمبادرة من الجامعة السعودية الإلكترونية.',
+        'سيو فيلوسيتي برنامج ابتكار مكثّف لمدة ٧ أيام لتطوير حلول تقنية تخدم القطاع الرياضي، بمبادرة من الجامعة السعودية الإلكترونية.',
     },
     nav: {
       brand: 'سيو فيلوسيتي',
@@ -27,20 +27,14 @@ export const content = {
         { label: 'المزايا', href: '#benefits' },
         { label: 'الأسئلة الشائعة', href: '#faq' },
       ],
-      register: { label: 'قدّم الآن', href: '/velocity/ar/register/' },
+      register: { label: 'سجّل الآن', href: '/velocity/ar/register/' },
       langSwitch: 'En',
       langSwitchHref: '/velocity/en/',
     },
     hero: {
-      eyebrow: 'مبادرة من الجامعة السعودية الإلكترونية',
       title: 'سيو فيلوسيتي',
-      editionBadge: 'النسخة الأولى — أول برنامج ابتكار يركّز على التقنية الرياضية',
-      lead: 'يمتد البرنامج ٤ أيام عن بُعد، ثم تنتقل أفضل ١٠ فرق إلى الرياض لاستكمال الأيام الثلاثة الختامية. خلال هذه الرحلة ستطوّر نموذجك الأولي، وتعرضه أمام خبراء القطاع، وتحصل على أولوية للنظر في الانضمام إلى مسرعة سيو للتكنولوجيا الرياضية.',
-      ctaPrimary: { label: 'قدّم الآن', href: '/velocity/ar/register/' },
-      deadlineLabel: 'آخر موعد للتقديم',
-      deadlineValue: '15 يونيو',
-      priorityDeadlineLabel: 'أولوية التقديم',
-      priorityDeadlineValue: '31 مايو',
+      subtitle: 'أوّل برنامج ابتكار يركّز على التيكنولوجيا الرياضية',
+      ctaPrimary: { label: 'سجّل الآن', href: '/velocity/ar/register/' },
     },
     countdown: {
       title: 'بداية البرنامج خلال',
@@ -51,28 +45,25 @@ export const content = {
       { icon: 'clock', label: 'المدة', value: '٧ أيام' },
       { icon: 'cloud', label: 'عن بُعد', value: '٤ أيام' },
       { icon: 'pin', label: 'المرحلة الحضورية', value: '٣ أيام في الرياض لأفضل ١٠ فرق' },
-      { icon: 'trophy', label: 'الجوائز', value: 'حتى 50,000 ريال' },
+      { icon: 'trophy', label: 'الجوائز', value: '١٠٠٬٠٠٠', valuePrefix: 'حتى', currencyIcon: true },
     ],
     why: {
-      title: 'عن فيلوسيتي',
-      lead: 'برنامج مكثّف يدعم المبتكرين ورواد الأعمال في تطوير حلول تقنية تخدم القطاع الرياضي، وتحويل الأفكار إلى نماذج أولية قابلة للتجربة، بإرشاد من خبراء القطاع وفرصة لعرض المشاريع أمام شركاء من المنظومة الرياضية.',
-      stats: [
-        { value: '7', label: 'أيام مكثفة' },
-        { value: '4', label: 'مسارات تحديات' },
-        { value: '+20', label: 'مرشد وخبير' },
-        { value: '50,000', label: 'إجمالي الجوائز' },
+      title: 'ما هو فيلوسيتي؟',
+      programName: 'برنامج SEU Velocity',
+      paragraphs: [
+        'هو برنامج مكثّف في مجال التقنية الرياضية، يجمع المبتكرين ورواد الأعمال والمطورين للعمل على تطوير حلول مبتكرة وتحويلها إلى مشاريع قابلة للاختبار في السوق.',
+        'يوفر البرنامج بيئة عملية عالية التنفيذ، تجمع بين الإرشاد التطبيقي، والتجارب الواقعية، والعمل المباشر على تطوير المنتجات، بهدف بناء أساس قوي للانطلاق في قطاع الرياضة.',
       ],
     },
     selection: {
       title: 'آلية الاختيار',
       subtitle: 'من التقديم حتى العرض الختامي في الرياض',
       steps: [
-        { n: '1', title: 'قدّم فكرتك', desc: 'أكمل نموذج التقديم وعرّفنا بفكرتك وفريقك.' },
-        { n: '2', title: 'شارك في المرحلة المكثفة عن بُعد', desc: 'طوّر فكرتك إلى نموذج أولي خلال ٤ أيام عن بُعد.' },
-        { n: '3', title: 'اختيار أفضل ١٠ فرق', desc: 'تُراجع المشاريع ويُعلن عن الفرق المتأهلة للمرحلة الحضورية.' },
-        { n: '4', title: 'النهائيات في الرياض', desc: 'ثلاثة أيام حضورية تنتهي بالعرض الختامي وإعلان الفائزين.' },
+        { n: '١', title: 'تقديم الفكرة', desc: 'إكمال نموذج التسجيل والتعريف بالفكرة والفريق.' },
+        { n: '٢', title: 'التطوير والعمل على الفكرة', desc: 'تطوير الفكرة إلى نموذج أولي خلال ٤ أيام أونلاين مكثفة.' },
+        { n: '٣', title: 'اختيار أفضل ١٠ فرق', desc: 'تُراجع المشاريع من قِبَل لجنة الخبراء ويُعلن عن الفرق المتأهلة.' },
+        { n: '٤', title: 'النهائيات في الرياض', desc: '٣ أيام حضورية مكثفة تنتهي بالعرض الختامي وإعلان الفائزين.' },
       ],
-      footer: 'الفرق المتأهلة تحصل على جوائز نقدية وأولوية للنظر في الانضمام إلى مسرعة سيو للتكنولوجيا الرياضية.',
     },
     tracks: {
       title: 'مسارات التحديات',
@@ -85,7 +76,7 @@ export const content = {
       },
       items: [
         {
-          n: '01',
+          n: '٠١',
           title: 'البنية التحتية والمنشآت الرياضية',
           desc: 'حلول لإدارة المنشآت، الحجز والتذاكر، تكامل الأنظمة، وتحسين جاهزية التشغيل والبث.',
           examples: [
@@ -101,7 +92,7 @@ export const content = {
           deliverables: 'نموذج عملي للحجز، تقرير جدوى، خطة تنفيذ',
         },
         {
-          n: '02',
+          n: '٠٢',
           title: 'اكتشاف المواهب الرياضية ورعايتها',
           desc: 'حلول لرصد المواهب، تسجيل اللاعبين، تقييم الأداء، وتسهيل مشاركة البيانات بشكل آمن.',
           examples: [
@@ -116,7 +107,7 @@ export const content = {
           deliverables: 'نموذج تقييم ذكي، منصة MVP، تقرير تحليلي',
         },
         {
-          n: '03',
+          n: '٠٣',
           title: 'تطوير اللاعبين الحاليين',
           desc: 'حلول لمتابعة أداء الرياضيين وصحتهم، التدريب المستمر، وإعادة التأهيل والإصابات.',
           examples: [
@@ -131,7 +122,7 @@ export const content = {
           deliverables: 'تطبيق متابعة، لوحة تحكم تحليلية، خطة تأهيل ذكية',
         },
         {
-          n: '04',
+          n: '٠٤',
           title: 'إشراك الجمهور وتجربة المشجع',
           desc: 'حلول لرحلة المشجع الرقمية من شراء التذكرة وحتى تجربة الملعب، وبرامج الولاء والتفاعل.',
           examples: [
@@ -153,15 +144,15 @@ export const content = {
       subtitle: '٤ أيام عن بُعد + ٣ أيام حضوريًا في الرياض',
       virtualLabel: 'عن بُعد',
       onsiteLabel: 'حضوري · الرياض',
-      finalistsCalloutLabel: 'إعلان أفضل ١٠ فرق مساء الخميس',
+      finalistsCalloutLabel: 'إعلان أفضل ١٠ فرق',
       steps: [
-        { day: '1', date: '٢٩ يونيو', title: 'الإطلاق', desc: 'انطلاق البرنامج، استعراض التحديات، وتحديد مسار العمل.', mode: 'virtual' as const },
-        { day: '2', date: '٣٠ يونيو', title: 'التطوير', desc: 'بدء العمل على الفكرة وتحويلها إلى نموذج أولي.', mode: 'virtual' as const },
-        { day: '3', date: '١ يوليو', title: 'التحقق', desc: 'اختبار الفكرة، جلسات إرشادية، وتحسين النموذج بناءً على الملاحظات.', mode: 'virtual' as const },
-        { day: '4', date: '٢ يوليو', title: 'إعلان المتأهلين', desc: 'مراجعة المشاريع واختيار أفضل ١٠ فرق للانتقال إلى المرحلة الحضورية.', mode: 'virtual' as const, finalists: true },
-        { day: '5', date: '٥ يوليو', title: 'الاستعداد النهائي', desc: 'يوم حضوري مكثّف في الرياض لصقل المنتج واستكمال التجهيزات.', mode: 'onsite' as const },
-        { day: '6', date: '٦ يوليو', title: 'الاستعداد للعرض', desc: 'بروفات العرض، جلسات مع المرشدين، والاستعداد للأسئلة والنقاش.', mode: 'onsite' as const },
-        { day: '7', date: '٧ يوليو', title: 'العرض الختامي', desc: 'تقديم المشاريع أمام لجنة التحكيم، ثم إعلان الفائزين.', mode: 'onsite' as const },
+        { day: '١', date: '٢٩ يونيو', title: 'الإطلاق', desc: 'انطلاق البرنامج، استعراض التحديات، وتحديد مسار العمل.', mode: 'virtual' as const },
+        { day: '٢', date: '٣٠ يونيو', title: 'التطوير', desc: 'بدء العمل على الفكرة وتحويلها إلى نموذج أولي.', mode: 'virtual' as const },
+        { day: '٣', date: '١ يوليو', title: 'التحقق', desc: 'اختبار الفكرة، جلسات إرشادية، وتحسين النموذج بناءً على الملاحظات.', mode: 'virtual' as const },
+        { day: '٤', date: '٢ يوليو', title: 'إعلان المتأهلين', desc: 'مراجعة المشاريع واختيار أفضل ١٠ فرق للانتقال إلى المرحلة الحضورية.', mode: 'virtual' as const, finalists: true },
+        { day: '٥', date: '٥ يوليو', title: 'الاستعداد النهائي', desc: 'يوم حضوري مكثّف في الرياض لصقل المنتج واستكمال التجهيزات.', mode: 'onsite' as const },
+        { day: '٦', date: '٦ يوليو', title: 'الاستعداد للعرض', desc: 'بروفات العرض، جلسات مع المرشدين، والاستعداد للأسئلة والنقاش.', mode: 'onsite' as const },
+        { day: '٧', date: '٧ يوليو', title: 'العرض الختامي', desc: 'تقديم المشاريع أمام لجنة التحكيم، ثم إعلان الفائزين.', mode: 'onsite' as const, demo: true },
       ],
     },
     benefits: {
@@ -170,10 +161,8 @@ export const content = {
       items: [
         { icon: 'certificate', title: 'شهادات معتمدة', desc: 'شهادات مشاركة وإنجاز لجميع المشاركين.' },
         { icon: 'rocket', title: 'أولوية للمسرعة', desc: 'أولوية للنظر في الانضمام إلى مسرعة سيو للتكنولوجيا الرياضية للفرق المؤهلة.' },
-        { icon: 'partners', title: 'فرص شراكة', desc: 'فرص للتواصل والعمل مع جهات فاعلة في القطاع.' },
         { icon: 'mentor', title: 'إرشاد مكثّف', desc: 'متابعة مباشرة من مرشدين وخبراء طوال فترة البرنامج.' },
         { icon: 'trophy', title: 'جوائز للفرق المتميزة', desc: 'جوائز نقدية للفرق التي تقدّم أفضل الحلول.' },
-        { icon: 'support', title: 'دعم مستمر بعد البرنامج', desc: 'متابعة إضافية للفرق المتأهلة، مع إتاحة التواصل لجميع المشاركين عبر شبكة خريجي سيو والإشعار بالبرامج القادمة.' },
       ],
     },
     leaveWith: {
@@ -187,52 +176,37 @@ export const content = {
         { icon: 'rocket', title: 'فرصة للانتقال إلى المسرعة', desc: 'أولوية للنظر في الانضمام إلى مسرعة سيو للتكنولوجيا الرياضية.' },
       ],
     },
-    eligibility: {
-      title: 'شروط الأهلية',
-      subtitle: 'من يمكنه التقديم؟',
-      items: [
-        '18 عامًا أو أكثر',
-        'مفتوح لجميع الجنسيات',
-        'الأفكار والمشاريع في المراحل المبكرة حتى النموذج الأولي (MVP) مرحّب بها',
-        'يمكن للشركات المسجلة التقديم أيضًا',
-      ],
-      note: 'المشاركة في الأيام من ١ إلى ٤ متاحة عن بُعد من أي مكان، أما الفرق المتأهلة فتلتزم بالحضور إلى الرياض في الأيام من ٥ إلى ٧.',
-    },
     audience: {
-      title: 'من الأنسب لهذا البرنامج؟',
-      subtitle: 'مفتوح للأفراد والفرق الراغبة في بناء حلول للقطاع الرياضي',
-      primary: {
-        label: 'الفئة الأساسية',
-        sublabel: 'البرنامج موجّه بالدرجة الأولى إلى:',
-        items: [
-          { icon: 'bulb', title: 'رواد الأعمال', desc: 'لمن لديهم فكرة ويريدون تحويلها إلى منتج قابل للتجربة.' },
-          { icon: 'student', title: 'الطلاب', desc: 'لمن يبحثون عن تجربة عملية في بناء حلول حقيقية.' },
-          { icon: 'spark', title: 'الطامحون للعمل الريادي', desc: 'لمن يملكون الطموح للبدء في مشروعهم الأول.' },
-        ],
-      },
-      specialisations: {
-        label: 'المهارات المطلوبة',
-        sublabel: 'ما التخصصات التي تقوّي الفرق؟',
-        items: [
-          { icon: 'code', title: 'المطورون', desc: 'تطوير الويب والجوال وحلول البيانات' },
-          { icon: 'design', title: 'المصممون', desc: 'تجربة المستخدم وتصميم الواجهات' },
-          { icon: 'media', title: 'صنّاع المحتوى', desc: 'المحتوى الرياضي والسرد الرقمي' },
-          { icon: 'support', title: 'مختصو التشغيل والدعم', desc: 'تشغيل المنتجات وفهم القطاع الرياضي' },
-          { icon: 'ai', title: 'خبراء الذكاء الاصطناعي', desc: 'الذكاء الاصطناعي وتعلّم الآلة' },
-        ],
-      },
-    },
-    technologies: {
-      title: 'التقنيات التي يدعمها البرنامج',
-      subtitle: 'مجالات وتقنيات تساعدك على بناء حل قابل للتطبيق',
-      items: [
-        { icon: 'ai', title: 'الذكاء الاصطناعي', desc: 'حلول ذكية تعتمد على الذكاء الاصطناعي وتعلّم الآلة.' },
-        { icon: 'data', title: 'تحليل البيانات', desc: 'تحويل البيانات إلى قرارات أوضح وأكثر دقة.' },
-        { icon: 'wearable', title: 'الأجهزة القابلة للارتداء', desc: 'أجهزة وبيانات لحظية لقياس الأداء والمتابعة.' },
-        { icon: 'mobile', title: 'تطوير تطبيقات الجوال', desc: 'تطبيقات iOS وAndroid للمشجعين والرياضيين والمنشآت.' },
-        { icon: 'iot', title: 'إنترنت الأشياء وتقنيات المنشآت الذكية', desc: 'أجهزة متصلة، حساسات، وأنظمة للملاعب والمنشآت الرياضية.' },
-        { icon: 'data', title: 'واجهات بيانات رياضية', desc: 'بيانات المباريات والإحصاءات والتكامل مع مزوّدي البيانات.' },
-        { icon: 'vision', title: 'الرؤية الحاسوبية', desc: 'تتبّع الحركة، تحليل الأداء، وأدوات البث المؤتمتة.' },
+      title: 'الفئة المستهدفة وشروط الأهلية',
+      description:
+        'البرنامج مفتوح للأفراد والفرق من جميع أنحاء المملكة الذين يمتلكون فكرة أو مشروعًا مبكرًا في مجال التكنولوجيا الرياضية. نرحّب بالمؤسسين في المراحل الأولى والمبتكرين الطموحين.',
+      cards: [
+        {
+          image: 'enthusiasts.jpg',
+          title: 'المهتمون بالرياضة والتقنية',
+          desc: 'أشخاص شغوفون بتقاطع الرياضة والتكنولوجيا والابتكار.',
+        },
+        {
+          image: 'entrepreneurs.jpg',
+          title: 'رواد الأعمال',
+          desc: 'أصحاب الأفكار الريادية في مجال التكنولوجيا الرياضية.',
+        },
+        {
+          image: 'designers.jpg',
+          title: 'المصممون',
+          desc: 'مصممو تجربة المستخدم وواجهات المنتجات الرقمية.',
+        },
+        {
+          image: 'developers.jpg',
+          title: 'المطورون والمهندسون',
+          desc: 'مطورو البرمجيات والتطبيقات وأنظمة التقنية.',
+        },
+      ],
+      eligibilityTitle: 'شروط الأهلية',
+      eligibility: [
+        'الالتزام بحضور جميع أيام البرنامج',
+        'فكرة أو مشروع مبكر في SportsTech',
+        'فريق من ٢ إلى ٥ أعضاء',
       ],
     },
     accelPipeline: {
@@ -247,7 +221,7 @@ export const content = {
       arrow: 'ثم تنتقل إلى',
       accelerator: {
         title: 'مسرعة سيو للتكنولوجيا الرياضية',
-        desc: 'المرحلة الثانية — أكتوبر 2026',
+        desc: 'أكتوبر ٢٠٢٦',
         bullets: ['برنامج مسرعة متكامل', 'تمويل وشركاء من المنظومة', 'دعم لبناء الشركات الناشئة'],
         applicationsOpenLabel: 'فتح باب التقديم',
         applicationsOpenDate: 'قريبًا',
@@ -261,7 +235,6 @@ export const content = {
       items: [
         { name: 'وزارة الاتصالات وتقنية المعلومات', logo: 'mcit.png', invert: true },
         { name: 'وزارة الرياضة', logo: 'ministry-sport.svg', invert: true },
-        { name: 'الاتحاد السعودي للثقافة الرياضية', logo: 'cultural-sport.webp', invert: false },
       ],
     },
     prizes: {
@@ -269,9 +242,9 @@ export const content = {
       lead: 'جوائز نقدية تقديرًا للفرق الأكثر تميّزًا في البرنامج.',
       currency: 'ر.س',
       items: [
-        { rank: 'المركز الأول', tier: 'gold' as const, amount: '50,000', highlight: true },
-        { rank: 'المركز الثاني', tier: 'silver' as const, amount: '30,000' },
-        { rank: 'المركز الثالث', tier: 'bronze' as const, amount: '20,000' },
+        { rank: 'المركز الأول', tier: 'gold' as const, amount: '٥٠٬٠٠٠', highlight: true },
+        { rank: 'المركز الثاني', tier: 'silver' as const, amount: '٣٠٬٠٠٠' },
+        { rank: 'المركز الثالث', tier: 'bronze' as const, amount: '٢٠٬٠٠٠' },
       ],
     },
     faq: {
@@ -287,7 +260,7 @@ export const content = {
         },
         {
           q: 'كم عدد أعضاء الفريق؟',
-          a: 'يمكن المشاركة بشكل فردي أو ضمن فريق يتكوّن من 2 إلى 5 أعضاء.',
+          a: 'يمكن المشاركة بشكل فردي أو ضمن فريق يتكوّن من ٢ إلى ٥ أعضاء.',
         },
         {
           q: 'كيف يتم تقييم المشاريع؟',
@@ -317,8 +290,8 @@ export const content = {
     },
     finalCta: {
       title: 'جاهز لتبنّي تحديات الرياضة وبناء حل حقيقي؟',
-      lead: 'قدّم الآن وابدأ رحلتك مع سيو فيلوسيتي في ٧ أيام من التطوير والإرشاد والعرض أمام خبراء المنظومة الرياضية.',
-      ctaPrimary: { label: 'قدّم الآن', href: '/velocity/ar/register/' },
+      lead: 'سجّل الآن وابدأ رحلتك مع سيو فيلوسيتي في ٧ أيام من التطوير والإرشاد والعرض أمام خبراء المنظومة الرياضية.',
+      ctaPrimary: { label: 'سجّل الآن', href: '/velocity/ar/register/' },
     },
     footer: {
       tagline: 'تابعنا على',
@@ -336,7 +309,7 @@ export const content = {
         { label: 'الشروط والأحكام', href: '/velocity/ar/terms/' },
         { label: 'سياسة الخصوصية', href: '/velocity/ar/privacy/' },
       ],
-      rights: '© 2026 سيو. جميع الحقوق محفوظة.',
+      rights: '© ٢٠٢٦ سيو. جميع الحقوق محفوظة.',
     },
     legal: {
       backToHome: 'العودة للرئيسية',
@@ -505,20 +478,14 @@ export const content = {
         { label: 'Benefits', href: '#benefits' },
         { label: 'FAQ', href: '#faq' },
       ],
-      register: { label: 'Apply Now', href: '/velocity/en/register/' },
+      register: { label: 'Register Now', href: '/velocity/en/register/' },
       langSwitch: 'ع',
       langSwitchHref: '/velocity/ar/',
     },
     hero: {
-      eyebrow: 'An initiative by Saudi Electronic University',
       title: 'SEU Velocity',
-      editionBadge: 'First Edition — first SportsTech-focused innovation program',
-      lead: '4 days online. Top teams come to Riyadh for the final 3 days. Build your prototype, present to industry experts, and get priority consideration for the SEU SportsTech Accelerator.',
-      ctaPrimary: { label: 'Apply Now', href: '/velocity/en/register/' },
-      deadlineLabel: 'Registration closes',
-      deadlineValue: 'June 15',
-      priorityDeadlineLabel: 'Priority deadline',
-      priorityDeadlineValue: 'May 31',
+      subtitle: 'The first innovation program focused on Sports Technology',
+      ctaPrimary: { label: 'Register Now', href: '/velocity/en/register/' },
     },
     countdown: {
       title: 'Program starts in',
@@ -529,28 +496,25 @@ export const content = {
       { icon: 'clock', label: 'Duration', value: '7 days total' },
       { icon: 'cloud', label: 'Online', value: '4 days virtual' },
       { icon: 'pin', label: 'On-site Riyadh', value: '3 days (Top 10 teams)' },
-      { icon: 'trophy', label: 'Prizes', value: 'Up to SAR 50,000' },
+      { icon: 'trophy', label: 'Prizes', value: '100,000', valuePrefix: 'Up to', currencyIcon: true },
     ],
     why: {
-      title: 'About Velocity',
-      lead: 'An intensive program designed to support innovators and entrepreneurs in building technology solutions for the sports sector — turning ideas into viable prototypes with guidance from sector experts and the opportunity to present to partners from the sports ecosystem.',
-      stats: [
-        { value: '7', label: 'Intensive days' },
-        { value: '4', label: 'Challenge tracks' },
-        { value: '+20', label: 'Mentors & experts' },
-        { value: '50,000', label: 'SAR prize pool' },
+      title: 'What is Velocity?',
+      programName: 'SEU Velocity Program',
+      paragraphs: [
+        'An intensive program in sports technology that brings together innovators, entrepreneurs, and developers to build innovative solutions and turn them into market-testable projects.',
+        'The program provides a high-execution practical environment that combines applied mentorship, real-world experimentation, and hands-on product development — building a strong foundation for launching into the sports sector.',
       ],
     },
     selection: {
       title: 'How selection works',
       subtitle: 'From application to Demo Day in Riyadh',
       steps: [
-        { n: '1', title: 'Apply online', desc: 'Submit your application and idea via the form.' },
-        { n: '2', title: 'Join the virtual sprint', desc: '4 days of remote prototyping with all participants.' },
-        { n: '3', title: 'Top 10 teams shortlisted', desc: 'Finalists announced and invited on-site.' },
-        { n: '4', title: 'Finalists come to Riyadh', desc: 'Three on-site days, ending with Demo Day and prizes.' },
+        { n: '1', title: 'Idea submission', desc: 'Complete the application form and introduce your idea, team, and chosen challenge track.' },
+        { n: '2', title: 'Development & build', desc: 'Develop your idea into a prototype over 4 intensive online days.' },
+        { n: '3', title: 'Top 10 teams selected', desc: 'Projects reviewed by expert jury; top 10 teams announced for on-site phase.' },
+        { n: '4', title: 'Finals in Riyadh', desc: '3 intensive on-site days ending with Demo Day and winners announcement.' },
       ],
-      footer: 'Top teams receive prizes and priority consideration for the SEU SportsTech Accelerator.',
     },
     tracks: {
       title: 'Challenge Tracks',
@@ -631,15 +595,15 @@ export const content = {
       subtitle: '4 days online + 3 days on-site in Riyadh',
       virtualLabel: 'Virtual',
       onsiteLabel: 'On-site · Riyadh',
-      finalistsCalloutLabel: 'Top 10 teams announced Thursday evening',
+      finalistsCalloutLabel: 'Top 10 teams announced',
       steps: [
         { day: '1', date: 'Jun 29', title: 'Kick-off', desc: 'Program launch and challenge briefings.', mode: 'virtual' as const },
         { day: '2', date: 'Jun 30', title: 'Build', desc: 'Idea development and prototype construction.', mode: 'virtual' as const },
         { day: '3', date: 'Jul 1', title: 'Validate', desc: 'User testing, mentor feedback, and refinements.', mode: 'virtual' as const },
-        { day: '4', date: 'Jul 2', title: 'Finalists', desc: 'Final virtual review. Top 10 teams selected and announced Thursday evening.', mode: 'virtual' as const, finalists: true },
+        { day: '4', date: 'Jul 2', title: 'Finalists', desc: 'Final virtual review. Top 10 teams selected and announced.', mode: 'virtual' as const, finalists: true },
         { day: '5', date: 'Jul 5', title: 'Preparation', desc: 'On-site full-day hackathon sprint in Riyadh — final product polish.', mode: 'onsite' as const },
         { day: '6', date: 'Jul 6', title: 'Pitch Prep', desc: 'Live pitch rehearsal, investor Q&A practice, mentor final sessions.', mode: 'onsite' as const },
-        { day: '7', date: 'Jul 7', title: 'Demo Day', desc: 'Final presentations to the jury, awards ceremony, accelerator offers revealed.', mode: 'onsite' as const },
+        { day: '7', date: 'Jul 7', title: 'Demo Day', desc: 'Final presentations to the jury, awards ceremony, accelerator offers revealed.', mode: 'onsite' as const, demo: true },
       ],
     },
     benefits: {
@@ -648,10 +612,8 @@ export const content = {
       items: [
         { icon: 'certificate', title: 'Accredited certificates', desc: 'Participation and achievement certificates for all participants.' },
         { icon: 'rocket', title: 'Accelerator fast-track', desc: 'A chance to join the SEU SportsTech Accelerator for qualifying teams.' },
-        { icon: 'partners', title: 'Partnership opportunities', desc: 'Partnership opportunities with leading organizations in the field.' },
         { icon: 'mentor', title: 'Intensive mentorship', desc: 'Guidance from specialist mentors and experts throughout Velocity.' },
-        { icon: 'trophy', title: 'Prizes for winning teams', desc: 'Cash prizes — pool up to SAR 50,000 for standout teams.' },
-        { icon: 'support', title: 'Ongoing support after the program', desc: 'Continued mentorship for finalists, plus SEU alumni network access and priority for future programs and cohorts for all participants.' },
+        { icon: 'trophy', title: 'Prizes for winning teams', desc: 'Cash prizes — pool up to SAR 100,000 for standout teams.' },
       ],
     },
     leaveWith: {
@@ -665,52 +627,37 @@ export const content = {
         { icon: 'rocket', title: 'Pathway to accelerator', desc: 'Priority consideration for the SEU SportsTech Accelerator.' },
       ],
     },
-    eligibility: {
-      title: 'Eligibility rules',
-      subtitle: 'Who can apply',
-      items: [
-        'Minimum age 18+',
-        'All nationalities welcome',
-        'Idea / MVP-stage projects welcome',
-        'Registered companies are also welcome',
-      ],
-      note: 'Virtual days (1–4) are open globally. Finalists must travel to Riyadh for Days 5–7.',
-    },
     audience: {
-      title: 'Who should apply?',
-      subtitle: 'Open to individuals and teams alike',
-      primary: {
-        label: 'Primary',
-        sublabel: 'Who this program is for:',
-        items: [
-          { icon: 'bulb', title: 'Entrepreneurs', desc: 'Bring an idea — leave with a real product.' },
-          { icon: 'student', title: 'Students', desc: 'Get hands-on experience building real solutions.' },
-          { icon: 'spark', title: 'Aspiring entrepreneurs', desc: 'Turn ambition into a tangible project.' },
-        ],
-      },
-      specialisations: {
-        label: 'Specialisations',
-        sublabel: 'What skills do teams need?',
-        items: [
-          { icon: 'code', title: 'Developers', desc: 'Web / Mobile / Data' },
-          { icon: 'design', title: 'Designers', desc: 'UI / UX' },
-          { icon: 'media', title: 'Content creators', desc: 'Sports media & storytelling' },
-          { icon: 'support', title: 'Support specialists', desc: 'Sports domain, operations' },
-          { icon: 'ai', title: 'AI / ML experts', desc: 'AI & Machine Learning' },
-        ],
-      },
-    },
-    technologies: {
-      title: 'Technologies supported',
-      subtitle: 'A ready-to-use technical stack for building real solutions',
-      items: [
-        { icon: 'ai', title: 'Artificial Intelligence', desc: 'AI / Machine Learning for intelligent solutions.' },
-        { icon: 'data', title: 'Data Analytics', desc: 'Turn data into precise decisions.' },
-        { icon: 'wearable', title: 'Wearables', desc: 'Wearable devices and real-time data.' },
-        { icon: 'mobile', title: 'Mobile Development', desc: 'iOS & Android apps for fans, athletes, and venue-facing teams.' },
-        { icon: 'iot', title: 'IoT & Smart Venue Tech', desc: 'Connected devices, sensor integration, stadium and facility systems.' },
-        { icon: 'data', title: 'Sports Data APIs', desc: 'Live game data, player stats, performance feeds, third-party integrations.' },
-        { icon: 'vision', title: 'Computer Vision', desc: 'Player tracking, movement analysis, automated broadcast tools.' },
+      title: 'Target Audience & Eligibility',
+      description:
+        'The program is open to individuals and teams across Saudi Arabia who have an idea or early-stage project in sports technology. We welcome early-stage founders and ambitious innovators.',
+      cards: [
+        {
+          image: 'enthusiasts.jpg',
+          title: 'Sports & Tech Enthusiasts',
+          desc: 'Those passionate about the intersection of sports, technology, and innovation.',
+        },
+        {
+          image: 'entrepreneurs.jpg',
+          title: 'Entrepreneurs',
+          desc: 'Founders with entrepreneurial ideas in sports technology.',
+        },
+        {
+          image: 'designers.jpg',
+          title: 'Designers',
+          desc: 'UX/UI and digital product designers.',
+        },
+        {
+          image: 'developers.jpg',
+          title: 'Developers & Engineers',
+          desc: 'Software, app, and technical systems developers.',
+        },
+      ],
+      eligibilityTitle: 'Eligibility',
+      eligibility: [
+        'Commitment to attend all program days',
+        'Early-stage idea or project in SportsTech',
+        'Team of 2 to 5 members',
       ],
     },
     accelPipeline: {
@@ -725,7 +672,7 @@ export const content = {
       arrow: 'leads into',
       accelerator: {
         title: 'SEU SportsTech Accelerator',
-        desc: 'Phase 2 — October 2026',
+        desc: 'October 2026',
         bullets: ['Full accelerator program', 'Funding & ecosystem partners', 'Startup-building support'],
         applicationsOpenLabel: 'Applications open',
         applicationsOpenDate: 'Coming soon',
@@ -739,7 +686,6 @@ export const content = {
       items: [
         { name: 'Ministry of Communications & IT', logo: 'mcit.png', invert: true },
         { name: 'Ministry of Sport', logo: 'ministry-sport.svg', invert: true },
-        { name: 'Saudi Sports Culture Federation', logo: 'cultural-sport.webp', invert: false },
       ],
     },
     prizes: {
@@ -795,8 +741,8 @@ export const content = {
     },
     finalCta: {
       title: 'Ready to take on sports challenges and build a real solution?',
-      lead: 'Apply now and start your Velocity journey — 7 days of innovation, development and pitching to sports-ecosystem experts.',
-      ctaPrimary: { label: 'Apply Now', href: '/velocity/en/register/' },
+      lead: 'Register now and start your Velocity journey — 7 days of innovation, development and pitching to sports-ecosystem experts.',
+      ctaPrimary: { label: 'Register Now', href: '/velocity/en/register/' },
     },
     footer: {
       tagline: 'Follow us',
