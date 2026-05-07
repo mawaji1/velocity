@@ -4,23 +4,35 @@ interface Props { t: Content }
 const { t } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
-<section id="partners" class="relative py-20 md:py-28">
-  <div class="mx-auto max-w-[1180px] px-5 sm:px-8">
-    <div class="mb-12 text-center md:mb-14">
-      <h2 class="text-3xl font-bold text-white md:text-4xl">{t.partners.title}</h2>
+<section id="partners" class="partners-section relative overflow-hidden py-20 md:py-28">
+  <!-- Top hairline accent -->
+  <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[color:var(--color-red-primary)]/45 to-transparent"></div>
+  <!-- Soft red glow behind the heading -->
+  <div
+    class="pointer-events-none absolute left-1/2 top-[-120px] h-[420px] w-[820px] -translate-x-1/2 rounded-full opacity-60"
+    style="background: radial-gradient(closest-side, rgba(223,51,38,0.18), transparent 70%); filter: blur(20px);"
+  ></div>
+
+  <div class="relative mx-auto max-w-[1180px] px-5 sm:px-8">
+    <div class="mb-12 text-center md:mb-16">
+      <h2 class="text-3xl font-extrabold tracking-tight text-white md:text-[44px] md:leading-tight">
+        {t.partners.title}
+      </h2>
+      <div class="mx-auto mt-5 h-[3px] w-24 rounded-full bg-gradient-to-r from-transparent via-[color:var(--color-red-primary)] to-transparent"></div>
     </div>
 
-    <div class="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
       {t.partners.items.map((p) => (
-        <div class="group relative flex h-36 items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] px-8 transition hover:border-white/25 hover:bg-white/[0.06] md:h-40">
+        <div class="partner-card group relative flex items-center justify-center overflow-hidden rounded-3xl bg-white px-8 py-12 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.55)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_45px_110px_-35px_rgba(223,51,38,0.45)] md:px-12 md:py-16">
+          <!-- Top red accent bar -->
+          <div class="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[color:var(--color-red-primary)]/0 via-[color:var(--color-red-primary)] to-[color:var(--color-red-primary)]/0 opacity-80"></div>
           <img
             src={`${base}/images/partners/${p.logo}`}
             alt={p.name}
-            class={`max-h-20 w-auto max-w-[220px] object-contain opacity-85 transition duration-300 group-hover:scale-[1.03] group-hover:opacity-100 md:max-h-24 ${p.invert ? 'partner-logo-invert' : ''}`}
+            class="h-20 w-auto max-w-[320px] object-contain transition duration-500 group-hover:scale-[1.04] md:h-28"
             loading="lazy"
           />
           <span class="sr-only">{p.name}</span>
-          <div class="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[color:var(--color-red-primary)]/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
         </div>
       ))}
     </div>
@@ -28,7 +40,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 </section>
 
 <style>
-  .partner-logo-invert {
-    filter: brightness(0) invert(1);
+  .partners-section {
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.04), transparent 60%),
+      var(--color-black-primary);
+  }
+  .partner-card {
+    /* Match the rest of the site's quiet luxe feel with a warmer near-white. */
+    background: linear-gradient(180deg, #ffffff 0%, #f7f7f8 100%);
   }
 </style>

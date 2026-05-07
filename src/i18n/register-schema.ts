@@ -136,10 +136,9 @@ export const registerContent: Record<Locale, RegisterCopy> = {
         number: '3',
         title: 'معلومات المشروع / الفكرة',
         fields: [
-          { name: 'projectName', label: 'اسم المشروع / الفكرة', type: 'text', required: true },
           {
             name: 'sector',
-            label: 'القطاع',
+            label: 'حدد المسار المرغوب',
             type: 'select',
             required: true,
             options: [
@@ -150,6 +149,7 @@ export const registerContent: Record<Locale, RegisterCopy> = {
               { value: 'other', label: 'أخرى' },
             ],
           },
+          { name: 'projectName', label: 'اسم المشروع / الفكرة', type: 'text', required: true },
           {
             name: 'ideaDescription',
             label: 'وصف الفكرة',
@@ -376,10 +376,9 @@ export const registerContent: Record<Locale, RegisterCopy> = {
         number: '3',
         title: 'Project / Idea',
         fields: [
-          { name: 'projectName', label: 'Project / idea name', type: 'text', required: true },
           {
             name: 'sector',
-            label: 'Sector',
+            label: 'Select your track',
             type: 'select',
             required: true,
             options: [
@@ -390,6 +389,7 @@ export const registerContent: Record<Locale, RegisterCopy> = {
               { value: 'other', label: 'Other' },
             ],
           },
+          { name: 'projectName', label: 'Project / idea name', type: 'text', required: true },
           {
             name: 'ideaDescription',
             label: 'Idea description',

@@ -3,8 +3,8 @@ export type Locale = 'ar' | 'en';
 const AR_ROOT = 'https://sportstechaccelerator.seu.edu.sa/ar';
 const EN_ROOT = 'https://sportstechaccelerator.seu.edu.sa/en';
 
-// Program runs Jun 29 – Jul 7, 2026 (4 days online + 3 on-site in Riyadh)
-export const PROGRAM_START_ISO = '2026-06-29T09:00:00+03:00';
+// Program runs Jun 28 – Jul 8, 2026 (4 days online + 3 on-site in Riyadh)
+export const PROGRAM_START_ISO = '2026-06-28T09:00:00+03:00';
 export const REGISTRATION_DEADLINE_ISO = '2026-06-15T23:59:59+03:00';
 export const PRIORITY_DEADLINE_ISO = '2026-05-31T23:59:59+03:00';
 
@@ -21,7 +21,6 @@ export const content = {
       brand: 'سيو فيلوسيتي',
       back: { label: 'مسرعة سيو', href: AR_ROOT },
       sections: [
-        { label: 'عن البرنامج', href: '#why' },
         { label: 'الرحلة', href: '#journey' },
         { label: 'المسارات', href: '#tracks' },
         { label: 'المزايا', href: '#benefits' },
@@ -44,7 +43,7 @@ export const content = {
     infobar: [
       { icon: 'clock', label: 'المدة', value: '٧ أيام' },
       { icon: 'cloud', label: 'عن بُعد', value: '٤ أيام' },
-      { icon: 'pin', label: 'المرحلة الحضورية', value: '٣ أيام في الرياض لأفضل ١٠ فرق' },
+      { icon: 'pin', label: 'المرحلة الحضورية', value: '٣ أيام في الرياض لأفضل الفرق المشاركة' },
       { icon: 'trophy', label: 'الجوائز', value: '١٠٠٬٠٠٠', valuePrefix: 'حتى', currencyIcon: true },
     ],
     why: {
@@ -61,7 +60,7 @@ export const content = {
       steps: [
         { n: '١', title: 'تقديم الفكرة', desc: 'إكمال نموذج التسجيل والتعريف بالفكرة والفريق.' },
         { n: '٢', title: 'التطوير والعمل على الفكرة', desc: 'تطوير الفكرة إلى نموذج أولي خلال ٤ أيام أونلاين مكثفة.' },
-        { n: '٣', title: 'اختيار أفضل ١٠ فرق', desc: 'تُراجع المشاريع من قِبَل لجنة الخبراء ويُعلن عن الفرق المتأهلة.' },
+        { n: '٣', title: 'اختيار أفضل الفرق المشاركة', desc: 'تُراجع المشاريع من قِبَل لجنة الخبراء ويُعلن عن الفرق المتأهلة.' },
         { n: '٤', title: 'النهائيات في الرياض', desc: '٣ أيام حضورية مكثفة تنتهي بالعرض الختامي وإعلان الفائزين.' },
       ],
     },
@@ -144,25 +143,42 @@ export const content = {
       subtitle: '٤ أيام عن بُعد + ٣ أيام حضوريًا في الرياض',
       virtualLabel: 'عن بُعد',
       onsiteLabel: 'حضوري · الرياض',
-      finalistsCalloutLabel: 'إعلان أفضل ١٠ فرق',
+      finalistsCalloutLabel: 'إعلان أفضل الفرق المشاركة',
+      partOne: {
+        eyebrow: 'الجزء الأول',
+        title: 'عن بُعد',
+        subtitle: '٤ أيام · أونلاين من أي مكان',
+        pillLabel: 'أونلاين',
+      },
+      partTwo: {
+        eyebrow: 'الجزء الثاني',
+        title: 'في الرياض',
+        subtitle: '٣ أيام · النهائيات الحضورية',
+        pillLabel: 'حضوري',
+      },
+      milestone: {
+        eyebrow: 'محطة بارزة',
+        title: 'إعلان المتأهلين',
+        desc: 'تُختار أفضل الفرق المشاركة للانتقال إلى الرياض للمرحلة الحضورية.',
+        date: '٢ يوليو',
+      },
       steps: [
-        { day: '١', date: '٢٩ يونيو', title: 'الإطلاق', desc: 'انطلاق البرنامج، استعراض التحديات، وتحديد مسار العمل.', mode: 'virtual' as const },
-        { day: '٢', date: '٣٠ يونيو', title: 'التطوير', desc: 'بدء العمل على الفكرة وتحويلها إلى نموذج أولي.', mode: 'virtual' as const },
-        { day: '٣', date: '١ يوليو', title: 'التحقق', desc: 'اختبار الفكرة، جلسات إرشادية، وتحسين النموذج بناءً على الملاحظات.', mode: 'virtual' as const },
-        { day: '٤', date: '٢ يوليو', title: 'إعلان المتأهلين', desc: 'مراجعة المشاريع واختيار أفضل ١٠ فرق للانتقال إلى المرحلة الحضورية.', mode: 'virtual' as const, finalists: true },
-        { day: '٥', date: '٥ يوليو', title: 'الاستعداد النهائي', desc: 'يوم حضوري مكثّف في الرياض لصقل المنتج واستكمال التجهيزات.', mode: 'onsite' as const },
-        { day: '٦', date: '٦ يوليو', title: 'الاستعداد للعرض', desc: 'بروفات العرض، جلسات مع المرشدين، والاستعداد للأسئلة والنقاش.', mode: 'onsite' as const },
-        { day: '٧', date: '٧ يوليو', title: 'العرض الختامي', desc: 'تقديم المشاريع أمام لجنة التحكيم، ثم إعلان الفائزين.', mode: 'onsite' as const, demo: true },
+        { day: '١', date: '٢٨ يونيو', title: 'الإطلاق', desc: 'انطلاق البرنامج، استعراض التحديات، وتحديد مسار العمل.', mode: 'virtual' as const },
+        { day: '٢', date: '٢٩ يونيو', title: 'التطوير', desc: 'بدء العمل على الفكرة وتحويلها إلى نموذج أولي.', mode: 'virtual' as const },
+        { day: '٣', date: '٣٠ يونيو', title: 'التحقق', desc: 'اختبار الفكرة، جلسات إرشادية، وتحسين النموذج بناءً على الملاحظات.', mode: 'virtual' as const },
+        { day: '٤', date: '١ يوليو', title: 'التقديم النهائي', desc: 'إنهاء النموذج الأوّلي وتقديمه لمراجعة لجنة التحكيم.', mode: 'virtual' as const },
+        { day: '٥', date: '٦ يوليو', title: 'الاستعداد النهائي', desc: 'يوم حضوري مكثّف في الرياض لصقل المنتج واستكمال التجهيزات.', mode: 'onsite' as const },
+        { day: '٦', date: '٧ يوليو', title: 'الاستعداد للعرض', desc: 'بروفات العرض، جلسات مع المرشدين، والاستعداد للأسئلة والنقاش.', mode: 'onsite' as const },
+        { day: '٧', date: '٨ يوليو', title: 'العرض الختامي', desc: 'تقديم المشاريع أمام لجنة التحكيم، ثم إعلان الفائزين.', mode: 'onsite' as const, demo: true },
       ],
     },
     benefits: {
       title: 'ماذا يقدّم لك سيو فيلوسيتي؟',
       subtitle: 'مزايا يحصل عليها جميع المشاركين',
       items: [
-        { icon: 'certificate', title: 'شهادات معتمدة', desc: 'شهادات مشاركة وإنجاز لجميع المشاركين.' },
-        { icon: 'rocket', title: 'أولوية للمسرعة', desc: 'أولوية للنظر في الانضمام إلى مسرعة سيو للتكنولوجيا الرياضية للفرق المؤهلة.' },
+        { icon: 'rocket', title: 'أولوية الانضمام للمسرعة', desc: 'أولوية للنظر في الانضمام إلى مسرعة سيو للتكنولوجيا الرياضية للفرق المؤهلة.' },
         { icon: 'mentor', title: 'إرشاد مكثّف', desc: 'متابعة مباشرة من مرشدين وخبراء طوال فترة البرنامج.' },
-        { icon: 'trophy', title: 'جوائز للفرق المتميزة', desc: 'جوائز نقدية للفرق التي تقدّم أفضل الحلول.' },
+        { icon: 'partners', title: 'الوصول إلى شبكة مؤثرة', desc: 'فرص مباشرة للتواصل مع مستثمرين، خبراء، وشركاء، لبناء علاقات تدعم نمو مشروعك وتسريع توسعه.' },
       ],
     },
     leaveWith: {
@@ -177,36 +193,31 @@ export const content = {
       ],
     },
     audience: {
-      title: 'الفئة المستهدفة وشروط الأهلية',
+      title: 'الفئة المستهدفة',
       description:
         'البرنامج مفتوح للأفراد والفرق من جميع أنحاء المملكة الذين يمتلكون فكرة أو مشروعًا مبكرًا في مجال التكنولوجيا الرياضية. نرحّب بالمؤسسين في المراحل الأولى والمبتكرين الطموحين.',
       cards: [
         {
-          image: 'enthusiasts.jpg',
-          title: 'المهتمون بالرياضة والتقنية',
-          desc: 'أشخاص شغوفون بتقاطع الرياضة والتكنولوجيا والابتكار.',
-        },
-        {
-          image: 'entrepreneurs.jpg',
-          title: 'رواد الأعمال',
+          icon: 'entrepreneur',
+          title: 'أصحاب الأفكار الريادية ورواد الأعمال',
           desc: 'أصحاب الأفكار الريادية في مجال التكنولوجيا الرياضية.',
         },
         {
-          image: 'designers.jpg',
-          title: 'المصممون',
-          desc: 'مصممو تجربة المستخدم وواجهات المنتجات الرقمية.',
+          icon: 'enthusiast',
+          title: 'المهتمون بالرياضة والتقنية',
+          desc: 'المطورون، المهندسون والمصممون.',
         },
         {
-          image: 'developers.jpg',
-          title: 'المطورون والمهندسون',
-          desc: 'مطورو البرمجيات والتطبيقات وأنظمة التقنية.',
+          icon: 'student',
+          title: 'الطلاب',
+          desc: 'لتطوير المهارات، اكتساب الخبرة، والانخراط في بيئة الابتكار.',
         },
       ],
       eligibilityTitle: 'شروط الأهلية',
       eligibility: [
         'الالتزام بحضور جميع أيام البرنامج',
-        'فكرة أو مشروع مبكر في SportsTech',
-        'فريق من ٢ إلى ٥ أعضاء',
+        'فريق يتكون من شخص واحد إلى ٥ كحد أقصى',
+        'فكرة أو مشروع يسهم في إيجاد حلول لأحد تحديات البرنامج في القطاع',
       ],
     },
     accelPipeline: {
@@ -256,7 +267,7 @@ export const content = {
         },
         {
           q: 'هل البرنامج حضوري؟',
-          a: 'تُقام الأيام الأربعة الأولى من ٢٩ يونيو إلى ٢ يوليو عن بُعد بالكامل. وفي ٢ يوليو يتم اختيار أفضل ١٠ فرق للانتقال إلى الرياض والمشاركة في الأيام الثلاثة الختامية من ٥ إلى ٧ يوليو. الحضور في الرياض مطلوب فقط للفرق المتأهلة.',
+          a: 'تُقام الأيام الأربعة الأولى من ٢٨ يونيو إلى ١ يوليو عن بُعد بالكامل. وفي ٢ يوليو يتم اختيار أفضل الفرق المشاركة للانتقال إلى الرياض والمشاركة في الأيام الثلاثة الختامية من ٦ إلى ٨ يوليو. الحضور في الرياض مطلوب فقط للفرق المتأهلة.',
         },
         {
           q: 'كم عدد أعضاء الفريق؟',
@@ -472,7 +483,6 @@ export const content = {
       brand: 'SEU Velocity',
       back: { label: 'SEU Accelerator', href: EN_ROOT },
       sections: [
-        { label: 'About', href: '#why' },
         { label: 'Journey', href: '#journey' },
         { label: 'Tracks', href: '#tracks' },
         { label: 'Benefits', href: '#benefits' },
@@ -495,7 +505,7 @@ export const content = {
     infobar: [
       { icon: 'clock', label: 'Duration', value: '7 days total' },
       { icon: 'cloud', label: 'Online', value: '4 days virtual' },
-      { icon: 'pin', label: 'On-site Riyadh', value: '3 days (Top 10 teams)' },
+      { icon: 'pin', label: 'On-site Riyadh', value: '3 days (best participating teams)' },
       { icon: 'trophy', label: 'Prizes', value: '100,000', valuePrefix: 'Up to', currencyIcon: true },
     ],
     why: {
@@ -512,7 +522,7 @@ export const content = {
       steps: [
         { n: '1', title: 'Idea submission', desc: 'Complete the application form and introduce your idea, team, and chosen challenge track.' },
         { n: '2', title: 'Development & build', desc: 'Develop your idea into a prototype over 4 intensive online days.' },
-        { n: '3', title: 'Top 10 teams selected', desc: 'Projects reviewed by expert jury; top 10 teams announced for on-site phase.' },
+        { n: '3', title: 'Best participating teams selected', desc: 'Projects reviewed by expert jury; the best participating teams are announced for the on-site phase.' },
         { n: '4', title: 'Finals in Riyadh', desc: '3 intensive on-site days ending with Demo Day and winners announcement.' },
       ],
     },
@@ -595,25 +605,42 @@ export const content = {
       subtitle: '4 days online + 3 days on-site in Riyadh',
       virtualLabel: 'Virtual',
       onsiteLabel: 'On-site · Riyadh',
-      finalistsCalloutLabel: 'Top 10 teams announced',
+      finalistsCalloutLabel: 'Best participating teams announced',
+      partOne: {
+        eyebrow: 'Part 01',
+        title: 'Remote',
+        subtitle: '4 days · online from anywhere',
+        pillLabel: 'Online',
+      },
+      partTwo: {
+        eyebrow: 'Part 02',
+        title: 'In Riyadh',
+        subtitle: '3 days · on-site finals',
+        pillLabel: 'On-site',
+      },
+      milestone: {
+        eyebrow: 'Key milestone',
+        title: 'Finalists Announced',
+        desc: 'The best participating teams are selected and invited to travel to Riyadh for the in-person finals.',
+        date: 'Jul 2',
+      },
       steps: [
-        { day: '1', date: 'Jun 29', title: 'Kick-off', desc: 'Program launch and challenge briefings.', mode: 'virtual' as const },
-        { day: '2', date: 'Jun 30', title: 'Build', desc: 'Idea development and prototype construction.', mode: 'virtual' as const },
-        { day: '3', date: 'Jul 1', title: 'Validate', desc: 'User testing, mentor feedback, and refinements.', mode: 'virtual' as const },
-        { day: '4', date: 'Jul 2', title: 'Finalists', desc: 'Final virtual review. Top 10 teams selected and announced.', mode: 'virtual' as const, finalists: true },
-        { day: '5', date: 'Jul 5', title: 'Preparation', desc: 'On-site full-day hackathon sprint in Riyadh — final product polish.', mode: 'onsite' as const },
-        { day: '6', date: 'Jul 6', title: 'Pitch Prep', desc: 'Live pitch rehearsal, investor Q&A practice, mentor final sessions.', mode: 'onsite' as const },
-        { day: '7', date: 'Jul 7', title: 'Demo Day', desc: 'Final presentations to the jury, awards ceremony, accelerator offers revealed.', mode: 'onsite' as const, demo: true },
+        { day: '1', date: 'Jun 28', title: 'Kick-off', desc: 'Program launch and challenge briefings.', mode: 'virtual' as const },
+        { day: '2', date: 'Jun 29', title: 'Build', desc: 'Idea development and prototype construction.', mode: 'virtual' as const },
+        { day: '3', date: 'Jun 30', title: 'Validate', desc: 'User testing, mentor feedback, and refinements.', mode: 'virtual' as const },
+        { day: '4', date: 'Jul 1', title: 'Final Submission', desc: 'Wrap up the prototype and submit it for jury review.', mode: 'virtual' as const },
+        { day: '5', date: 'Jul 6', title: 'Preparation', desc: 'On-site full-day hackathon sprint in Riyadh — final product polish.', mode: 'onsite' as const },
+        { day: '6', date: 'Jul 7', title: 'Pitch Prep', desc: 'Live pitch rehearsal, investor Q&A practice, mentor final sessions.', mode: 'onsite' as const },
+        { day: '7', date: 'Jul 8', title: 'Demo Day', desc: 'Final presentations to the jury, awards ceremony, accelerator offers revealed.', mode: 'onsite' as const, demo: true },
       ],
     },
     benefits: {
       title: 'What SEU Velocity offers',
       subtitle: 'Exclusive perks for every participant',
       items: [
-        { icon: 'certificate', title: 'Accredited certificates', desc: 'Participation and achievement certificates for all participants.' },
         { icon: 'rocket', title: 'Accelerator fast-track', desc: 'A chance to join the SEU SportsTech Accelerator for qualifying teams.' },
         { icon: 'mentor', title: 'Intensive mentorship', desc: 'Guidance from specialist mentors and experts throughout Velocity.' },
-        { icon: 'trophy', title: 'Prizes for winning teams', desc: 'Cash prizes — pool up to SAR 100,000 for standout teams.' },
+        { icon: 'partners', title: 'Access to an influential network', desc: 'Direct opportunities to connect with investors, experts, and partners — building relationships that support your project\'s growth and accelerate its expansion.' },
       ],
     },
     leaveWith: {
@@ -628,36 +655,31 @@ export const content = {
       ],
     },
     audience: {
-      title: 'Target Audience & Eligibility',
+      title: 'Target Audience',
       description:
         'The program is open to individuals and teams across Saudi Arabia who have an idea or early-stage project in sports technology. We welcome early-stage founders and ambitious innovators.',
       cards: [
         {
-          image: 'enthusiasts.jpg',
-          title: 'Sports & Tech Enthusiasts',
-          desc: 'Those passionate about the intersection of sports, technology, and innovation.',
-        },
-        {
-          image: 'entrepreneurs.jpg',
-          title: 'Entrepreneurs',
+          icon: 'entrepreneur',
+          title: 'Entrepreneurs & Innovators',
           desc: 'Founders with entrepreneurial ideas in sports technology.',
         },
         {
-          image: 'designers.jpg',
-          title: 'Designers',
-          desc: 'UX/UI and digital product designers.',
+          icon: 'enthusiast',
+          title: 'Sports & Tech Enthusiasts',
+          desc: 'Developers, engineers, and designers.',
         },
         {
-          image: 'developers.jpg',
-          title: 'Developers & Engineers',
-          desc: 'Software, app, and technical systems developers.',
+          icon: 'student',
+          title: 'Students',
+          desc: 'Develop skills, gain experience, and engage with the innovation ecosystem.',
         },
       ],
       eligibilityTitle: 'Eligibility',
       eligibility: [
         'Commitment to attend all program days',
-        'Early-stage idea or project in SportsTech',
-        'Team of 2 to 5 members',
+        'Team of 1 to 5 members maximum',
+        'An idea or project that helps solve one of the program\'s sector challenges',
       ],
     },
     accelPipeline: {
@@ -707,7 +729,7 @@ export const content = {
         },
         {
           q: 'Is the program in person?',
-          a: 'The first 4 days (June 29 – July 2) are fully virtual. The top 10 finalist teams are selected on July 2 and come to Riyadh for the final 3 days (July 5–7). Only finalists need to travel to Riyadh.',
+          a: 'The first 4 days (June 28 – July 1) are fully virtual. The best participating teams are selected on July 2 and come to Riyadh for the final 3 days (July 6–8). Only finalists need to travel to Riyadh.',
         },
         {
           q: 'How many members can a team have?',

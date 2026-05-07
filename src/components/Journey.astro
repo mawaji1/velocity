@@ -2,79 +2,242 @@
 import type { Content } from '../i18n/content';
 interface Props { t: Content }
 const { t } = Astro.props;
+
+const j = t.journey;
+const virtualSteps = j.steps.filter((s) => s.mode === 'virtual');
+const onsiteSteps = j.steps.filter((s) => s.mode === 'onsite');
+
+// Per-mode visual treatment — virtual stays neutral so the on-site (red) phase is the climax.
+const phaseStyles = {
+  virtual: {
+    container: 'border-white/12 bg-gradient-to-br from-white/[0.05] via-white/[0.02] to-white/[0.015]',
+    eyebrow: 'text-white/70',
+    pill: 'border-white/25 bg-white/10 text-white',
+    rail: 'bg-gradient-to-b from-white/0 via-white/30 to-white/0',
+    dayBadge: 'bg-white/8 ring-white/22 text-white',
+    dayHover: 'hover:border-white/22 hover:bg-white/[0.04]',
+  },
+  onsite: {
+    container: 'border-[color:var(--color-red-primary)]/30 bg-gradient-to-br from-[color:var(--color-red-primary)]/12 via-[color:var(--color-red-primary)]/5 to-orange-700/5',
+    eyebrow: 'text-[color:var(--color-red-primary)]',
+    pill: 'border-[color:var(--color-red-primary)]/50 bg-[color:var(--color-red-primary)]/18 text-white',
+    rail: 'bg-gradient-to-b from-[color:var(--color-red-primary)]/0 via-[color:var(--color-red-primary)]/55 to-[color:var(--color-red-primary)]/0',
+    dayBadge: 'bg-[color:var(--color-red-primary)]/22 ring-[color:var(--color-red-primary)]/45 text-white',
+    dayHover: 'hover:border-[color:var(--color-red-primary)]/45 hover:bg-[color:var(--color-red-primary)]/[0.06]',
+  },
+} as const;
+
+type Mode = keyof typeof phaseStyles;
 ---
-<section id="journey" class="relative border-y border-white/5 bg-white/[0.02] py-20 md:py-28">
-  <div class="mx-auto max-w-[1240px] px-5 sm:px-8">
+<section id="journey" class="journey-section relative overflow-hidden py-20 md:py-28">
+  <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+  <div
+    class="pointer-events-none absolute left-1/2 top-[-80px] h-[420px] w-[920px] -translate-x-1/2 rounded-full opacity-50"
+    style="background: radial-gradient(closest-side, rgba(223,51,38,0.14), transparent 70%); filter: blur(28px);"
+  ></div>
+
+  <div class="relative mx-auto max-w-[1180px] px-5 sm:px-8">
     <div class="mb-12 text-center md:mb-16">
-      <h2 class="text-3xl font-extrabold text-white md:text-4xl">{t.journey.title}</h2>
-      <p class="mt-3 text-[15px] text-white/60">{t.journey.subtitle}</p>
+      <h2 class="text-3xl font-extrabold tracking-tight text-white md:text-[44px] md:leading-tight">{j.title}</h2>
+      <p class="mt-3 text-[15px] text-white/65 md:mt-4 md:text-[16px]">{j.subtitle}</p>
+      <div class="mx-auto mt-5 h-[3px] w-24 rounded-full bg-gradient-to-r from-transparent via-[color:var(--color-red-primary)] to-transparent"></div>
     </div>
 
-    <div class="relative">
-      <div class="pointer-events-none absolute top-[56px] start-0 end-0 hidden h-px bg-gradient-to-r from-transparent via-[color:var(--color-red-primary)]/40 to-transparent lg:block"></div>
+    <div data-journey>
+      {/* PART 01 — Remote */}
+      <div
+        class={`journey-phase relative overflow-hidden rounded-3xl border p-6 md:p-9 ${phaseStyles.virtual.container}`}
+        style="--reveal-delay: 0ms;"
+      >
+        <div class="flex flex-wrap items-start justify-between gap-4 md:items-center">
+          <div>
+            <div class={`text-[11px] font-semibold uppercase tracking-[0.3em] ${phaseStyles.virtual.eyebrow} md:text-[12px]`}>{j.partOne.eyebrow}</div>
+            <h3 class="mt-2 text-[26px] font-extrabold tracking-tight text-white md:text-[34px]">{j.partOne.title}</h3>
+            <p class="mt-1.5 text-[14px] text-white/70 md:text-[15px]">{j.partOne.subtitle}</p>
+          </div>
+          <span class={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] md:text-[12px] ${phaseStyles.virtual.pill}`}>
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17.5 19a4.5 4.5 0 100-9h-1.26A8 8 0 104 16.25"></path>
+            </svg>
+            {j.partOne.pillLabel}
+          </span>
+        </div>
 
-      <ol class="grid gap-5 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7">
-        {t.journey.steps.map((step) => {
-          const onsite = step.mode === 'onsite';
-          const isDemo = 'demo' in step && step.demo;
-          const cardCls = isDemo
-            ? 'border-[color:var(--color-red-primary)]/55 bg-gradient-to-b from-[color:var(--color-red-primary)]/22 via-[color:var(--color-red-primary)]/10 to-transparent shadow-[0_28px_70px_-30px_rgba(223,51,38,0.7)]'
-            : onsite
-            ? 'border-amber-300/30 bg-gradient-to-b from-amber-300/10 via-amber-300/5 to-transparent shadow-[0_24px_60px_-32px_rgba(252,211,77,0.5)]'
-            : 'border-white/10 bg-white/[0.03]';
-          const dayBadgeCls = isDemo
-            ? 'bg-[color:var(--color-red-primary)] text-white shadow-[0_12px_32px_-10px_rgba(223,51,38,0.85)]'
-            : onsite
-            ? 'bg-amber-300 text-amber-950 shadow-[0_10px_30px_-10px_rgba(252,211,77,0.7)]'
-            : 'bg-white/[0.05] text-white/90 border border-white/10';
-          const dateCls = isDemo ? 'text-[color:var(--color-red-primary)]' : onsite ? 'text-amber-200' : 'text-[color:var(--color-red-primary)]';
-          return (
-            <li class={`relative flex flex-col rounded-2xl border p-4 md:p-5 ${cardCls}`}>
-              <div class={`relative mx-auto flex h-14 w-14 items-center justify-center rounded-2xl text-xl font-extrabold ${dayBadgeCls}`}>
-                {step.day}
+        <div class="relative mt-6 space-y-3 md:mt-8 md:space-y-4">
+          {/* Timeline rail through the badge column */}
+          <div class={`day-rail pointer-events-none absolute start-[40px] top-[40px] bottom-[40px] w-px md:start-[48px] md:top-[48px] md:bottom-[48px] ${phaseStyles.virtual.rail}`} aria-hidden="true"></div>
+          {virtualSteps.map((step, i) => (
+            <article
+              class={`journey-day group relative z-[1] flex items-start gap-4 rounded-2xl border border-white/8 bg-white/[0.025] p-4 transition-colors duration-300 md:gap-5 md:p-5 ${phaseStyles.virtual.dayHover}`}
+              style={`--reveal-delay: ${(i + 1) * 90}ms;`}
+            >
+              <div class={`flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-xl ring-1 ring-inset md:h-14 md:w-14 ${phaseStyles.virtual.dayBadge}`}>
+                <span class="text-[8px] font-semibold uppercase tracking-[0.18em] opacity-80 md:text-[9px]">{t.lang === 'ar' ? 'يوم' : 'DAY'}</span>
+                <span class="text-[18px] font-extrabold tabular-nums leading-none md:text-[20px]">{step.day}</span>
               </div>
-              <div class={`mt-3 text-center text-[11px] font-semibold uppercase tracking-[0.18em] ${dateCls}`}>
-                {step.date}
-              </div>
-              <h3 class="mt-1.5 text-center text-[15px] font-bold text-white md:text-base">{step.title}</h3>
-              <p class="mt-2 text-center text-[12.5px] leading-6 text-white/65 md:text-[13px]">
-                {step.desc}
-              </p>
-
-              <div class="mt-3 flex flex-wrap items-center justify-center gap-1.5">
-                {isDemo ? (
-                  <div class="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--color-red-primary)]/55 bg-[color:var(--color-red-primary)]/15 px-2.5 py-0.5 text-[10.5px] font-semibold text-white">
-                    <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M12 22s-7-7.58-7-13a7 7 0 1114 0c0 5.42-7 13-7 13z M12 11a2 2 0 100-4 2 2 0 000 4z"></path>
-                    </svg>
-                    {t.journey.onsiteLabel}
-                  </div>
-                ) : onsite ? (
-                  <div class="inline-flex items-center gap-1.5 rounded-full border border-amber-300/45 bg-amber-300/12 px-2.5 py-0.5 text-[10.5px] font-semibold text-amber-100">
-                    <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M12 22s-7-7.58-7-13a7 7 0 1114 0c0 5.42-7 13-7 13z M12 11a2 2 0 100-4 2 2 0 000 4z"></path>
-                    </svg>
-                    {t.journey.onsiteLabel}
-                  </div>
-                ) : (
-                  <div class="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.04] px-2.5 py-0.5 text-[10.5px] font-medium text-white/70">
-                    <svg viewBox="0 0 24 24" class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M17.5 19a4.5 4.5 0 100-9h-1.26A8 8 0 104 16.25"></path>
-                    </svg>
-                    {t.journey.virtualLabel}
-                  </div>
-                )}
-              </div>
-
-              {step.finalists && (
-                <div class="mt-3 rounded-lg border border-[color:var(--color-red-primary)]/35 bg-[color:var(--color-red-primary)]/10 px-2.5 py-1.5 text-center text-[10.5px] font-semibold leading-4 text-white">
-                  {t.journey.finalistsCalloutLabel}
+              <div class="min-w-0 flex-1">
+                <div class="flex flex-wrap items-baseline justify-between gap-2">
+                  <h4 class="text-[16px] font-bold leading-tight text-white md:text-[18px]">{step.title}</h4>
+                  <span class={`text-[11px] font-semibold uppercase tracking-[0.18em] ${phaseStyles.virtual.eyebrow} md:text-[12px]`}>{step.date}</span>
                 </div>
-              )}
-            </li>
-          );
-        })}
-      </ol>
+                <p class="mt-1.5 text-[13px] leading-6 text-white/65 md:text-[14px]">{step.desc}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      {/* Connector: PART 01 → MILESTONE */}
+      <div class="phase-connector flex justify-center" aria-hidden="true">
+        <div class="relative h-12 w-px bg-gradient-to-b from-white/30 via-white/35 to-amber-300/55 md:h-16">
+          <span class="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-300/85 ring-4 ring-amber-300/15"></span>
+        </div>
+      </div>
+
+      {/* MILESTONE */}
+      <div
+        class="journey-milestone relative overflow-hidden rounded-3xl border border-amber-300/40 bg-gradient-to-br from-amber-300/15 via-yellow-300/8 to-lime-400/5 p-7 text-center md:p-10"
+        style="--reveal-delay: 200ms;"
+      >
+        <div class="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-amber-300/0 via-amber-300 to-amber-300/0"></div>
+        <div
+          class="pointer-events-none absolute left-1/2 top-1/2 h-[280px] w-[460px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-50"
+          style="background: radial-gradient(closest-side, rgba(252,211,77,0.22), transparent 70%); filter: blur(20px);"
+        ></div>
+        <div class="relative mx-auto max-w-2xl">
+          <div class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-300/20 ring-1 ring-inset ring-amber-300/45 md:h-14 md:w-14">
+            <svg viewBox="0 0 24 24" class="h-6 w-6 text-amber-200 md:h-7 md:w-7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 21h8 M12 17v4 M7 4h10v5a5 5 0 0 1-10 0V4z M17 5h3v2a3 3 0 0 1-3 3 M7 5H4v2a3 3 0 0 0 3 3"></path>
+            </svg>
+          </div>
+          <h3 class="mt-4 text-[26px] font-extrabold tracking-tight text-white md:text-[34px]">{j.milestone.title}</h3>
+          <p class="mt-3 text-[14px] leading-7 text-white/80 md:text-[16px]">{j.milestone.desc}</p>
+          <div class="mt-5 inline-flex items-center gap-2 rounded-full border border-amber-300/45 bg-amber-300/15 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-100 md:text-[12px]">
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+            {j.milestone.date}
+          </div>
+        </div>
+      </div>
+
+      {/* Connector: MILESTONE → PART 02 */}
+      <div class="phase-connector flex justify-center" aria-hidden="true">
+        <div class="relative h-12 w-px bg-gradient-to-b from-amber-300/55 via-orange-400/45 to-[color:var(--color-red-primary)]/65 md:h-16">
+          <span class="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[color:var(--color-red-primary)] ring-4 ring-[color:var(--color-red-primary)]/15"></span>
+        </div>
+      </div>
+
+      {/* PART 02 — In Riyadh */}
+      <div
+        class={`journey-phase relative overflow-hidden rounded-3xl border p-6 md:p-9 ${phaseStyles.onsite.container}`}
+        style="--reveal-delay: 400ms;"
+      >
+        <div class="flex flex-wrap items-start justify-between gap-4 md:items-center">
+          <div>
+            <div class={`text-[11px] font-semibold uppercase tracking-[0.3em] ${phaseStyles.onsite.eyebrow} md:text-[12px]`}>{j.partTwo.eyebrow}</div>
+            <h3 class="mt-2 text-[26px] font-extrabold tracking-tight text-white md:text-[34px]">{j.partTwo.title}</h3>
+            <p class="mt-1.5 text-[14px] text-white/70 md:text-[15px]">{j.partTwo.subtitle}</p>
+          </div>
+          <span class={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] md:text-[12px] ${phaseStyles.onsite.pill}`}>
+            <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s-7-7.58-7-13a7 7 0 1114 0c0 5.42-7 13-7 13z M12 11a2 2 0 100-4 2 2 0 000 4z"></path>
+            </svg>
+            {j.partTwo.pillLabel}
+          </span>
+        </div>
+
+        <div class="relative mt-6 space-y-3 md:mt-8 md:space-y-4">
+          {/* Timeline rail through the badge column */}
+          <div class={`day-rail pointer-events-none absolute start-[40px] top-[40px] bottom-[40px] w-px md:start-[48px] md:top-[48px] md:bottom-[48px] ${phaseStyles.onsite.rail}`} aria-hidden="true"></div>
+          {onsiteSteps.map((step, i) => {
+            const isDemo = 'demo' in step && step.demo;
+            return (
+              <article
+                class={`journey-day group relative z-[1] flex items-start gap-4 rounded-2xl border border-white/8 bg-white/[0.025] p-4 transition-colors duration-300 md:gap-5 md:p-5 ${phaseStyles.onsite.dayHover}`}
+                style={`--reveal-delay: ${(i + 1) * 90}ms;`}
+              >
+                <div class={`flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-xl ring-1 ring-inset md:h-14 md:w-14 ${phaseStyles.onsite.dayBadge} ${isDemo ? 'shadow-[0_8px_24px_-8px_rgba(223,51,38,0.7)]' : ''}`}>
+                  <span class="text-[8px] font-semibold uppercase tracking-[0.18em] opacity-80 md:text-[9px]">{t.lang === 'ar' ? 'يوم' : 'DAY'}</span>
+                  <span class="text-[18px] font-extrabold tabular-nums leading-none md:text-[20px]">{step.day}</span>
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex flex-wrap items-baseline justify-between gap-2">
+                    <h4 class="text-[16px] font-bold leading-tight text-white md:text-[18px]">
+                      {step.title}
+                      {isDemo && (
+                        <span class="ms-2 inline-block rounded-full border border-[color:var(--color-red-primary)]/55 bg-[color:var(--color-red-primary)]/18 px-2 py-0.5 align-middle text-[10px] font-semibold uppercase tracking-[0.18em] text-white md:text-[10.5px]">
+                          {t.journey.onsiteLabel}
+                        </span>
+                      )}
+                    </h4>
+                    <span class={`text-[11px] font-semibold uppercase tracking-[0.18em] ${phaseStyles.onsite.eyebrow} md:text-[12px]`}>{step.date}</span>
+                  </div>
+                  <p class="mt-1.5 text-[13px] leading-6 text-white/65 md:text-[14px]">{step.desc}</p>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-journey]');
+  if (root) {
+    const targets = Array.from(root.querySelectorAll<HTMLElement>('.journey-phase, .journey-milestone, .journey-day'));
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!('IntersectionObserver' in window) || reduced) {
+      targets.forEach((t) => t.classList.add('revealed'));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            (e.target as HTMLElement).classList.add('revealed');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.18 });
+      targets.forEach((t) => io.observe(t));
+    }
+  }
+</script>
+
+<style>
+  .journey-section {
+    background: linear-gradient(180deg, var(--color-black-primary) 0%, rgba(255, 255, 255, 0.012) 50%, var(--color-black-primary) 100%);
+  }
+  .journey-phase,
+  .journey-milestone,
+  .journey-day {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  .journey-phase.revealed,
+  .journey-milestone.revealed,
+  .journey-day.revealed {
+    animation: journey-in 760ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+  @keyframes journey-in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .journey-phase,
+    .journey-milestone,
+    .journey-day {
+      opacity: 1;
+      transform: none;
+      animation: none !important;
+    }
+  }
+</style>

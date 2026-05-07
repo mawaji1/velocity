@@ -2,56 +2,105 @@
 import type { Content } from '../i18n/content';
 interface Props { t: Content }
 const { t } = Astro.props;
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const audience = t.audience;
+
+const audienceIcons: Record<string, string> = {
+  // Lightbulb (idea / entrepreneurial spirit)
+  entrepreneur: 'M9 18h6 M10 22h4 M12 2a7 7 0 00-4 12.74V17a2 2 0 002 2h4a2 2 0 002-2v-2.26A7 7 0 0012 2z',
+  // Code brackets crossed by a line (developers / makers)
+  enthusiast: 'M16 18l6-6-6-6 M8 6l-6 6 6 6 M14 4l-4 16',
+  // Graduation cap (students)
+  student: 'M22 10v6 M2 10l10-5 10 5-10 5L2 10z M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5',
+  default: 'M12 22a10 10 0 100-20 10 10 0 000 20z',
+};
 ---
-<section id="audience" class="relative border-y border-white/5 bg-white/[0.02] py-20 md:py-28">
-  <div class="mx-auto max-w-[1180px] px-5 sm:px-8">
-    <div class="mx-auto mb-14 max-w-3xl text-center md:mb-16">
-      <h2 class="text-3xl font-extrabold text-white md:text-4xl">{audience.title}</h2>
-      <p class="mt-5 text-[15px] leading-8 text-white/70 md:text-base">{audience.description}</p>
+<section id="audience" class="audience-section relative overflow-hidden py-20 md:py-28">
+  <!-- Top hairline accent -->
+  <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+  <!-- Soft red glow behind heading -->
+  <div
+    class="pointer-events-none absolute left-1/2 top-[-80px] h-[420px] w-[920px] -translate-x-1/2 rounded-full opacity-50"
+    style="background: radial-gradient(closest-side, rgba(223,51,38,0.16), transparent 70%); filter: blur(28px);"
+  ></div>
+
+  <div class="relative mx-auto max-w-[1180px] px-5 sm:px-8">
+    <div class="mx-auto mb-12 max-w-3xl text-center md:mb-16">
+      <h2 class="text-3xl font-extrabold tracking-tight text-white md:text-[44px] md:leading-tight">{audience.title}</h2>
+      <p class="mt-5 text-[15px] leading-8 text-white/70 md:mt-6 md:text-base">{audience.description}</p>
+      <div class="mx-auto mt-6 h-[3px] w-24 rounded-full bg-gradient-to-r from-transparent via-[color:var(--color-red-primary)] to-transparent"></div>
     </div>
 
-    <!-- 4 image cards -->
-    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
-      {audience.cards.map((c) => (
-        <article class="group relative flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] transition hover:-translate-y-0.5 hover:border-white/20">
-          <div class="relative aspect-[4/5] overflow-hidden">
-            <img
-              src={`${base}/images/audience/${c.image}`}
-              alt={c.title}
-              class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]"
-              loading="lazy"
-            />
-            <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[color:var(--color-black-primary)] via-[color:var(--color-black-primary)]/55 to-transparent"></div>
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6" data-audience>
+      {audience.cards.map((c, i) => (
+        <article
+          class="audience-card group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.025] p-7 transition-colors duration-300 hover:border-[color:var(--color-red-primary)]/40 hover:bg-white/[0.045] hover:shadow-[0_25px_70px_-25px_rgba(223,51,38,0.45)] md:p-9"
+          style={`--reveal-delay: ${i * 100}ms;`}
+        >
+          <!-- Icon badge with hover glow -->
+          <div class="audience-icon relative flex h-14 w-14 items-center justify-center rounded-2xl bg-[color:var(--color-red-primary)]/15 ring-1 ring-inset ring-[color:var(--color-red-primary)]/30 md:h-16 md:w-16">
+            <div class="absolute -inset-2 -z-10 rounded-2xl bg-[color:var(--color-red-primary)]/0 blur-md transition-colors duration-500 group-hover:bg-[color:var(--color-red-primary)]/35"></div>
+            <svg viewBox="0 0 24 24" class="h-6 w-6 text-[color:var(--color-red-primary)] md:h-7 md:w-7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d={audienceIcons[c.icon] ?? audienceIcons.default}></path>
+            </svg>
           </div>
-          <div class="flex flex-1 flex-col p-6 md:p-7">
-            <h3 class="text-lg font-bold text-white md:text-xl">{c.title}</h3>
-            <p class="mt-2 text-[13.5px] leading-7 text-white/65 md:text-sm">{c.desc}</p>
-          </div>
+
+          <h3 class="mt-7 text-[20px] font-bold leading-tight text-white md:text-[22px]">{c.title}</h3>
+          <p class="mt-3 text-[14px] leading-7 text-white/70 md:text-[15px]">{c.desc}</p>
+
+          <!-- Bottom hairline that lights up on hover -->
+          <div class="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[color:var(--color-red-primary)]/0 to-transparent transition-colors duration-500 group-hover:via-[color:var(--color-red-primary)]/60"></div>
         </article>
       ))}
     </div>
 
-    <!-- Eligibility chips row -->
-    <div class="mt-12 md:mt-14">
-      <div class="mb-5 flex items-center gap-3">
-        <span class="h-px flex-1 bg-white/10"></span>
-        <span class="text-[10.5px] font-semibold uppercase tracking-[0.24em] text-white/55">{audience.eligibilityTitle}</span>
-        <span class="h-px flex-1 bg-white/10"></span>
-      </div>
-      <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4 lg:grid-cols-4">
-        {audience.eligibility.map((e) => (
-          <div class="flex items-center gap-3 rounded-2xl border border-[color:var(--color-red-primary)]/25 bg-[color:var(--color-red-primary)]/6 px-4 py-3.5 text-[13.5px] leading-6 text-white/90 md:text-sm">
-            <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[color:var(--color-red-primary)]/20 text-[color:var(--color-red-primary)]">
-              <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12l5 5L20 7"></path>
-              </svg>
-            </span>
-            <span>{e}</span>
-          </div>
-        ))}
-      </div>
-    </div>
   </div>
 </section>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-audience]');
+  if (root) {
+    const cards = Array.from(root.querySelectorAll<HTMLElement>('.audience-card'));
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!('IntersectionObserver' in window) || reduced) {
+      cards.forEach((c) => c.classList.add('revealed'));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            (e.target as HTMLElement).classList.add('revealed');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.25 });
+      cards.forEach((c) => io.observe(c));
+    }
+  }
+</script>
+
+<style>
+  .audience-section {
+    background: linear-gradient(180deg, var(--color-black-primary) 0%, rgba(255, 255, 255, 0.012) 50%, var(--color-black-primary) 100%);
+  }
+  .audience-card {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  .audience-card.revealed {
+    animation: audience-card-in 760ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+  @keyframes audience-card-in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .audience-card {
+      opacity: 1;
+      transform: none;
+      animation: none !important;
+    }
+  }
+</style>

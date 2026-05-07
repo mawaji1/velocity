@@ -9,94 +9,218 @@ type Tier = 'gold' | 'silver' | 'bronze';
 
 const tierStyles: Record<Tier, {
   card: string;
-  rank: string;
-  badge: string;
-  iconColor: string;
-  topAccent: string;
+  rankPill: string;
+  trophy: string;
+  topBar: string;
   amount: string;
+  sarFilter: string;
+  hoverShadow: string;
 }> = {
   gold: {
-    card: 'border-amber-300/50 bg-gradient-to-b from-amber-300/22 via-amber-300/8 to-white/[0.03] shadow-[0_30px_70px_-30px_rgba(252,211,77,0.55)] md:-translate-y-3 md:scale-[1.04]',
-    rank: 'bg-amber-300 text-amber-950',
-    badge: 'bg-amber-300/15 text-amber-100 border border-amber-300/40',
-    iconColor: 'text-amber-300',
-    topAccent: 'bg-gradient-to-r from-transparent via-amber-300 to-transparent',
-    amount: 'text-white',
+    card: 'border-amber-300/55 bg-gradient-to-b from-amber-300/14 via-amber-300/4 to-amber-400/[0.02] shadow-[0_28px_70px_-30px_rgba(252,211,77,0.45)]',
+    rankPill: 'border-amber-300/60 bg-amber-300/15 text-amber-100',
+    trophy: 'text-amber-300/45 group-hover:text-amber-200',
+    topBar: 'bg-gradient-to-r from-amber-200/0 via-amber-300 to-amber-200/0',
+    amount: 'text-amber-100',
+    /* approximation of amber-300 (#fcd34d) */
+    sarFilter: 'brightness(0) saturate(100%) invert(82%) sepia(58%) saturate(429%) hue-rotate(358deg) brightness(101%) contrast(98%)',
+    hoverShadow: 'hover:shadow-[0_36px_90px_-30px_rgba(252,211,77,0.6)] hover:border-amber-300/85',
   },
   silver: {
-    card: 'border-slate-300/30 bg-gradient-to-b from-slate-200/15 via-slate-300/5 to-white/[0.02] shadow-[0_24px_60px_-30px_rgba(203,213,225,0.4)]',
-    rank: 'bg-slate-200 text-slate-800',
-    badge: 'bg-slate-200/12 text-slate-100 border border-slate-300/30',
-    iconColor: 'text-slate-200',
-    topAccent: 'bg-gradient-to-r from-transparent via-slate-200/80 to-transparent',
-    amount: 'text-white/95',
+    card: 'border-slate-200/40 bg-gradient-to-b from-slate-200/10 via-slate-300/3 to-slate-400/[0.02] shadow-[0_24px_60px_-30px_rgba(203,213,225,0.4)]',
+    rankPill: 'border-slate-200/55 bg-slate-200/12 text-slate-100',
+    trophy: 'text-slate-300/45 group-hover:text-slate-100',
+    topBar: 'bg-gradient-to-r from-slate-200/0 via-slate-200 to-slate-200/0',
+    amount: 'text-slate-100',
+    /* approximation of slate-200 (#e2e8f0) */
+    sarFilter: 'brightness(0) saturate(100%) invert(98%) sepia(2%) saturate(307%) hue-rotate(180deg) brightness(98%) contrast(95%)',
+    hoverShadow: 'hover:shadow-[0_30px_75px_-30px_rgba(203,213,225,0.55)] hover:border-slate-200/70',
   },
   bronze: {
-    card: 'border-orange-700/35 bg-gradient-to-b from-orange-700/15 via-orange-800/4 to-white/[0.02] shadow-[0_20px_55px_-30px_rgba(180,83,9,0.45)]',
-    rank: 'bg-orange-600 text-orange-50',
-    badge: 'bg-orange-700/15 text-orange-200 border border-orange-700/35',
-    iconColor: 'text-orange-400',
-    topAccent: 'bg-gradient-to-r from-transparent via-orange-500 to-transparent',
-    amount: 'text-white/90',
+    card: 'border-orange-500/45 bg-gradient-to-b from-orange-600/12 via-orange-700/4 to-orange-800/[0.02] shadow-[0_22px_55px_-30px_rgba(234,88,12,0.45)]',
+    rankPill: 'border-orange-500/55 bg-orange-600/15 text-orange-100',
+    trophy: 'text-orange-400/45 group-hover:text-orange-300',
+    topBar: 'bg-gradient-to-r from-orange-500/0 via-orange-500 to-orange-500/0',
+    amount: 'text-orange-100',
+    /* approximation of orange-400 (#fb923c) */
+    sarFilter: 'brightness(0) saturate(100%) invert(63%) sepia(89%) saturate(1064%) hue-rotate(345deg) brightness(101%) contrast(101%)',
+    hoverShadow: 'hover:shadow-[0_28px_70px_-30px_rgba(234,88,12,0.6)] hover:border-orange-500/75',
   },
 };
+
+// Stair-step heights mirror a podium silhouette: 1st > 2nd > 3rd.
+const heightByRank: Record<number, string> = {
+  0: 'min-h-[260px] md:min-h-[340px]',
+  1: 'min-h-[220px] md:min-h-[290px]',
+  2: 'min-h-[200px] md:min-h-[240px]',
+};
+const amountSizeByRank: Record<number, string> = {
+  0: 'text-[44px] md:text-[60px]',
+  1: 'text-[40px] md:text-[52px]',
+  2: 'text-[36px] md:text-[46px]',
+};
+const sarSizeByRank: Record<number, string> = {
+  0: '60px',
+  1: '52px',
+  2: '46px',
+};
 ---
-<section id="prizes" class="relative py-20 md:py-28">
-  <div class="mx-auto max-w-[1180px] px-5 sm:px-8">
+<section id="prizes" class="prizes-section relative overflow-hidden py-20 md:py-28">
+  <!-- Top hairline -->
+  <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+  <!-- Soft red glow behind heading -->
+  <div
+    class="pointer-events-none absolute left-1/2 top-[-80px] h-[420px] w-[920px] -translate-x-1/2 rounded-full opacity-50"
+    style="background: radial-gradient(closest-side, rgba(223,51,38,0.15), transparent 70%); filter: blur(28px);"
+  ></div>
+
+  <div class="relative mx-auto max-w-[1180px] px-5 sm:px-8">
     <div class="mb-12 text-center md:mb-16">
-      <h2 class="text-3xl font-bold text-white md:text-4xl">{prizes.title}</h2>
-      <p class="mx-auto mt-4 max-w-2xl text-[15px] text-white/70">{prizes.lead}</p>
+      <h2 class="text-3xl font-extrabold tracking-tight text-white md:text-[44px] md:leading-tight">{prizes.title}</h2>
+      <div class="mx-auto mt-5 h-[3px] w-24 rounded-full bg-gradient-to-r from-transparent via-[color:var(--color-red-primary)] to-transparent"></div>
     </div>
 
-    {(() => {
-      const renderCard = (item: typeof prizes.items[number], i: number) => {
+    <div class="grid grid-cols-1 items-end gap-5 sm:grid-cols-3 sm:gap-5 lg:gap-7" data-prizes>
+      {prizes.items.map((item, i) => {
         const tier = item.tier as Tier;
         const s = tierStyles[tier];
-        const isGold = tier === 'gold';
         return (
           <article
-            class={`prize-card relative flex flex-col overflow-hidden rounded-3xl border p-7 transition md:p-8 ${s.card}`}
+            class={`prize-bar group relative flex flex-col justify-end overflow-hidden rounded-3xl border px-6 py-7 transition-colors duration-300 md:px-8 md:py-9 ${s.card} ${s.hoverShadow} ${heightByRank[i] ?? heightByRank[2]}`}
+            style={`--reveal-delay: ${i * 110}ms;`}
           >
-            <div class={`pointer-events-none absolute inset-x-0 top-0 h-[3px] ${s.topAccent}`}></div>
+            <!-- Tier-colored top accent bar -->
+            <div class={`pointer-events-none absolute inset-x-0 top-0 h-[3px] ${s.topBar}`}></div>
 
-            <div class="flex items-center justify-between gap-3">
-              <div class="flex items-center gap-3">
-                <span
-                  class={`inline-flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold ${s.rank}`}
-                >
-                  {i + 1}
-                </span>
-                <span class={`text-[12px] font-semibold uppercase tracking-[0.18em] rounded-full px-2.5 py-1 ${s.badge}`}>{item.rank}</span>
-              </div>
-              <svg viewBox="0 0 24 24" class={`${isGold ? 'h-6 w-6' : 'h-5 w-5'} ${s.iconColor}`} fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Rank pill (start corner — right in RTL, left in LTR) -->
+            <div class="absolute start-5 top-5 md:start-6 md:top-6">
+              <span class={`inline-block rounded-full border px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] md:text-[12px] ${s.rankPill}`}>
+                {item.rank}
+              </span>
+            </div>
+
+            <!-- Trophy decoration in the opposite corner (end — left in RTL, right in LTR) -->
+            <div class={`absolute end-5 top-5 transition-colors duration-300 md:end-6 md:top-6 ${s.trophy}`}>
+              <svg viewBox="0 0 24 24" class={i === 0 ? 'h-6 w-6 md:h-7 md:w-7' : 'h-5 w-5 md:h-6 md:w-6'} fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M8 21h8 M12 17v4 M7 4h10v5a5 5 0 0 1-10 0V4z M17 5h3v2a3 3 0 0 1-3 3 M7 5H4v2a3 3 0 0 0 3 3"></path>
               </svg>
             </div>
 
-            <div class="mt-8 flex items-baseline gap-3 rtl:flex-row-reverse">
-              <img
-                src={`${base}/images/sar.svg`}
-                alt={prizes.currency}
-                class={`w-auto ${isGold ? 'h-10 md:h-12' : 'h-8 md:h-10'}`}
-                style="filter: brightness(0) invert(1);"
-              />
-              <span class={`tabular-nums font-bold leading-none ${s.amount} ${isGold ? 'text-6xl md:text-7xl' : 'text-5xl md:text-6xl'}`}>{item.amount}</span>
+            <!-- Amount block — locale-aware: EN puts SAR before number; AR puts SAR after the number. -->
+            <div class={`flex items-baseline gap-2.5 whitespace-nowrap ${s.amount}`}>
+              {t.lang === 'en' && (
+                <img
+                  src={`${base}/images/sar.svg`}
+                  alt={prizes.currency}
+                  class="prize-sar h-[0.55em] w-auto self-center"
+                  style={`font-size: ${sarSizeByRank[i] ?? sarSizeByRank[2]}; filter: ${s.sarFilter};`}
+                />
+              )}
+              <span
+                class={`tabular-nums font-extrabold leading-none ${amountSizeByRank[i] ?? amountSizeByRank[2]}`}
+                data-prize-amount={item.amount}
+              >{item.amount}</span>
+              {t.lang === 'ar' && (
+                <img
+                  src={`${base}/images/sar.svg`}
+                  alt={prizes.currency}
+                  class="prize-sar h-[0.55em] w-auto self-center"
+                  style={`font-size: ${sarSizeByRank[i] ?? sarSizeByRank[2]}; filter: ${s.sarFilter};`}
+                />
+              )}
             </div>
           </article>
         );
-      };
-      const first = prizes.items[0];
-      const rest = prizes.items.slice(1);
-      return (
-        <div class="space-y-5 md:space-y-6">
-          <div class="md:flex md:justify-center">
-            <div class="md:w-[60%] lg:w-[52%]">{renderCard(first, 0)}</div>
-          </div>
-          <div class="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
-            {rest.map((item, i) => renderCard(item, i + 1))}
-          </div>
-        </div>
-      );
-    })()}
+      })}
+    </div>
   </div>
 </section>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-prizes]');
+  if (root) {
+    const bars = Array.from(root.querySelectorAll<HTMLElement>('.prize-bar'));
+    const AR = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+    const isArabic = (s: string) => /[٠-٩]/.test(s);
+    const parseNum = (s: string) => {
+      const ascii = s.replace(/[٠-٩]/g, (c) => String('٠١٢٣٤٥٦٧٨٩'.indexOf(c)));
+      return parseInt(ascii.replace(/[,٬٫]/g, ''), 10);
+    };
+    const formatNum = (n: number, original: string) => {
+      const ar = isArabic(original);
+      const useSeparators = /[,٬]/.test(original);
+      let s = useSeparators ? n.toLocaleString('en-US') : String(n);
+      if (ar) s = s.replace(/\d/g, (d) => AR[+d]).replace(/,/g, '٬');
+      return s;
+    };
+    const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const reveal = (bar: HTMLElement) => {
+      bar.classList.add('revealed');
+      const target = bar.querySelector<HTMLElement>('[data-prize-amount]');
+      if (!target) return;
+      const original = target.dataset.prizeAmount ?? '';
+      const final = parseNum(original);
+      if (Number.isNaN(final) || reduced) {
+        target.textContent = original;
+        return;
+      }
+      const duration = 1500;
+      const start = performance.now();
+      const step = (now: number) => {
+        const t = Math.min(1, (now - start) / duration);
+        const current = Math.round(final * easeOutQuart(t));
+        target.textContent = formatNum(current, original);
+        if (t < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+
+    if (!('IntersectionObserver' in window) || reduced) {
+      bars.forEach((b) => reveal(b));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            reveal(e.target as HTMLElement);
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.25 });
+      bars.forEach((b) => io.observe(b));
+    }
+  }
+</script>
+
+<style>
+  .prizes-section {
+    background:
+      linear-gradient(180deg, var(--color-black-primary) 0%, rgba(255, 255, 255, 0.012) 50%, var(--color-black-primary) 100%);
+  }
+  .prize-bar {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  .prize-bar.revealed {
+    animation: prize-bar-in 760ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+  .prize-sar {
+    transform: translateY(0.05em);
+  }
+  @keyframes prize-bar-in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .prize-bar {
+      opacity: 1;
+      transform: none;
+      animation: none !important;
+    }
+  }
+</style>

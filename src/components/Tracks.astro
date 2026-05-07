@@ -6,8 +6,9 @@ const { t } = Astro.props;
 <section id="tracks" class="relative py-20 md:py-28">
   <div class="mx-auto max-w-[1180px] px-5 sm:px-8">
     <div class="mb-12 text-center md:mb-16">
-      <h2 class="text-3xl font-bold text-white md:text-4xl">{t.tracks.title}</h2>
+      <h2 class="text-3xl font-extrabold tracking-tight text-white md:text-[44px] md:leading-tight">{t.tracks.title}</h2>
       <p class="mx-auto mt-4 max-w-2xl text-[15px] text-white/70">{t.tracks.lead}</p>
+      <div class="mx-auto mt-5 h-[3px] w-24 rounded-full bg-gradient-to-r from-transparent via-[color:var(--color-red-primary)] to-transparent"></div>
     </div>
 
     <div class="flex flex-col gap-4 md:gap-5">

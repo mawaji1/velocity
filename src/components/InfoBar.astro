@@ -1,0 +1,191 @@
+---
+import type { Content } from '../i18n/content';
+interface Props { t: Content }
+const { t } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const infoIcons: Record<string, string> = {
+  clock: 'M12 7v5l3 2 M12 22a10 10 0 100-20 10 10 0 000 20z',
+  pin: 'M12 22s-7-7.58-7-13a7 7 0 1114 0c0 5.42-7 13-7 13z M12 11a2 2 0 100-4 2 2 0 000 4z',
+  users: 'M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2 M9 11a4 4 0 100-8 4 4 0 000 8z M22 21v-2a4 4 0 00-3-3.87 M16 3.13A4 4 0 0119 7a4 4 0 01-3 3.87',
+  target: 'M12 22a10 10 0 100-20 10 10 0 000 20z M12 18a6 6 0 100-12 6 6 0 000 12z M12 14a2 2 0 100-4 2 2 0 000 4z',
+  cloud: 'M17.5 19a4.5 4.5 0 100-9h-1.26A8 8 0 104 16.25',
+  trophy: 'M8 21h8 M12 17v4 M6 3h12v4a6 6 0 01-12 0V3z M6 5H3v2a3 3 0 003 3 M18 5h3v2a3 3 0 01-3 3',
+};
+
+// Split each value into a leading number portion (for count-up) and the remaining suffix text.
+function splitValue(value: string) {
+  const match = value.match(/^\s*([\d٠-٩]+(?:[,٬٫][\d٠-٩]+)*)\s*(.*)$/);
+  if (!match) return { num: null as string | null, rest: value };
+  return { num: match[1], rest: match[2] };
+}
+---
+
+<section class="infobar-section relative overflow-hidden py-16 md:py-24">
+  <!-- Hairline accents top & bottom -->
+  <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/12 to-transparent"></div>
+  <div class="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent"></div>
+  <!-- Soft red glow as a tone-setter -->
+  <div
+    class="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40"
+    style="background: radial-gradient(closest-side, rgba(223,51,38,0.13), transparent 70%); filter: blur(30px);"
+  ></div>
+
+  <div class="relative mx-auto max-w-[1240px] px-5 sm:px-8">
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6" data-infobar>
+      {t.infobar.map((item, i) => {
+        const split = splitValue(item.value);
+        const hasNum = split.num !== null;
+        const isCurrency = ('currencyIcon' in item && item.currencyIcon);
+        return (
+          <div
+            class="info-card group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.025] p-7 transition-colors duration-300 hover:border-[color:var(--color-red-primary)]/40 hover:bg-white/[0.045] hover:shadow-[0_25px_70px_-25px_rgba(223,51,38,0.45)] md:p-9"
+            style={`--reveal-delay: ${i * 90}ms;`}
+          >
+            <!-- Icon badge with hover glow -->
+            <div class="info-icon relative flex h-14 w-14 items-center justify-center rounded-2xl bg-[color:var(--color-red-primary)]/15 ring-1 ring-inset ring-[color:var(--color-red-primary)]/30 md:h-16 md:w-16">
+              <div class="absolute -inset-2 -z-10 rounded-2xl bg-[color:var(--color-red-primary)]/0 blur-md transition-colors duration-500 group-hover:bg-[color:var(--color-red-primary)]/35"></div>
+              <svg viewBox="0 0 24 24" class="h-6 w-6 text-[color:var(--color-red-primary)] md:h-7 md:w-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d={infoIcons[item.icon] ?? infoIcons.target}></path>
+              </svg>
+            </div>
+
+            <!-- Label -->
+            <div class="mt-7 text-[11px] font-semibold uppercase tracking-[0.25em] text-white/55 md:text-[12px]">
+              {item.label}
+            </div>
+
+            <!-- Value -->
+            <div class="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-white">
+              {('valuePrefix' in item && item.valuePrefix) && (
+                <span class="text-[14px] font-medium text-white/65 md:text-[15px]">{item.valuePrefix}</span>
+              )}
+              {hasNum ? (
+                <span class="inline-flex items-baseline gap-1.5 whitespace-nowrap text-[36px] leading-[1] md:text-[46px]">
+                  {isCurrency && t.lang === 'en' && (
+                    <img
+                      src={`${base}/images/sar.svg`}
+                      alt="SAR"
+                      class="sar-icon h-[0.62em] w-auto self-center"
+                    />
+                  )}
+                  <span
+                    class="font-extrabold tracking-tight tabular-nums"
+                    data-countup={split.num}
+                  >{split.num}</span>
+                  {isCurrency && t.lang === 'ar' && (
+                    <img
+                      src={`${base}/images/sar.svg`}
+                      alt="ر.س"
+                      class="sar-icon h-[0.62em] w-auto self-center"
+                    />
+                  )}
+                </span>
+              ) : (
+                <span class="text-[18px] font-semibold leading-7 md:text-[20px]">{item.value}</span>
+              )}
+              {hasNum && split.rest && (
+                <span class="text-[13px] font-semibold leading-snug text-white/85 md:text-[15px]">{split.rest}</span>
+              )}
+            </div>
+
+            <!-- Bottom hairline that lights up on hover -->
+            <div class="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[color:var(--color-red-primary)]/0 to-transparent transition-colors duration-500 group-hover:via-[color:var(--color-red-primary)]/60"></div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-infobar]');
+  if (root) {
+    const cards = Array.from(root.querySelectorAll<HTMLElement>('.info-card'));
+    const AR = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+
+    const isArabic = (s: string) => /[٠-٩]/.test(s);
+    const parseNum = (s: string) => {
+      const ascii = s.replace(/[٠-٩]/g, (c) => String('٠١٢٣٤٥٦٧٨٩'.indexOf(c)));
+      return parseInt(ascii.replace(/[,٬٫]/g, ''), 10);
+    };
+    const formatNum = (n: number, original: string) => {
+      const ar = isArabic(original);
+      const useSeparators = /[,٬]/.test(original);
+      let s = useSeparators ? n.toLocaleString('en-US') : String(n);
+      if (ar) s = s.replace(/\d/g, (d) => AR[+d]).replace(/,/g, '٬');
+      return s;
+    };
+    const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const reveal = (card: HTMLElement) => {
+      card.classList.add('revealed');
+      const target = card.querySelector<HTMLElement>('[data-countup]');
+      if (!target) return;
+      const original = target.dataset.countup ?? '';
+      const final = parseNum(original);
+      if (Number.isNaN(final) || reduced) {
+        target.textContent = original;
+        return;
+      }
+      const duration = Math.min(1600, 700 + Math.log10(Math.max(final, 1)) * 360);
+      const start = performance.now();
+      const step = (now: number) => {
+        const t = Math.min(1, (now - start) / duration);
+        const current = Math.round(final * easeOutQuart(t));
+        target.textContent = formatNum(current, original);
+        if (t < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+
+    if (!('IntersectionObserver' in window) || reduced) {
+      cards.forEach((c) => reveal(c));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            reveal(e.target as HTMLElement);
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.25 });
+      cards.forEach((c) => io.observe(c));
+    }
+  }
+</script>
+
+<style>
+  .infobar-section {
+    background:
+      linear-gradient(180deg, var(--color-black-primary) 0%, rgba(255, 255, 255, 0.014) 50%, var(--color-black-primary) 100%);
+  }
+  .info-card {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  .sar-icon {
+    filter: brightness(0) invert(1);
+    /* Tiny optical adjustment so the symbol sits visually on the digit's baseline */
+    transform: translateY(0.05em);
+  }
+  .info-card.revealed {
+    animation: info-card-in 760ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+  @keyframes info-card-in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .info-card {
+      opacity: 1;
+      transform: none;
+      animation: none !important;
+    }
+  }
+</style>
